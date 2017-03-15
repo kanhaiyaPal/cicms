@@ -16,10 +16,12 @@ class Pages extends CI_Controller {
 			show_404();
 		}
 		
-		$this->load->model('frontend/home.php');
+		$this->load->model('frontend/home');
+		$meta_info = $this->home->get_home_meta();
 		
-		$data['title'] = ucfirst($page); // Capitalize the first letter
-		$data['sidebar'] = $this->load->view('manage/templates/admin_sidebar', $data, true);
+		$data['title'] = ucfirst($meta_info['meta-title']); // Capitalize the first letter
+		$data['description'] = $meta_info['meta-description'];
+		$data['keywords'] = $meta_info['meta-keywords'];
 
 		$this->load->view('frontend/templates/header', $data);
 		$this->load->view('frontend/index', $data);

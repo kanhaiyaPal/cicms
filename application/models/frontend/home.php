@@ -9,7 +9,7 @@ class Home extends CI_Model {
 	
 	public function get_home_meta()
 	{
-		$query = $this->db->get_where('ci_seo_data', array('id' => '1'));
+		$query = $this->db->get_where('ci_seo_data', array('id' => '1')); //home page details are reserved at id 1
         return $query->row_array();
 	}
 }
