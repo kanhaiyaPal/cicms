@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 class Visas_model extends CI_Model {
 	
 	public $file_upld_config = '';
@@ -56,9 +57,23 @@ class Visas_model extends CI_Model {
         return $query->row_array();
     }
 	
+	public function get_questions($id = FALSE)
+    {
+        if ($id === FALSE)
+        {
+            $query = $this->db->get(' ci_service_questions');
+            return $query->result_array();
+        }
+ 
+        $query = $this->db->get_where(' ci_service_questions', array('service_id' => $id));
+        return $query->result_array();
+    }
+	
 	public function set_services($id = 0)
     {
         $data = array(
+			
+			'service_title' => $this->input->post('service_title'),
             'for_citizen' => $this->input->post('for_citizen'),
 			'travelling_to' => $this->input->post('travelling_to'),
 			'living_in' => $this->input->post('living_in'),
@@ -76,7 +91,7 @@ class Visas_model extends CI_Model {
         if ($id == 0) {
 			$this->db->insert('ci_visa_services', $data);
 			$insert_id = $this->db->insert_id();
-			$this->set_service_questions($id);
+			$this->set_service_questions($insert_id);
         } else {
             $this->db->where('id', $id);
             $this->db->update('ci_visa_services', $data);
@@ -96,16 +111,44 @@ class Visas_model extends CI_Model {
         return $query->row_array();
 	}
 	
-	public function set_service_questions($id)
+	public function set_service_questions($id = 0)
 	{
-		
 		if((int)$id > 0){
-			if(!array_filter($this->input->post('ques_title'))){
+
+			/*if(!array_filter($this->input->post('ques_title'))){*/
 				$this->db->where('service_id', $id);
-				$this->db->delete('ci_service_questions');
+				$this->db->delete('ci_service_questions');  //remember not to use the id's of questions as they will change
 				
-			}
+				$q_title = $this->input->post('ques_title');
+				$q_help = $this->input->post('ques_title');
+				$q_req = $this->input->post('quest_opt');
+				
+				foreach($this->input->post('ques_title') as $key=>$value)
+				{
+					if($value != ''){
+						$data_q = array();
+						$data_q = array(
+							'question_title' => $q_title[$key],
+							'help_text' => $q_help[$key],
+							'required' => $q_req[$key],
+							'service_id' => (int)$id
+						);
+						$this->db->insert('ci_service_questions', $data_q);
+					}
+				}
+			/*}*/
 		}
 	}
 	
+	public function delete_service($id=0)
+	{
+		if((int)$id > 0){
+			//first delete questionarrie
+			$this->db->where('service_id', $id);
+			$this->db->delete('ci_service_questions');
+			
+			$this->db->where('id', $id);
+			return $this->db->delete('ci_visa_services');
+		}
+	}
 }

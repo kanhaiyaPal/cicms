@@ -50,10 +50,16 @@
 									$dl_url = base_url('/manage/visas/delete_service/'.$page['id']);
 									
 									echo "<tr class='".$od_ev." gradeX'>";
-									echo "<td>".$page['title']."</td>";
-									echo "<td>".$page['for_citizen']."</td>";
-									echo "<td>".$page['travelling_to']."</td>";
-									echo "<td>".$page['visa_type']."</td>";
+									echo "<td>".$page['service_title']."</td>";
+									echo "<td>";
+									foreach($country_list as $country){ if($country['id']==$page['for_citizen']){ echo $country['country_name']; break; } }
+									echo "</td>";
+									echo "<td>";
+									foreach($country_list as $country){ if($country['id']==$page['travelling_to']){ echo $country['country_name']; break; } }
+									echo "</td>";
+									echo "<td>";
+									foreach($visa_types as $visa){ if($visa['id']==$page['visa_type']){ echo $visa['title']; break; } }
+									echo "</td>";
 									echo "<td><span class='".$pb_st."'></span></td>";
 									echo "<td><a href='$ed_url' class='option_ico glyphicon glyphicon-edit'/>&nbsp;<a href='$dl_url' class='glyphicon glyphicon-trash'/></td>";
 									

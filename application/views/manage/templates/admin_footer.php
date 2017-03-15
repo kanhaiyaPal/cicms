@@ -51,7 +51,7 @@
     <script src="<?php echo base_url(); ?>assets/vendors/multi_up/js/fileinput.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/vendors/multi_up/themes/explorer/theme.js" type="text/javascript"></script>
 	
-	<script>dync_field.js
+	<script>
 	$(document).ready(function() {
 	$("#input-id").fileinput({	minFileCount: 1,
 								maxFileCount: 5,
