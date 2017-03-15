@@ -6,4 +6,7 @@ $(function() {
 		{ name: 'basicstyles', items: [ 'Bold', 'Italic' ] }
 	]});
     $( 'textarea#ckeditor_full' ).ckeditor({width:'100%', height: '150px'});
+	CKEDITOR.replace('pageset_editor1');
+	CKEDITOR.replace('pageset_editor2');
+	CKEDITOR.replace('pageset_editor3');
 });

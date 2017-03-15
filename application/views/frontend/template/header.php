@@ -6,15 +6,15 @@
 	<meta name="description" content="<?=$description?>" />
 	<meta name="keywords" content="<?=$keywords?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="menu/js/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="menu/css/webslidemenu.css" />
-	<script type="text/javascript" src="menu/js/webslidemenu.js"></script>
-	<link rel="stylesheet" type="text/css" href="menu/font-awesome/css/font-awesome.min.css" />
-	<link rel="stylesheet" href="t-slider/css/jquery.bxslider.css" type="text/css" />
-	<script type="text/javascript" src="t-slider/js/jquery.min.js"></script>
-	<script type="text/javascript" src="t-slider/js/jquery.bxslider.js"></script>
+	<link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>/assets/images/favicon.png" />
+	<link href="<?php echo base_url(); ?>/assets/css/style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="<?php echo base_url(); ?>/assets/menu/js/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>/assets/menu/css/webslidemenu.css" />
+	<script type="text/javascript" src="<?php echo base_url(); ?>/assets/menu/js/webslidemenu.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/assets/menu/font-awesome/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/t-slider/css/jquery.bxslider.css" type="text/css" />
+	<script type="text/javascript" src="<?php echo base_url(); ?>/assets/t-slider/js/jquery.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>/assets/t-slider/js/jquery.bxslider.js"></script>
 	<script type="text/javascript">
 	var $2222 = jQuery.noConflict();
 	$2222(document).ready(function(){
@@ -29,9 +29,9 @@
 	</script>
 </head>
 <body>
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url(); ?>/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>/assets/bootstrap/js/bootstrap.min.js"></script>
 <header data-spy="affix" data-offset-top="250">
   <div class="top-nav">
     <div class="container">

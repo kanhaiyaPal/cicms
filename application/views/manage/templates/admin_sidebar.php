@@ -15,22 +15,32 @@
 			<li><a href="<?php echo base_url('manage/visas/service'); ?>">Visa Service Setup</a></li>
 		</ul>
 	</li>
-	<li><a href="<?php echo base_url('manage/pages/view/home'); ?>"><i class="glyphicon glyphicon-calendar"></i> Calendar</a></li>
-	<li><a href="<?php echo base_url('manage/pages/view/home'); ?>"><i class="glyphicon glyphicon-stats"></i> Statistics (Charts)</a></li>
-	<li><a href="<?php echo base_url('manage/pages/view/home'); ?>"><i class="glyphicon glyphicon-list"></i> Tables</a></li>
-	<li><a href="<?php echo base_url('manage/pages/view/home'); ?>"><i class="glyphicon glyphicon-record"></i> Buttons</a></li>
-	<li><a href="<?php echo base_url('manage/pages/view/home'); ?>"><i class="glyphicon glyphicon-pencil"></i> Editors</a></li>
-	<li><a href="<?php echo base_url('manage/pages/view/home'); ?>"><i class="glyphicon glyphicon-tasks"></i> Forms</a></li>
 	<li class="submenu">
-		 <a href="<?php echo base_url('manage/pages/view/home'); ?>">
-			<i class="glyphicon glyphicon-list"></i> Pages
+		 <a href="#">
+			<i class="glyphicon glyphicon-list"></i> Visa Applications
 			<span class="caret pull-right"></span>
 		 </a>
 		 <!-- Sub menu -->
 		 <ul>
-			<li><a href="<?php echo base_url('manage/pages/view/home'); ?>">Login</a></li>
-			<li><a href="<?php echo base_url('manage/pages/view/home'); ?>">Signup</a></li>
+			<li><a href="<?php echo base_url('manage/visaapplications/view'); ?>">Application Submitted</a></li>
+			<li><a href="<?php echo base_url('manage/visaapplications/view'); ?>">Documents Upload Section</a></li>
+			<li><a href="<?php echo base_url('manage/visaapplications/view'); ?>">Application Tracking</a></li>
 		</ul>
 	</li>
+	<li class="submenu">
+		 <a href="#">
+			<i class="glyphicon glyphicon-tasks"></i> Custom Settings
+			<span class="caret pull-right"></span>
+		 </a>
+		 <!-- Sub menu -->
+		 <ul>
+			<li><a href="<?php echo base_url('manage/cms/page_settings'); ?>">Page Settings</a></li>
+			<li><a href="<?php echo base_url('manage/cms/seo_management'); ?>">Seo Management</a></li>
+			<li><a href="<?php echo base_url('manage/cms/parts_management'); ?>">Header/Footer Management</a></li>
+		</ul>
+	</li>
+	<li><a href="<?php echo base_url('manage/testimonials/showall'); ?>"><i class="glyphicon glyphicon-pencil"></i> Testimonials</a></li>
+	<li><a href="<?php echo base_url('manage/users/showall'); ?>"><i class="glyphicon glyphicon-user"></i> Users</a></li>
+	<li><a href="<?php echo base_url('manage/enquiry/contact'); ?>"><i class="glyphicon glyphicon-stats"></i> Enquiries </a></li>
 </ul>
 </div>
