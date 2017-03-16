@@ -71,27 +71,34 @@ class Cms extends CI_Controller {
 			$this->load->helper('form');
 			$this->load->library('form_validation');
 			
-			if( ! file_exists(APPPATH.'views/manage/new_testimonial.php'))
+			/*for ajax call*/
+			if($this->input->post('title') != NULL){
+				$meta_rs = $this->seomanagement_model->get_details($this->input->post('title'));
+				echo json_encode($meta_rs);
+				return true;
+			}
+			
+			if( ! file_exists(APPPATH.'views/manage/seo_management.php'))
 			{
 				show_404();
 			}
 			
-			$data['title'] = ucfirst('Add testimonial'); // Capitalize the first letter
+			$data['title'] = ucfirst('Seo Mangement'); // Capitalize the first letter
 			$data['sidebar'] = $this->load->view('manage/templates/admin_sidebar', $data, true);
-			$data['editor_on'] = 'show';
-			$data['return_url'] = base_url('/manage/testimonials/showall');
+			$data['seo_js'] = 'show';
+			$data['data_pages'] = $this->seomanagement_model->get_all_pages();
 			
-			$this->form_validation->set_rules('testimonial_title', 'Testimonial Title', 'trim|required');
-			$this->form_validation->set_rules('testimonial_content', 'Testimonial Content', 'trim|required');
-			
+			$this->form_validation->set_rules('page_meta_title', 'Meta Title', 'trim|required');
+			$this->form_validation->set_rules('page_meta_description', 'Meta Description', 'trim|required');
+			$this->form_validation->set_rules('page_meta_keywords', 'Meta Keywords', 'trim|required');
 			if(!($this->form_validation->run() === FALSE)){
-				$this->testimonials_model->set_testimonials();
-				$this->session->set_flashdata('testimonial_created', 'Testimonial Created Successfully');
-				redirect("manage/testimonials/showall");
+				$this->seomanagement_model->set_details($this->input->post('selected_seo_page'));
+				$this->session->set_flashdata('setting_updated', 'Setting Updated Successfully');
+				redirect("manage/cms/seo_management");
 			}
 			
 			$this->load->view('manage/templates/admin_header', $data);
-			$this->load->view('manage/new_testimonial', $data);
+			$this->load->view('manage/seo_management', $data);
 			$this->load->view('manage/templates/admin_footer', $data);
 			
 		}else{
@@ -148,6 +155,48 @@ class Cms extends CI_Controller {
 				
 				
 			}
+		}else{
+			redirect("manage/pages/view");
+		}
+	}
+	
+	public function parts_management()
+	{
+		if(isset($this->session->adminsession)&& ($this->session->adminsession != ''))
+		{
+			$this->load->model('manage/site_settings');
+			$this->load->helper('form');
+			$this->load->library('form_validation');
+			
+			$data['title'] = ucfirst('Update Site Settings'); 
+			$data['sidebar'] = $this->load->view('manage/templates/admin_sidebar', $data, true);
+			$data['editor_on'] = 'show';
+			$data['logo_select_up'] = 'show';
+			
+			$site_logo = $this->site_settings->get_settings('site_logo');
+			if(strlen($site_logo['setting_value']) > 0){
+				$data['site_logo'] = $site_logo['setting_value'];
+			}
+			
+			$this->load->view('manage/templates/admin_header', $data);
+			$this->load->view('manage/site_settings', $data);
+			$this->load->view('manage/templates/admin_footer', $data);
+		}else{
+			redirect("manage/pages/view");
+		}
+	}
+	
+	public function logo_delete()
+	{
+		if(isset($this->session->adminsession)&& ($this->session->adminsession != ''))
+		{
+			$this->load->model('manage/site_settings');
+			$md_file = $this->site_settings->get_settings('site_logo');		
+			$target = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'admin'. DIRECTORY_SEPARATOR . $md_file['setting_value'];
+			unlink($target);
+			$this->site_settings->remove_logo();
+			echo '{}';
+			return;
 		}else{
 			redirect("manage/pages/view");
 		}

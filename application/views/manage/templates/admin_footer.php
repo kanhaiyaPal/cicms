@@ -85,5 +85,43 @@
 	<?php  if(isset($dynamic_field_gen)&& ($dynamic_field_gen == 'show')){ ?>
 	<script src="<?php echo base_url(); ?>assets/js/dync_field.js" type="text/javascript"></script>
 	<?php } ?>
+	
+	<?php  if(isset($seo_js)&& ($seo_js == 'show')){ ?>
+	<script src="<?php echo base_url(); ?>assets/js/seo_manage.js" type="text/javascript"></script>
+	<?php } ?>
+	
+	<?php  if(isset($logo_select_up)&& ($logo_select_up == 'show')){ ?>
+	
+	<link href="<?php echo base_url(); ?>assets/vendors/multi_up/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo base_url(); ?>assets/vendors/multi_up/themes/explorer/theme.css" media="all" rel="stylesheet" type="text/css"/>
+	<script src="<?php echo base_url(); ?>assets/vendors/multi_up/js/plugins/sortable.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/vendors/multi_up/js/fileinput.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/vendors/multi_up/themes/explorer/theme.js" type="text/javascript"></script>
+	
+	<script>
+	$(document).ready(function() {
+	$("#input-id").fileinput({	minFileCount: 1,
+								maxFileCount: 1,
+								showUpload:false,
+								allowedFileExtensions: ["jpg", "JPG", "jpeg", "JPEG","png","PNG","gif","GIF"],
+								initialPreviewAsData: true, // identify if you are sending preview data only and not the markup
+								overwriteInitial:false,
+								validateInitialCount:true,
+								deleteUrl: '<?=base_url('cms/logo_delete')?>',
+								initialPreview: [
+								<?php if(isset($site_logo)): ?>
+								"<?php echo base_url('/uploads/admin/').$site_logo['setting_value']; ?>",
+								<?php  endif; ?>
+								],
+								initialPreviewConfig: [
+									
+								<?php if(isset($site_logo)): ?>
+								{caption: "site-logo", key: 'site_logo'},
+								<?php endif; ?>
+								],
+							});
+	} );
+	</script>
+	<?php } ?>
 	</body>
 </html>

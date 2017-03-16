@@ -6,7 +6,8 @@ $(function() {
 		{ name: 'basicstyles', items: [ 'Bold', 'Italic' ] }
 	]});
     $( 'textarea#ckeditor_full' ).ckeditor({width:'100%', height: '150px'});
-	CKEDITOR.replace('pageset_editor1');
-	CKEDITOR.replace('pageset_editor2');
-	CKEDITOR.replace('pageset_editor3');
+	if($('#pageset_editor1').length){ CKEDITOR.replace('pageset_editor1'); }
+	if($('#pageset_editor2').length){ CKEDITOR.replace('pageset_editor2'); }
+	if($('#pageset_editor3').length){ CKEDITOR.replace('pageset_editor3'); }
+
 });
