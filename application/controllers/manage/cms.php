@@ -173,6 +173,15 @@ class Cms extends CI_Controller {
 			$data['editor_on'] = 'show';
 			$data['logo_select_up'] = 'show';
 			
+			$this->form_validation->set_rules('site_logo', 'Testimonial Title', 'trim|required');
+			$this->form_validation->set_rules('testimonial_content', 'Testimonial Content', 'trim|required');
+			
+			if(!($this->form_validation->run() === FALSE)){
+				$this->testimonials_model->set_testimonials($id);
+				$this->session->set_flashdata('testimonial_update_success', 'Testimonial updated successfully');
+				redirect("manage/testimonials/showall");
+			}
+			
 			$site_logo = $this->site_settings->get_settings('site_logo');
 			if(strlen($site_logo['setting_value']) > 0){
 				$data['site_logo'] = $site_logo['setting_value'];
