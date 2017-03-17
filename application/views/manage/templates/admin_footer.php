@@ -100,23 +100,21 @@
 	
 	<script>
 	$(document).ready(function() {
-	$("#input-id").fileinput({	minFileCount: 1,
-								maxFileCount: 1,
+	$("#input-id").fileinput({	maxFileCount: 1,
 								showUpload:false,
 								allowedFileExtensions: ["jpg", "JPG", "jpeg", "JPEG","png","PNG","gif","GIF"],
 								initialPreviewAsData: true, // identify if you are sending preview data only and not the markup
 								overwriteInitial:false,
 								validateInitialCount:true,
-								deleteUrl: '<?=base_url('cms/logo_delete')?>',
+								deleteUrl: '<?=base_url('manage/cms/logo_delete')?>',
 								initialPreview: [
 								<?php if(isset($site_logo)): ?>
-								"<?php echo base_url('/uploads/admin/').$site_logo['setting_value']; ?>",
+								"<?php echo base_url('/uploads/admin/').$site_logo; ?>"
 								<?php  endif; ?>
 								],
 								initialPreviewConfig: [
-									
 								<?php if(isset($site_logo)): ?>
-								{caption: "site-logo", key: 'site_logo'},
+								{caption: "site-logo",width: '100%', height: '40px',key:'<?=$site_logo?>'}
 								<?php endif; ?>
 								],
 							});

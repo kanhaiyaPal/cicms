@@ -32,6 +32,7 @@ class Cms extends CI_Controller {
 			
 			if(!($this->form_validation->run() === FALSE)){
 				$this->pagesettings_model->set_settings();
+				$this->pagesettings_model->set_settings('2');
 				$this->session->set_flashdata('setting_updated', 'Settings Updated Successfully');
 				redirect("manage/cms/page_settings");
 			}
@@ -42,6 +43,9 @@ class Cms extends CI_Controller {
 			$data['home_top_sum'] = '';
 			$data['home_bot_sum'] = '';
 			$data['home_fet_blk'] = '';
+			
+			$data['contact_g_map'] = '';
+			
 			foreach($home_data_ar as $fr){
 				if($fr['setting_name'] == 'home_top_summary'){
 					$data['home_top_sum'] = $fr['setting_val'];
@@ -51,6 +55,14 @@ class Cms extends CI_Controller {
 				}
 				if($fr['setting_name'] == 'home_feature_block'){
 					$data['home_fet_blk'] = $fr['setting_val'];
+				}
+			}
+			
+			$contact_data_ar = $this->pagesettings_model->get_settings('2'); /*ID:2 is for Contact Us page*/
+			
+			foreach($contact_data_ar as $fr){
+				if($fr['setting_name'] == 'contact_google_map'){
+					$data['contact_g_map'] = $fr['setting_val'];
 				}
 			}
 
@@ -173,19 +185,62 @@ class Cms extends CI_Controller {
 			$data['editor_on'] = 'show';
 			$data['logo_select_up'] = 'show';
 			
-			$this->form_validation->set_rules('site_logo', 'Testimonial Title', 'trim|required');
-			$this->form_validation->set_rules('testimonial_content', 'Testimonial Content', 'trim|required');
-			
-			if(!($this->form_validation->run() === FALSE)){
-				$this->testimonials_model->set_testimonials($id);
-				$this->session->set_flashdata('testimonial_update_success', 'Testimonial updated successfully');
-				redirect("manage/testimonials/showall");
+			if(isset($_POST['form_marker'])){
+				
+				if(isset($_FILES['site_logo'])&&(!empty($_FILES['site_logo']))){
+					$this->site_settings->set_logo();
+				}
+				if($this->input->post('site_email') != ''){
+					$this->site_settings->set_settings('site_email',$this->input->post('site_email'));
+				}
+				if($this->input->post('site_phone') != ''){
+					$this->site_settings->set_settings('site_phone',$this->input->post('site_phone'));
+				}
+				if($this->input->post('site_address') != ''){
+					$this->site_settings->set_settings('site_address',$this->input->post('site_address'));
+				}
+				
+				if($this->input->post('site_footer_facebook') != ''){
+					$this->site_settings->set_settings('site_footer_facebook',$this->input->post('site_footer_facebook'));
+				}
+				if($this->input->post('site_footer_twitter') != ''){
+					$this->site_settings->set_settings('site_footer_twitter',$this->input->post('site_footer_twitter'));
+				}
+				if($this->input->post('site_footer_instagram') != ''){
+					$this->site_settings->set_settings('site_footer_instagram',$this->input->post('site_footer_instagram'));
+				}
+				if($this->input->post('site_footer_googleplus') != ''){
+					$this->site_settings->set_settings('site_footer_googleplus',$this->input->post('site_footer_googleplus'));
+				}
+				if($this->input->post('site_footer_pinterest') != ''){
+					$this->site_settings->set_settings('site_footer_pinterest',$this->input->post('site_footer_pinterest'));
+				}
+				if($this->input->post('site_footer_linkedin') != ''){
+					$this->site_settings->set_settings('site_footer_linkedin',$this->input->post('site_footer_linkedin'));
+				}
+				
+				if($this->input->post('site_footer_disclaimer') != ''){
+					$this->site_settings->set_settings('site_footer_disclaimer',$this->input->post('site_footer_disclaimer'));
+				}
+				
+				$this->session->set_flashdata('site_setting_updated', 'Site Settings updated successfully');
+				redirect("manage/cms/parts_management");
 			}
 			
 			$site_logo = $this->site_settings->get_settings('site_logo');
 			if(strlen($site_logo['setting_value']) > 0){
 				$data['site_logo'] = $site_logo['setting_value'];
 			}
+			$data['site_email'] = $this->site_settings->get_settings('site_email')['setting_value'];
+			$data['site_phone'] = $this->site_settings->get_settings('site_phone')['setting_value'];
+			$data['site_address'] = $this->site_settings->get_settings('site_address')['setting_value'];
+			$data['site_footer_facebook'] = $this->site_settings->get_settings('site_footer_facebook')['setting_value'];
+			$data['site_footer_twitter'] = $this->site_settings->get_settings('site_footer_twitter')['setting_value'];
+			$data['site_footer_linkedin'] = $this->site_settings->get_settings('site_footer_linkedin')['setting_value'];
+			$data['site_footer_pinterest'] = $this->site_settings->get_settings('site_footer_pinterest')['setting_value'];
+			$data['site_footer_instagram'] = $this->site_settings->get_settings('site_footer_instagram')['setting_value'];
+			$data['site_footer_googleplus'] = $this->site_settings->get_settings('site_footer_googleplus')['setting_value'];
+			$data['site_footer_disclaimer'] = $this->site_settings->get_settings('site_footer_disclaimer')['setting_value'];
 			
 			$this->load->view('manage/templates/admin_header', $data);
 			$this->load->view('manage/site_settings', $data);

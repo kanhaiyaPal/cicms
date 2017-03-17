@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Welcome extends CI_Controller {
+include_once (dirname(__FILE__) . "/frontend/pages.php");
+class Welcome extends Pages {
 
 	/**
 	 * Index Page for this controller.
@@ -18,8 +18,7 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
-	{
-		$this->load->view('welcome_message');
+	public function __construct(){
+		parent::__construct();
 	}
 }

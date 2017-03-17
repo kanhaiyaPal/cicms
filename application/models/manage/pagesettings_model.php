@@ -47,5 +47,19 @@ class Pagesettings_model extends CI_Model {
 
 			return $this->db->insert_batch('ci_page_settings', $data);
 		}
+		if($id == 2){
+			//Contact Us settings
+			
+			$this->db->where('page_id', $id);
+			$this->db->delete('ci_page_settings');
+			
+			$data = array(
+				'setting_name' => 'contact_google_map',
+				'setting_val' => $this->input->post('contact_map_code'),
+				'page_id' => 2
+			);
+
+			return $this->db->insert('ci_page_settings', $data);
+		}
     }
 }

@@ -29,16 +29,15 @@
 						  <div class="navbar-inner">
 							<div class="container">
 								<ul class="nav nav-pills">
-									<li class="active"><a href="#tab1" data-toggle="tab">Home</a></li>
-									<!--<li><a href="#tab2" data-toggle="tab">Second</a></li>
-									<li><a href="#tab3" data-toggle="tab">Third</a></li>-->
+									<li class="active"><a href="#tab1" data-toggle="pill">Home</a></li>
+									<li><a href="#tab2" data-toggle="pill">Contact Us</a></li>
+									<!--<li><a href="#tab3" data-toggle="tab">Third</a></li>-->
 								</ul>
 							</div>
 						  </div>
 						</div>
-						<div class="tab-content">
-						  <?php echo form_open('',array("class" =>"form-horizontal","id"=>"frmsett")); ?>
-						  
+						<?php echo form_open('',array("class" =>"form-horizontal","id"=>"frmsett")); ?>
+						 <div class="tab-content"> 
 							<div class="tab-pane active" id="tab1">
 								  <div class="form-group">
 									<label class="col-sm-2 control-label">Top Summary</label>
@@ -59,8 +58,16 @@
 									</div>
 								  </div>
 							</div>
-						  </form>							
-						</div>	
+							<div class="tab-pane" id="tab2">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Google Map Iframe Code</label>
+									<div class="col-sm-10">
+									  <textarea class="form-control setting_editor" name="contact_map_code" placeholder="Iframe code for Contact Us Page"  rows="3" ><?=$contact_g_map?></textarea>
+									</div>
+								</div>
+							</div>
+						  </div>
+						</form>							
 					</div>
   				</div>
   			</div> 

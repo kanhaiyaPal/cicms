@@ -36,14 +36,6 @@
 									</select>
 								</div>
 								<div class="form-group col-md-4">
-									<label>Travelling to</label>
-									<select class="form-control" name="travelling_to">
-										<?php if(!empty($country_list)): foreach($country_list as $country): ?>
-										<option value="<?=$country['id']?>"><?=$country['country_name']?></option>
-										<?php endforeach; endif; ?>
-									</select>
-								</div>
-								<div class="form-group col-md-4">
 									<label>Living In</label>
 									<select class="form-control" name="living_in">
 										<?php if(!empty($country_list)): foreach($country_list as $country): ?>
@@ -51,7 +43,14 @@
 										<?php endforeach; endif; ?>
 									</select>
 								</div>
-								
+								<div class="form-group col-md-4">
+									<label>Travelling to</label>
+									<select class="form-control" name="travelling_to">
+										<?php if(!empty($country_list)): foreach($country_list as $country): if($country['id']=='221'): ?>
+										<option value="<?=$country['id']?>"><?=$country['country_name']?></option>
+										<?php endif; endforeach; endif; ?>
+									</select>
+								</div>
 								<div class="form-group col-md-4">
 									<label>Visa Type</label>
 									<select class="form-control" name="visa_type">
