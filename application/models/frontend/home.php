@@ -105,11 +105,11 @@ class Home extends CI_Model {
 	{
 		if ($id === FALSE)
         {
-            $query = $this->db->get('ci_visa_services');
+            $query = $this->db->get_where('ci_visa_services',array('is_active'=> 1));
             return $query->result_array();
         }
  
-        $query = $this->db->get_where('ci_visa_services', array('id' => $id));
+        $query = $this->db->get_where('ci_visa_services', array('id' => $id,'is_active'=> 1 ));
         return $query->row_array();
 	}
 	

@@ -3,7 +3,7 @@
 	<!-- Main menu -->
 	<li class="current"><a href="<?php echo base_url('manage/pages/view/home'); ?>"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
 	<li><a href="<?php echo base_url('manage/pages/show'); ?>"><i class="glyphicon glyphicon-list"></i> Static Pages</a></li>
-	<li class="submenu">
+	<li class="submenu <?php $ur = uri_string(); if((strpos($ur,'visas/dashboard'))||(strpos($ur,'visas/types'))||(strpos($ur,'visas/service'))){ echo "open"; } ?>">
 		 <a href="#">
 			<i class="glyphicon glyphicon-list"></i> Visa Setup
 			<span class="caret pull-right"></span>
@@ -27,7 +27,7 @@
 			<li><a href="<?php echo base_url('manage/visaapplications/view'); ?>">Application Tracking</a></li>
 		</ul>
 	</li>
-	<li class="submenu">
+	<li class="submenu <?php $ur = uri_string(); if((strpos($ur,'cms/page_settings'))||(strpos($ur,'cms/seo_management'))||(strpos($ur,'cms/parts_management'))){ echo "open"; } ?>">
 		 <a href="#">
 			<i class="glyphicon glyphicon-tasks"></i> Custom Settings
 			<span class="caret pull-right"></span>
