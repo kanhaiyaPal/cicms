@@ -184,6 +184,9 @@ class Visas extends CI_Controller {
 			$this->form_validation->set_rules('service_fee', 'Visa Service fee', 'trim|required');
 			$this->form_validation->set_rules('embassy_fee', 'Visa Embassy Fee', 'trim|required');
 			$this->form_validation->set_rules('intro_text', 'Introduction Text', 'trim|required');
+			if(( NULL != $this->input->post('meet_greet_combo'))&&($this->input->post('meet_greet_combo')=='1')){
+				$this->form_validation->set_rules('extended_service_fee', 'Extended Service Fee', 'trim|required');
+			}
 
 			if(!($this->form_validation->run() === FALSE)){
 				$this->visas_model->set_services();

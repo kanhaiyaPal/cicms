@@ -37,8 +37,6 @@ class Pages extends CI_Controller {
 			show_404();
 		}
 		
-		$this->load->model('frontend/home');
-		
 		$meta_info = $this->home->get_home_meta();
 		
 		$data['title'] = ucfirst($meta_info['meta_title']); // Capitalize the first letter
@@ -99,8 +97,6 @@ class Pages extends CI_Controller {
 			show_404();
 		}
 		
-		$this->load->model('frontend/home');
-		
 		$meta_info = $this->home->get_contact_meta();
 		
 		$data['title'] = ucfirst($meta_info['meta_title']); // Capitalize the first letter
@@ -123,7 +119,6 @@ class Pages extends CI_Controller {
 	
 	public function default_page($url = '')
 	{
-		$this->load->model('frontend/home');
 		
 		if( ! file_exists(APPPATH.'views/frontend/page_template.php'))
 		{
@@ -132,9 +127,10 @@ class Pages extends CI_Controller {
 		
 		if($url != ''){
 			$page_data = $this->home->get_page_data($url);
+
 		}
 		
-		if(($page_data)||(empty($page_data))){
+		if(!is_array($page_data)){
 			show_404();
 		}
 		
@@ -159,15 +155,58 @@ class Pages extends CI_Controller {
 		}
 		
 		$page_data = $this->home->get_visaapplication_meta();
+		$this->load->model('manage/visas_model');
 		
 		$data['title'] = ucfirst($page_data['meta_title']); // Capitalize the first letter
 		$data['description'] = $page_data['meta_description'];
 		$data['keywords'] = $page_data['meta_keywords'];
 		
+		$data['country_list'] = $this->visas_model->get_countries();
 		$data = array_merge($data,$this->common_data);
 		
 		$this->load->view('frontend/template/header', $data);
 		$this->load->view('frontend/application_form', $data);
 		$this->load->view('frontend/template/footer', $data);
+	}
+	
+	public function select_service($service_id = 0)
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		if(NULL != $this->input->post('visa_service_type')){
+			$service_id = $this->input->post('visa_service_type');
+		}
+		if($service_id){
+			if( ! file_exists(APPPATH.'views/frontend/select_service.php'))
+			{
+				show_404();
+			}
+			
+			$page_meta_data = $this->home->get_service_select_meta();
+			
+			$data['title'] = ucfirst($page_meta_data['meta_title']); // Capitalize the first letter
+			$data['description'] = $page_meta_data['meta_description'];
+			$data['keywords'] = $page_meta_data['meta_keywords'];
+			
+			$visa_service_details = $this->home->get_visa_service_details($service_id);
+			
+			if(isset($visa_service_details['extended_service_fee'])&& ($visa_service_details['extended_service_fee']!= '')){
+				$data['meet_greet'] = true;
+			}else{
+				$data['meet_greet'] = false;
+			}
+			
+			$data['visa_service_data'] = $visa_service_details;
+			
+			$data = array_merge($data,$this->common_data);
+			
+			$this->load->view('frontend/template/header', $data);
+			$this->load->view('frontend/select_service', $data);
+			$this->load->view('frontend/template/footer', $data);
+		}else{
+			
+			show_404();
+		}
 	}
 }

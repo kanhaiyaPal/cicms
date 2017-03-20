@@ -36,13 +36,13 @@ class Home extends CI_Model {
         $top_menu = $t_query->result_array();
 		if(count($top_menu) > 0){
 			foreach($top_menu as $menu){
-				$menu_html .= '<li><a href="'.base_url().'/'.$menu['url'].'" >'.ucfirst($menu['title']).'</a></li>';
+				$menu_html .= '<li><a href="'.base_url().$menu['url'].'" >'.ucfirst($menu['title']).'</a></li>';
 				$l_query = $this->db->get_where('ci_pages', array('public_status' => '1','parent_id' => $menu['id']));
 				$inner_menu = $l_query->result_array();
 				if(count($inner_menu) > 0){
 					$menu_html .= '<ul class="wsmenu-submenu">';
 					foreach($inner_menu as $imenu){
-						$menu_html .= '<li><a href="'.base_url().'/'.$imenu['url'].'" >'.ucfirst($imenu['title']).'</a></li>';
+						$menu_html .= '<li><a href="'.base_url().$imenu['url'].'" >'.ucfirst($imenu['title']).'</a></li>';
 					}
 					$menu_html .= '</ul>';
 				}
@@ -82,7 +82,24 @@ class Home extends CI_Model {
 	public function get_page_data($url = FALSE)
 	{
 		if($url){
-			$query = $this->db->get_where('ci_pages', array('url' => "%$url%")); //home page details are reserved at id 1
+			$query = $this->db->get_where('ci_pages', array('url' => $url)); //home page details are reserved at id 1
+			return $query->row_array();
+		}
+		return false;
+	}
+	
+	/*Visa Service Select Functions*/
+	
+	public function get_service_select_meta()
+	{
+		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'service-select')); //home page meta-details are reserved
+        return $query->row_array();
+	}
+	
+	public function get_visa_service_details($id = FALSE)
+	{
+		if($id){
+			$query = $this->db->get_where('Ci_visa_services', array('id' => $id)); 
 			return $query->row_array();
 		}
 		return false;

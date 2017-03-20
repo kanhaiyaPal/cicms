@@ -82,6 +82,24 @@
 									<label>Embassy/Visa Fee Amount</label>
 									<input class="form-control" name="embassy_fee" placeholder="Embassy/Visa Fee" value="<?=set_value('embassy_fee')?>" type="text">
 								</div>
+								
+								<div class="form-group col-md-4">
+									<label>Meet & Greet Combo Available</label>
+									<select class="form-control" name="meet_greet_combo" onchange="if(this.value =='1'){ $('#ex_ser_fe').show(); }else{ $('#ex_ser_fe').hide(); }">
+										<option value="0" <?=set_select('meet_greet_combo','0')?> >No</option>
+										<option value="1" <?=set_select('meet_greet_combo','1')?> >Yes</option>
+									</select>
+								</div>
+								
+								<div class="form-group col-md-4" id="ex_ser_fe" style="display:none">
+									<label>Extended Service Fee Amount</label>
+									<input class="form-control" name="extended_service_fee" placeholder="Extended Service Fee" value="<?=set_value('extended_service_fee')?>" type="text">
+								</div>
+								
+								<div class="form-group col-md-4">
+									&nbsp;
+								</div>
+								
 								<div class="form-group col-md-12">
 									<label>Introduction Text</label>
 									<textarea class="form-control" name="intro_text" placeholder="Introduction Page Content" id="ckeditor_full" rows="3"><?=set_value('intro_text')?></textarea>
@@ -93,7 +111,7 @@
 										<option value="1" <?=set_select('is_active','1')?> >Visible</option>
 									</select>
 								</div>
-								<div class="form-group col-md-12">
+								<!--<div class="form-group col-md-12">
 									<label>Add Visa Specific Questions(Max 20)</label>
 									<div class="colbox">
 										<div class="field_wrapper">
@@ -117,7 +135,7 @@
 											</div>
 										</div>
 									</div>
-								</div>
+								</div>-->
 							</fieldset>
 							<div>
 								<input type="submit" class="btn btn-primary" value='Submit' />

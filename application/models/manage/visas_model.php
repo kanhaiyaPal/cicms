@@ -72,7 +72,6 @@ class Visas_model extends CI_Model {
 	public function set_services($id = 0)
     {
         $data = array(
-			
 			'service_title' => $this->input->post('service_title'),
             'for_citizen' => $this->input->post('for_citizen'),
 			'travelling_to' => $this->input->post('travelling_to'),
@@ -81,6 +80,7 @@ class Visas_model extends CI_Model {
 			'intro_content' => $this->input->post('intro_text'),
 			'embassy_fee' => $this->input->post('embassy_fee'),
 			'service_fee' => $this->input->post('service_fee'),
+			'extended_service_fee' => $this->input->post('extended_service_fee'),
 			'processing_time' => $this->input->post('processing_time'),
 			'visa_validity' => $this->input->post('visa_validity'),
 			'visa_max_stay' => $this->input->post('visa_max_stay'),

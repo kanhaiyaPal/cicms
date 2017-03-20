@@ -83,13 +83,13 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
 			  <div class="list-group">
 				<a href="#" class="list-group-item active text-center" id="step_1">
-				  <!--<h4 class="glyphicon glyphicon-plane">--></h4><br/>Travelling Information
+				  <!--<h4 class="glyphicon glyphicon-plane">--></h4>Travelling Information
 				</a>
 				<a href="#" class="list-group-item text-center" id="step_2">
-				  <!--<h4 class="glyphicon glyphicon-road">--></h4><br/>Contact Details
+				  <!--<h4 class="glyphicon glyphicon-road">--></h4>Contact Details
 				</a>
 				<a href="#" class="list-group-item text-center" id="step_3">
-				  <!--<h4 class="glyphicon glyphicon-home">--></h4><br/>Applicant Information
+				  <!--<h4 class="glyphicon glyphicon-home">--></h4>Applicant Information
 				</a>
 			  </div>
 			</div>
@@ -99,15 +99,13 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 					<form name="dates_form" action="">
 						<fieldset>
 						<div class="form-group col-md-6">
-							<div class="input-group " >
-								<label class="control-label">Arrival Date in UAE</label>
-								<input type="text" name="input-arrival-date" class="form-control datepicker" >
+							<div class="input-group" >
+								<input type="text" name="input-arrival-date" class="form-control datepicker" placeholder="Arrival Date in UAE" >
 							</div>
 						</div>
 						<div class="form-group col-md-6">
-							<div class="input-group " >
-								<label class="control-label">Departure Date from UAE</label>
-								<input type="text" name="input-departure-date" class="form-control datepicker">
+							<div class="input-group" >
+								<input type="text" name="input-departure-date" class="form-control datepicker" placeholder="Departure Date from UAE">
 							</div>
 						</div>
 						</fieldset>
@@ -123,26 +121,21 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 							<legend>Current Address</legend>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Current Address</label>
-									<textarea class="form-control" name="text-current-address" rows="5"></textarea>
+									<textarea class="form-control" name="text-current-address" placeholder="Current Address" rows="5"></textarea>
 								</div>
 								<div class="form-group">
-									<label class="control-label">Country</label>
-									<input type="text" disabled class="form-control" name="input-current-country" value="Argentena" />
+									<input type="text" disabled class="form-control" name="input-current-country" placeholder="Country" value="Argentena" />
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">City</label>
-									<input type="text" class="form-control" name="input-current-city" value="" />
+									<input type="text" class="form-control" name="input-current-city" placeholder="City" value="" />
 								</div>
 								<div class="form-group">
-									<label class="control-label">Mobile</label>
-									<input type="text" class="form-control" name="input-current-mobile" pattern="/d{10}/" value="" />
+									<input type="text" class="form-control" name="input-current-mobile" pattern="/d{10}/" value="" placeholder="Mobile" />
 								</div>
 								<div class="form-group">
-									<label class="control-label">Email</label>
-									<input type="email" class="form-control" name="input-email" value="" />
+									<input type="email" class="form-control" name="input-email" value="" placeholder="Email" />
 								</div>
 							</div>
 						</fieldset>
@@ -150,9 +143,8 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 							<legend>Address in  UAE</legend>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Emirates</label>
 									<select class="form-control-input" name="input-emirates">
-										<option value="0">Select Emirates</option>
+										<option value="0">Emirates</option>
 										<option value="1">Abu Dhabi</option>
 										<option value="4">Ajman</option>
 										<option value="7">Al Fujerah</option>
@@ -163,14 +155,12 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
                                     </select>
 								</div>
 								<div class="form-group">
-									<label class="control-label">Phone</label>
-									<input type="text" class="form-control" name="input-current-phone" value="" />
+									<input type="text" class="form-control" name="input-current-phone" placeholder="Phone" value="" />
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Hotel Address / Address where will to stay in UAE</label>
-									<textarea class="form-control" name="text-hotel-address" rows="6"></textarea>
+									<textarea class="form-control" name="text-hotel-address" placeholder="Hotel Address / Address where will to stay in UAE" rows="6"></textarea>
 								</div>
 							</div>
 						</fieldset>
@@ -178,14 +168,12 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 							<legend>Emergency Contact</legend>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Contact Person</label>
-									<input type="text" class="form-control" name="input-emergency-person" value="" />
+									<input type="text" class="form-control" name="input-emergency-person" placeholder="Contact Person" value="" />
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Mobile Number</label>
-									<input type="text" class="form-control" name="input-emergency-number" value="" />
+									<input type="text" class="form-control" name="input-emergency-number" placeholder="Mobile Number" value="" />
 								</div>
 							</div>
 						</fieldset>
@@ -200,26 +188,22 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 							<legend>Applicant #1 </legend>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">First Name</label>
-									<input type="text" class="form-control" name="input-applicant-firstname" value="" />
+									<input type="text" class="form-control" name="input-applicant-firstname" placeholder="First Name" value="" />
 								</div>
 								<div class="form-group">
-									<label class="control-label">Gender</label>
 									<select class="form-control" name="input-applicant-gender">
-										<option value="0">Select Gender</option>
+										<option value="0">Gender</option>
 										<option>Male</option>
 										<option>Female</option>
 										<option>Transgender</option>
 									</select>
 								</div>
 								<div class="form-group">
-									<label class="control-label">Birth Place</label>
-									<input type="text" class="form-control" value="" name="input-applicant-birthplace" />
+									<input type="text" class="form-control" value="" placeholder="Birth Place" name="input-applicant-birthplace" />
 								</div>
 								<div class="form-group">
-									<label class="control-label">Religion</label>
 									<select class="form-control" name="input-applicant-religion">
-										<option value="0">Select Relegion</option>
+										<option value="0">Relegion</option>
 										<option value="BAHAI"> BAHAI</option>
 										<option value="BUDDHISM"> BUDDHISM</option>
 										<option value="CHRISTIAN"> CHRISTIAN</option>
@@ -234,42 +218,40 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
                     				</select>
 								</div>
 								<div class="form-group">
-									<label class="control-label">Professoin</label>
-									<div>Profession should match as mentioned on your Passport or Residence Visa or Iqama. Note: If there is a mismatch in Profession entered then you might be denied boarding by airlines or entry in UAE.</div>
-									<input type="text" class="form-control" value="" name="input-applicant-profession" />
+									<input type="text" class="form-control" value="" placeholder="Profession" name="input-applicant-profession" />
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Last name</label>
-									<input type="text" class="form-control" name="input-applicant-lastname" value="" />
+									<input type="text" class="form-control" name="input-applicant-lastname" placeholder="Last name" value="" />
 								</div>
 								<div class="form-group">
-									<label class="control-label">Date of Birth</label>
-									<input type="text" name="input-applicant-dob" class="form-control  datepicker_dob">
+									<input type="text" name="input-applicant-dob" class="form-control  datepicker_dob" placeholder="Date of Birth">
 								</div>
 								<div class="form-group">
-									<label class="control-label">Birth Country</label>
-									<input type="text" class="form-control" name="input-applicant-birthcountry" value="" />
+									<select class="form-control">
+									<option value="0">Birth Country</option>
+									<?php if(!empty($country_list)): foreach($country_list as $country): ?>
+									<option value="<?=$country['id']?>"><?=$country['country_name']?></option>
+									<?php endforeach; endif; ?>
+									</select>
 								</div>
 								<div class="form-group">
-									<label class="control-label">Email</label>
-									<input type="email" class="form-control" name="input-applicant-email" value="" />
+									<input type="email" class="form-control" name="input-applicant-email" placeholder="Email" value="" />
 								</div>
+								<div>Profession should be as per your passport.</div>
 							</div>
 						</fieldset>
 						<fieldset>
 							<legend>Family Details</legend>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Father's Name</label>
-									<input type="text" class="form-control" name="input-applicant-fathername" value="" />
+									<input type="text" class="form-control" name="input-applicant-fathername" placeholder="Father's Name" value="" />
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Mother's Name</label>
-									<input type="text" class="form-control" name="input-applicant-mothername" value="" />
+									<input type="text" class="form-control" name="input-applicant-mothername" placeholder="Mother's Name" value="" />
 								</div>
 							</div>
 						</fieldset>
@@ -286,39 +268,26 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 							<legend>Passport Information</legend>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Passport Number</label>
-									<input type="text" class="form-control" name="input-applicant-passportnumber" value="" />
+									<input type="text" class="form-control" name="input-applicant-passportnumber" placeholder="Passport Number" value="" />
 								</div>
 								<div class="form-group">
-									<label class="control-label">Issuing Country</label>
-									<select class="form-control" name="input-applicant-issuingcountry">
-										<option value="0">Select Country</option>
-										<option value="BAHAI"> BAHAI</option>
-										<option value="BUDDHISM"> BUDDHISM</option>
-										<option value="CHRISTIAN"> CHRISTIAN</option>
-										<option value="HINDU"> HINDU</option>
-										<option value="ISLAM"> ISLAM</option>
-										<option value="JAINISM"> JAINISM</option>
-										<option value="JUDAISM"> JUDAISM</option>
-										<option value="OTHERS"> OTHERS</option>
-										<option value="PARSI"> PARSI</option>
-										<option value="SIKH"> SIKH</option>
-										<option value="ZOROASTRIAN"> ZOROASTRIAN</option>
-                    				</select>
+									<select class="form-control">
+									<option value="0">Issuing Country</option>
+									<?php if(!empty($country_list)): foreach($country_list as $country): ?>
+									<option value="<?=$country['id']?>"><?=$country['country_name']?></option>
+									<?php endforeach; endif; ?>
+									</select>
 								</div>
 								<div class="form-group">
-									<label class="control-label">Expiry Date</label>
-									<input type="text" class="form-control datepicker" name="input-applicant-expiry">
+									<input type="text" class="form-control datepicker" placeholder="Expiry Date" name="input-applicant-expiry">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Place of Issue</label>
-									<input type="text" class="form-control" value="" name="input-applicant-placeofissue" />
+									<input type="text" class="form-control" value="" placeholder="Place of Issue" name="input-applicant-placeofissue" />
 								</div>
 								<div class="form-group">
-									<label class="control-label">Issuing Date</label>
-									<input type="text" class="form-control datepicker_dob" name="input-applicant-issuedate">
+									<input type="text" class="form-control datepicker_dob" placeholder="Issuing Date" name="input-applicant-issuedate">
 								</div>
 							</div>
 						</fieldset>
@@ -460,7 +429,7 @@ $(document).ready(function() {
 				has_error = true;	
 			}  
 		}
-		
+
 		if(emi.val() == '0'){
 			has_error = true;
 			show_error(emi);
@@ -665,7 +634,8 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		return true;
+		/*redirect to thank you page*/
+		window.location.replace("<?=base_url('thank-you')?>");
 	}
 	
 	show_error = function(ele){
@@ -716,5 +686,4 @@ $(document).ready(function() {
 		}
     });
 });
-
 </script>
