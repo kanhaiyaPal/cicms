@@ -199,6 +199,10 @@ class Pages extends CI_Controller {
 			
 			$data['visa_service_data'] = $visa_service_details;
 			
+			$form_data['country_list'] = $this->home->get_countries(); 
+			$form_data['visa_services'] = $this->home->get_visa_services(); 
+			$data['visa_form'] = $this->load->view('frontend/visa_form', $form_data, true);
+			
 			$data = array_merge($data,$this->common_data);
 			
 			$this->load->view('frontend/template/header', $data);

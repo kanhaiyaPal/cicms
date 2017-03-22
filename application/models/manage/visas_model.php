@@ -71,7 +71,7 @@ class Visas_model extends CI_Model {
 	
 	public function set_services($id = 0)
     {
-        $data = array(
+		$data = array(
 			'service_title' => $this->input->post('service_title'),
             'for_citizen' => $this->input->post('for_citizen'),
 			'travelling_to' => $this->input->post('travelling_to'),

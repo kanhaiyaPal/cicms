@@ -36,7 +36,7 @@ class Home extends CI_Model {
         $top_menu = $t_query->result_array();
 		if(count($top_menu) > 0){
 			foreach($top_menu as $menu){
-				$menu_html .= '<li><a href="'.base_url().$menu['url'].'" >'.ucfirst($menu['title']).'</a></li>';
+				$menu_html .= '<li><a href="'.base_url().$menu['url'].'" >'.ucfirst($menu['title']).'</a>';
 				$l_query = $this->db->get_where('ci_pages', array('public_status' => '1','parent_id' => $menu['id']));
 				$inner_menu = $l_query->result_array();
 				if(count($inner_menu) > 0){
@@ -46,6 +46,7 @@ class Home extends CI_Model {
 					}
 					$menu_html .= '</ul>';
 				}
+				echo '</li>';
 			}
 		}
 		return $menu_html;
