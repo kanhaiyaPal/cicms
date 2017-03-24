@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-include_once (dirname(__FILE__) . "/frontend/pages.php");
+include_once (dirname(__FILE__) . "/frontend/Pages.php");
 class Welcome extends Pages {
 
 	/**

@@ -25,11 +25,10 @@
 .slide-cont{
 	width:100%;
 	margin:0 auto;
-	color:#fff;
 	padding:0 0 50px 0;
 }
 .slide-cont .quote{
-	text-align: center;
+	
 }
 .slide-cont .testi-img{
 	width:100px;
@@ -63,13 +62,11 @@
 @media screen and (max-width : 768px) {
 .slide-cont{
 	margin:0 auto;
-	color:#fff;
 	padding:0 0 30px 0;
 	font-size:12px;
 	line-height:24px;
 }
 .slide-cont .quote{
-	text-align: center;
 	margin:20px 0;
 }
 .slide-cont .testi-img{
@@ -152,7 +149,7 @@
 }
 
 .bx-wrapper .bx-pager.bx-default-pager a {
-	background: #dc1e28;
+	background: #006699;
 	text-indent: -9999px;
 	display: block;
 	width: 10px;

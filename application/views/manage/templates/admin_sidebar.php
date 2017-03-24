@@ -15,14 +15,14 @@
 			<li><a href="<?php echo base_url('manage/visas/service'); ?>">Visa Service Setup</a></li>
 		</ul>
 	</li>
-	<li class="submenu">
+	<li class="submenu" <?php $ur = uri_string(); if((strpos($ur,'visaapplications/show'))){ echo "open"; } ?>>
 		 <a href="#">
 			<i class="glyphicon glyphicon-list"></i> Visa Applications
 			<span class="caret pull-right"></span>
 		 </a>
 		 <!-- Sub menu -->
 		 <ul>
-			<li><a href="<?php echo base_url('manage/visaapplications/view'); ?>">Application Submitted</a></li>
+			<li><a href="<?php echo base_url('manage/visaapplications/show'); ?>">Application Submitted</a></li>
 			<li><a href="<?php echo base_url('manage/visaapplications/view'); ?>">Documents Upload Section</a></li>
 			<li><a href="<?php echo base_url('manage/visaapplications/view'); ?>">Application Tracking</a></li>
 		</ul>

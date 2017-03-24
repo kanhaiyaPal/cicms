@@ -70,4 +70,140 @@ class Uploads extends CI_Controller {
 			redirect("manage/pages/view");
 		}
 	}
+	
+	
+	public function upload_userdocs()
+	{
+			$p1 = $p2 = [];
+			if ((isset($_FILES['file-applicant-passport'])) && (!empty($_FILES['file-applicant-passport']['name']))) {
+				
+				$ext = explode('.', basename($_FILES['file-applicant-passport']['name']));
+				$filename = $_REQUEST['temp_id'] . "__" . md5(uniqid()) . "." . array_pop($ext);
+				$target = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR .'user_docs'. DIRECTORY_SEPARATOR . $filename;
+				if(move_uploaded_file($_FILES['file-applicant-passport']['tmp_name'], $target)) {
+					$key = $filename;
+					$url = base_url('/uploads/userdoc_delete');
+					$p1 = base_url('/uploads/visas/user_docs')."{$key}"; // sends the data
+					$p2 = ['width' => '120px', 'url' => $url, 'key' => $key ];
+				} else {
+					echo '{}';
+					return;
+				}
+				echo json_encode([
+					'initialPreview' => $p1, 
+					'initialPreviewConfig' => $p2,   
+				 ]);
+				return;
+			}
+			if ((isset($_FILES['file-applicant-returnticket'])) && (!empty($_FILES['file-applicant-returnticket']['name']))) {
+				$ext = explode('.', basename($_FILES['file-applicant-returnticket']['name']));
+				$filename = $_REQUEST['temp_id'] . "__" . md5(uniqid()) . "." . array_pop($ext);
+				$target = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR .'user_docs'. DIRECTORY_SEPARATOR . $filename;
+				if(move_uploaded_file($_FILES['file-applicant-returnticket']['tmp_name'], $target)) {
+
+					$key = $filename;
+					$url = base_url('/uploads/userdoc_delete');
+					$p1 = base_url('/uploads/visas/user_docs')."{$key}"; // sends the data
+					$p2 = ['width' => '120px', 'url' => $url, 'key' => $key ];
+				} else {
+					echo '{}';
+					return;
+				}
+				echo json_encode([
+					'initialPreview' => $p1, 
+					'initialPreviewConfig' => $p2,   
+				 ]);
+				 return;
+			}
+			if ((isset($_FILES['file-applicant-empid'])) && (!empty($_FILES['file-applicant-empid']['name']))) {
+				$ext = explode('.', basename($_FILES['file-applicant-empid']['name']));
+				$filename = $_REQUEST['temp_id'] . "__" . md5(uniqid()) . "." . array_pop($ext);
+				$target = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR .'user_docs'. DIRECTORY_SEPARATOR . $filename;
+				if(move_uploaded_file($_FILES['file-applicant-empid']['tmp_name'], $target)) {
+					$key = $filename;
+					$url = base_url('/uploads/userdoc_delete');
+					$p1 = base_url('/uploads/visas/user_docs')."{$key}"; // sends the data
+					$p2 = ['width' => '120px', 'url' => $url, 'key' => $key ];
+				} else {
+					echo '{}';
+					return;
+				}
+				echo json_encode([
+					'initialPreview' => $p1, 
+					'initialPreviewConfig' => $p2,   
+				 ]);
+				 return;
+			}
+			if ((isset($_FILES['file-applicant-residence'])) && (!empty($_FILES['file-applicant-residence']['name']))) {
+				$ext = explode('.', basename($_FILES['file-applicant-residence']['name']));
+				$filename = $_REQUEST['temp_id'] . "__" . md5(uniqid()) . "." . array_pop($ext);
+				$target = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR .'user_docs'. DIRECTORY_SEPARATOR . $filename;
+				if(move_uploaded_file($_FILES['file-applicant-residence']['tmp_name'], $target)) {
+					$key = $filename;
+					$url = base_url('/uploads/userdoc_delete');
+					$p1 = base_url('/uploads/visas/user_docs')."{$key}"; // sends the data
+					$p2 = ['width' => '120px', 'url' => $url, 'key' => $key ];
+				} else {
+					echo '{}';
+					return;
+				}
+				echo json_encode([
+					'initialPreview' => $p1, 
+					'initialPreviewConfig' => $p2,   
+				 ]);
+				 return;
+			}
+			if ((isset($_FILES['file-applicant-reservation'])) && (!empty($_FILES['file-applicant-reservation']['name']))) {
+				$ext = explode('.', basename($_FILES['file-applicant-reservation']['name']));
+				$filename = $_REQUEST['temp_id'] . "__" . md5(uniqid()) . "." . array_pop($ext);
+				$target = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR .'user_docs'. DIRECTORY_SEPARATOR . $filename;
+				if(move_uploaded_file($_FILES['file-applicant-reservation']['tmp_name'], $target)) {
+					$key = $filename;
+					$url = base_url('/uploads/userdoc_delete');
+					$p1 = base_url('/uploads/visas/user_docs')."{$key}"; // sends the data
+					$p2 = ['width' => '120px', 'url' => $url, 'key' => $key ];
+				} else {
+					echo '{}';
+					return;
+				}
+				echo json_encode([
+					'initialPreview' => $p1, 
+					'initialPreviewConfig' => $p2,   
+				 ]);
+				 return;
+			}
+			if ((isset($_FILES['file-applicant-miscellanious'])) && (!empty($_FILES['file-applicant-miscellanious']['name']))) {
+				$ext = explode('.', basename($_FILES['file-applicant-miscellanious']['name']));
+				$filename = $_REQUEST['temp_id'] . "__" . md5(uniqid()) . "." . array_pop($ext);
+				$target = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR .'user_docs'. DIRECTORY_SEPARATOR . $filename;
+				if(move_uploaded_file($_FILES['file-applicant-miscellanious']['tmp_name'], $target)) {
+					$j = $i + 1;
+					$key = $filename;
+					$url = base_url('/uploads/userdoc_delete');
+					$p1 = base_url('/uploads/visas/user_docs')."{$key}"; // sends the data
+					$p2 = ['width' => '120px', 'url' => $url, 'key' => $key ];
+				} else {
+					echo '{}';
+					return;
+				}
+				echo json_encode([
+					'initialPreview' => $p1, 
+					'initialPreviewConfig' => $p2,   
+				 ]);
+				 return;
+			}
+			
+			echo '{}';
+			return;
+	}
+	
+	public function userdoc_delete()
+	{
+			$key = $_REQUEST['key'];
+
+			$target = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR .'user_docs'. DIRECTORY_SEPARATOR . $key;
+			unlink($target);
+			echo '{}';
+			return;
+	}
 }

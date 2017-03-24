@@ -100,7 +100,7 @@ class Home extends CI_Model {
 	public function get_visa_service_details($id = FALSE)
 	{
 		if($id){
-			$query = $this->db->get_where('Ci_visa_services', array('id' => $id)); 
+			$query = $this->db->get_where('ci_visa_services', array('id' => $id)); 
 			return $query->row_array();
 		}
 		return false;
@@ -134,6 +134,23 @@ class Home extends CI_Model {
 	public function get_visaapplication_meta()
 	{
 		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'vapplication')); //vapplication page meta-details are reserved
+        return $query->row_array();
+	}
+	
+	public function get_myaccount_meta()
+	{
+		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'myaccount')); //myaccount page meta-details are reserved
+        return $query->row_array();
+	}
+	
+	public function get_visasteps_meta()
+	{
+		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'visa-steps')); //myaccount page meta-details are reserved
+        return $query->row_array();
+	}
+	public function get_trackstatus_meta()
+	{
+		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'track-status')); //myaccount page meta-details are reserved
         return $query->row_array();
 	}
 }

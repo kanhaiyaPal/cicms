@@ -32,6 +32,7 @@ class Pages extends CI_Controller {
 	
 	public function index()
 	{
+		$this->load->helper('form');
 		if( ! file_exists(APPPATH.'views/frontend/index.php'))
 		{
 			show_404();
@@ -62,7 +63,8 @@ class Pages extends CI_Controller {
 		$form_data['country_list'] = $this->home->get_countries(); 
 		$form_data['visa_services'] = $this->home->get_visa_services(); 
 		$data['visa_form'] = $this->load->view('frontend/visa_form', $form_data, true);
-		
+
+		$data['feature_visa_service'] = $this->home->get_visa_services(); 
 		$data = array_merge($data,$this->common_data);
 		
 		$this->load->view('frontend/template/header', $data);
@@ -149,6 +151,12 @@ class Pages extends CI_Controller {
 	
 	public function start_application()
 	{
+		$this->load->helper('form');
+		
+		if((NULL == $this->input->post('citizen_of')) || (NULL == $this->input->post('living_in')) || (NULL == $this->input->post('travelling_to')) || (NULL == $this->input->post('visa_service_select')) || (NULL == $this->input->post('total_amount'))){
+			show_404();
+		}
+		
 		if( ! file_exists(APPPATH.'views/frontend/application_form.php'))
 		{
 			show_404();
@@ -162,6 +170,10 @@ class Pages extends CI_Controller {
 		$data['keywords'] = $page_data['meta_keywords'];
 		
 		$data['country_list'] = $this->visas_model->get_countries();
+		$data['top_total_value'] = $this->input->post('total_amount');
+		
+		$data['selected_visa_ser'] = $this->home->get_visa_service_details($this->input->post('visa_service_select'));
+		
 		$data = array_merge($data,$this->common_data);
 		
 		$this->load->view('frontend/template/header', $data);
@@ -212,5 +224,85 @@ class Pages extends CI_Controller {
 			
 			show_404();
 		}
+	}
+	
+	public function my_account()
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		
+		if( ! file_exists(APPPATH.'views/frontend/my_account.php'))
+		{
+			show_404();
+		}
+		
+		$page_data = $this->home->get_myaccount_meta();
+		
+		$data['title'] = ucfirst($page_data['meta_title']); // Capitalize the first letter
+		$data['description'] = $page_data['meta_description'];
+		$data['keywords'] = $page_data['meta_keywords'];
+		
+
+		$data = array_merge($data,$this->common_data);
+		
+		$this->load->view('frontend/template/header', $data);
+		$this->load->view('frontend/my_account', $data);
+		$this->load->view('frontend/template/footer', $data);
+	}
+	
+	public function visa_processing_steps()
+	{
+		
+		if( ! file_exists(APPPATH.'views/frontend/visa_steps.php'))
+		{
+			show_404();
+		}
+		
+		$page_data = $this->home->get_visasteps_meta();
+		
+		$data['title'] = ucfirst($page_data['meta_title']); // Capitalize the first letter
+		$data['description'] = $page_data['meta_description'];
+		$data['keywords'] = $page_data['meta_keywords'];
+		
+		$home_parts_info = $this->home->get_home_data();
+		foreach($home_parts_info as $homepart){
+			if($homepart['setting_name'] == 'home_feature_block')
+				$data['fet_dec'] =  $homepart['setting_val'];
+		}
+		
+		$data = array_merge($data,$this->common_data);
+		
+		$this->load->view('frontend/template/header', $data);
+		$this->load->view('frontend/visa_steps', $data);
+		$this->load->view('frontend/template/footer', $data);
+	}
+	
+	public function track_status()
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		
+		if( ! file_exists(APPPATH.'views/frontend/track_status.php'))
+		{
+			show_404();
+		}
+		
+		$page_data = $this->home->get_trackstatus_meta();
+		
+		$data['title'] = ucfirst($page_data['meta_title']); // Capitalize the first letter
+		$data['description'] = $page_data['meta_description'];
+		$data['keywords'] = $page_data['meta_keywords'];
+		
+
+		$data = array_merge($data,$this->common_data);
+		
+		$this->load->view('frontend/template/header', $data);
+		$this->load->view('frontend/track_status', $data);
+		$this->load->view('frontend/template/footer', $data);
+	}
+	
+	public function testimonials()
+	{
+		
 	}
 }

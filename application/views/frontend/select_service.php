@@ -1,23 +1,19 @@
 <div class="inner-banner">
-  <div class="container">
-    <h2>
-      Select Visa Service
-    </h2>	
-  </div>
-  
-<div class="search-panel">
-     <div class="container">
-      <?=$visa_form?>
-     </div>
-  </div>
-  
-</div>
 <div class="container">
-  <h1>Select Visa Service<span></span></h1>
+<h2>Select Visa Service</h2>
+
+<div class="search-panel" data-spy="affix" data-offset-top="200">
+<?=$visa_form?>
+</div>    
+</div>
+</div>
+
+<div class="container">
+  <h1><?=$visa_service_data['service_title']?> Days Visa (<?php if($visa_service_data['visa_type']){ echo "Single Entry"; }else{ echo "Multiple Entry"; } ?>)<span></span></h1>
 	<table width="100%" cellspacing="0" cellpadding="0" class="tbl1">
 		<tbody>
 			<tr>
-			<th width="20%">&nbsp;</th>
+			<th width="20%">Description</th>
 			<?php if($meet_greet): ?>
 			<th width="40%">Visa + Meet &amp; Greet Combo Service</th>
 			<?php endif; ?>
@@ -26,9 +22,9 @@
 		<tr>
 			<td class="grey">Type of Visa</td>
 			<?php if($meet_greet): ?>
-		  <td valign="top">Single Entry</td>
+		  <td valign="top"><?php if($visa_service_data['visa_type']){ echo "Single Entry"; }else{ echo "Multiple Entry"; } ?></td>
 			<?php endif; ?>
-			<td valign="top">Single Entry</td>
+			<td valign="top"><?php if($visa_service_data['visa_type']){ echo "Single Entry"; }else{ echo "Multiple Entry"; } ?></td>
 		</tr>
 		<tr>
 			<td class="grey">Visa Validity</td>
@@ -47,9 +43,9 @@
 		<tr>
 			<td class="grey">Processing Time</td>
 			<?php if($meet_greet): ?>
-		  <td valign="top"><?=$visa_service_data['processing_time']?> Hours</td>
+		  <td valign="top"><?=$visa_service_data['processing_time']?> </td>
 			<?php endif; ?>
-			<td valign="top"><?=$visa_service_data['processing_time']?> Hours</td>
+			<td valign="top"><?=$visa_service_data['processing_time']?> </td>
 		</tr>
 		<tr>
 			<td class="grey">Visa Fee ($)</td>
@@ -77,14 +73,20 @@
 			<?php if($meet_greet): ?>
 			<td class="grey"><div>
 			<form action="<?=base_url('frontend/pages/start_application')?>" method="post" >
-			<input type="hidden" name="visa_service_select" value="<?=$visa_service_data['id']?>"/>
-			<input type="hidden" name="total_amount" value="<?=$visa_service_data['extended_service_fee']+$visa_service_data['embassy_fee']?>"/>
-			<input type="submit" value="Get Started" name="submit_m" id="submit_m">
+				<input type="hidden" name="citizen_of" value="<?=$this->input->post('citizen_user')?>" />
+				<input type="hidden" name="living_in" value="<?=$this->input->post('living_user')?>" />
+				<input type="hidden" name="travelling_to" value="<?=$this->input->post('travelling_user')?>" />
+				<input type="hidden" name="visa_service_select" value="<?=$visa_service_data['id']?>"/>
+				<input type="hidden" name="total_amount" value="<?=$visa_service_data['extended_service_fee']+$visa_service_data['embassy_fee']?>"/>
+				<input type="submit" value="Get Started" name="submit_m" id="submit_m">
 			</form>
 			</div></td>
 			<?php endif; ?>
 			<td class="grey"><div>
 			<form action="<?=base_url('frontend/pages/start_application')?>" method="post" >
+			<input type="hidden" name="citizen_of" value="<?=$this->input->post('citizen_user')?>" />
+			<input type="hidden" name="living_in" value="<?=$this->input->post('living_user')?>" />
+			<input type="hidden" name="travelling_to" value="<?=$this->input->post('travelling_user')?>" />
 			<input type="hidden" name="visa_service_select" value="<?=$visa_service_data['id']?>"/>
 			<input type="hidden" name="total_amount" value="<?=$visa_service_data['service_fee']+$visa_service_data['embassy_fee']?>"/>
 			<input type="submit" value="Get Started" name="submit_r" id="submit_r"></form></div></td>

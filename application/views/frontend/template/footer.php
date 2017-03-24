@@ -6,15 +6,21 @@
         <ul>
           <li><a href="<?=base_url()?>"><i class="fa fa-home"></i> Home</a></li>
           <li><a href="<?=base_url('about-us')?>"><i class="fa fa-info-circle"></i> About us</a></li>
-          <li><a href="<?=base_url()?>"><i class="fa fa-list-ul"></i> Visa Processing Steps</a></li>
-          <li><a href="<?=base_url('testimonials')?>"><i class="fa fa-comments-o"></i> Testimonials</a></li>
+          <li><a href="<?=base_url('frontend/pages/visa_processing_steps')?>"><i class="fa fa-list-ul"></i> Visa Processing Steps</a></li>
           <li><a href="<?=base_url('contact-us')?>"><i class="fa fa-envelope-o"></i> Contact us</a></li>
         </ul>
       </div>
+      
       <div class="col-sm-3">
-        <h4>Disclaimer</h4>
-        <div><?=$site_disc?></div>
-      </div>
+        <h4>Contact us</h4>
+        <ul>
+        <li><a href="#"><i class="fa fa-comments-o"></i> Testimonials</a></li>
+		  <li><a href="<?=base_url('privacy-policy')?>"><i class="fa fa-file-text" aria-hidden="true"></i> Privacy Policy</a></li>
+		  <li><a href="<?=base_url('terms-of-use')?>"><i class="fa fa-file-text-o" aria-hidden="true"></i> Terms of Use</a></li>
+		  <li><a href="<?=base_url('security-policy')?>"><i class="fa fa-file" aria-hidden="true"></i> Security Policy</a></li>
+          </ul>
+        </div>
+      
       <div class="col-sm-3">
         <h4>Contact us</h4>
         <ul>
@@ -33,7 +39,16 @@
           </ul>
         </div>
       </div>
-      <div class="col-sm-3">&nbsp;</div>
+      
+      
+      <div class="col-sm-3">
+        <h4>Disclaimer</h4>
+        <div><?=$site_disc?></div>
+      </div>
+      
+      <!--<div class="col-sm-3 text-right">
+      <img src="<?=base_url('assets/images/')?>footer-logo.png" alt="E Visas Online" />
+      </div>-->
     </div>
   </div>
 </div>
