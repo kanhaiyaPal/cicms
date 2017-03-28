@@ -54,6 +54,7 @@ $route['manage'] = 'manage/pages/view';
 $route['manage/(:any)'] = 'manage/pages/view/$1';
 $route['login-register'] = 'frontend/pages/login';
 $route['contact-us'] = 'frontend/pages/contact_us';
+$route['testimonials'] = 'frontend/pages/testimonials';
 $route['(:any)'] = 'frontend/pages/default_page/$1';
 $route['default_controller'] = 'welcome';
 

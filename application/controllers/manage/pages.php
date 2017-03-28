@@ -192,6 +192,66 @@ class Pages extends CI_Controller {
 		}
 	}
 	
+	public function enquiry($pagename = FALSE)
+	{
+		if(isset($this->session->adminsession)&& ($this->session->adminsession != ''))
+		{
+			if($pagename){
+				if( ! file_exists(APPPATH.'views/manage/view_inquiry.php'))
+				{
+					show_404();
+				}
+				$this->load->model('manage/pages_model'); 
+				
+				$data['title'] = ucfirst('view contact inquiry'); 
+				$data['sidebar'] = $this->load->view('manage/templates/admin_sidebar', $data, true);
+				$data['contact_data'] = $this->pages_model->get_enquiries();
+			
+				$this->load->view('manage/templates/admin_header', $data);
+				$this->load->view('manage/view_inquiry', $data);
+				$this->load->view('manage/templates/admin_footer', $data);
+			}
+		}else{
+			$this->admin_login();
+		}
+	}
+	
+	public function delete_inquiry($id = 0)
+	{
+		if(isset($this->session->adminsession)&& ($this->session->adminsession != ''))
+		{
+			if($id){
+				$this->load->model('manage/pages_model');
+				$this->pages_model->delete_inquiry($id);
+				$this->session->set_flashdata('delete_contact_success', 'Contact Record Deleted successfully');
+				redirect("manage/pages/enquiry/contact");
+			}
+		}else{
+			$this->admin_login();
+		}
+	}
+	
+	public function view_details_inquiry($id = 0)
+	{
+		if(isset($this->session->adminsession)&& ($this->session->adminsession != ''))
+		{
+			if($id){
+				$this->load->model('manage/pages_model'); 
+				
+				$data['title'] = ucfirst('view contact inquiry - Details '); 
+				$data['sidebar'] = $this->load->view('manage/templates/admin_sidebar', $data, true);
+				$data['contact_data'] = $this->pages_model->get_enquiries($id);
+				$data['back_url'] = base_url('manage/pages/enquiry/contact');
+			
+				$this->load->view('manage/templates/admin_header', $data);
+				$this->load->view('manage/view_details_inquiry', $data);
+				$this->load->view('manage/templates/admin_footer', $data);
+			}
+		}else{
+			$this->admin_login();
+		}
+	}
+	
 	public function logout()
 	{
 		$this->session->unset_userdata('adminsession');

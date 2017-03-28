@@ -16,12 +16,12 @@
 					</div>
 				</div>
 				<div class="panel-body">
-				<?php if(!empty($this->session->flashdata('setting_updated'))): ?>
+				<?php if($this->session->flashdata('setting_updated')): ?>
 					<div class="alert alert-success" role="alert">
 					  <?php echo $this->session->flashdata('setting_updated');  ?>
 					</div>
 				<?php endif; ?>
-				<?php if(!empty(validation_errors())): ?>
+				<?php if(validation_errors()): ?>
 					<div class="alert alert-danger" role="alert">
 					  <?php echo validation_errors();  ?>
 					</div>

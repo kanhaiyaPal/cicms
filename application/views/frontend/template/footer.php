@@ -14,7 +14,7 @@
       <div class="col-sm-3">
         <h4>Contact us</h4>
         <ul>
-        <li><a href="#"><i class="fa fa-comments-o"></i> Testimonials</a></li>
+        <li><a href="<?=base_url('testimonials')?>"><i class="fa fa-comments-o"></i> Testimonials</a></li>
 		  <li><a href="<?=base_url('privacy-policy')?>"><i class="fa fa-file-text" aria-hidden="true"></i> Privacy Policy</a></li>
 		  <li><a href="<?=base_url('terms-of-use')?>"><i class="fa fa-file-text-o" aria-hidden="true"></i> Terms of Use</a></li>
 		  <li><a href="<?=base_url('security-policy')?>"><i class="fa fa-file" aria-hidden="true"></i> Security Policy</a></li>
@@ -30,12 +30,12 @@
         </ul>
         <div class="social">
           <ul>
-			<?php if($fb_url != ''){ ?><li><a href="<?=$fb_url?>" target="_blank"><i class="fa fa-facebook"></i></a></li><?php } ?>
-            <?php if($tw_url != ''){ ?><li><a href="<?=$tw_url?>" target="_blank"><i class="fa fa-twitter"></i></a></li><?php } ?>
-			<?php if($ln_url != ''){ ?><li><a href="<?=$ln_url?>" target="_blank"><i class="fa fa-linkedin"></i></a></li><?php } ?>
-			<?php if($pn_url != ''){ ?><li><a href="<?=$pn_url?>" target="_blank"><i class="fa fa-pinterest"></i></a></li><?php } ?>
-			<?php if($in_url != ''){ ?><li><a href="<?=$in_url?>" target="_blank"><i class="fa fa-instagram"></i></a></li><?php } ?>
-			<?php if($gp_url != ''){ ?><li><a href="<?=$gp_url?>" target="_blank"><i class="fa fa-google-plus"></i></a></li><?php } ?>
+			<?php if($fb_url != ''){ ?><li><a href="<?=$fb_url?>" target="_blank"><i class="fa fa-facebook fb"></i></a></li><?php } ?>
+            <?php if($tw_url != ''){ ?><li><a href="<?=$tw_url?>" target="_blank"><i class="fa fa-twitter ttr"></i></a></li><?php } ?>
+			<?php if($ln_url != ''){ ?><li><a href="<?=$ln_url?>" target="_blank"><i class="fa fa-linkedin li"></i></a></li><?php } ?>
+			<?php if($pn_url != ''){ ?><li><a href="<?=$pn_url?>" target="_blank"><i class="fa fa-pinterest pin"></i></a></li><?php } ?>
+			<?php if($in_url != ''){ ?><li><a href="<?=$in_url?>" target="_blank"><i class="fa fa-instagram ins"></i></a></li><?php } ?>
+			<?php if($gp_url != ''){ ?><li><a href="<?=$gp_url?>" target="_blank"><i class="fa fa-google-plus gl"></i></a></li><?php } ?>
           </ul>
         </div>
       </div>

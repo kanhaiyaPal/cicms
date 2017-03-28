@@ -5,17 +5,17 @@
 				<div class="box">
 					<div class="content-wrap">
 						<h6>Sign In</h6>
-						<?php if(!empty(validation_errors())): ?>
+						<?php if(validation_errors()): ?>
 						<div class="alert alert-danger" role="alert">
 						  <?php echo validation_errors();  ?>
 						</div>
 						<?php endif; ?>
-						<?php if(!empty($this->session->flashdata('incorrect_data'))): ?>
+						<?php if($this->session->flashdata('incorrect_data')): ?>
 						<div class="alert alert-danger" role="alert">
 						  <?php echo $this->session->flashdata('incorrect_data');  ?>
 						</div>
 						<?php endif; ?>
-						<?php if(!empty($this->session->flashdata('logout_success'))): ?>
+						<?php if($this->session->flashdata('logout_success')): ?>
 						<div class="alert alert-success" role="alert">
 						  <?php echo $this->session->flashdata('logout_success');  ?>
 						</div>

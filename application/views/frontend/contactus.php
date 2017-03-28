@@ -25,19 +25,24 @@
     <p>&nbsp;</p>
     <div class="col-md-6">
       <div class="box1">
-        <form name="contform" action="" method="post" onSubmit="return contvform()">
+	  <?php if($this->session->flashdata('mail_sent')): ?>
+		<div class="alert alert-success" role="alert">
+			<?php echo $this->session->flashdata('mail_sent');  ?>
+		</div>
+	  <?php endif; ?>
+	  <form name="contform" action="" method="post" onSubmit="return contvform()">
           <div class="row">
             <div class="col-sm-6 f-user">
-              <input type="text" placeholder="Name *" required>
+              <input type="text" placeholder="Name *" name="c_name" required>
             </div>
             <div class="col-sm-6 f-mobile">
-              <input type="tel" placeholder="Mobile *" required />
+              <input type="text" placeholder="Mobile *" maxlength="10"  pattern="[0-9]{10}" name="c_mobile" required />
             </div>
             <div class="col-sm-12 f-email">
-              <input type="email" placeholder="Email *" required/>
+              <input type="email" placeholder="Email *" name="c_mail" required/>
             </div>
             <div class="col-sm-12">
-              <textarea maxlength="200" placeholder="Message /Comment"></textarea>
+              <textarea maxlength="200" name="c_message" placeholder="Message /Comment"></textarea>
             </div>
             <div class="col-md-12">
               <input name="button" type="submit" id="button" value="Submit">

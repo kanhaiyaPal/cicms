@@ -70,19 +70,17 @@ div.bhoechie-tab-content legend{
 	margin:20px 0 10px 0!important;
 }
 
-div.bhoechie-tab-content button[type="button"] {
-	background-color: #003366;
-	box-shadow:inset 0px 0px 0px 2px rgba(0,0,0,.1);
+.bhoechie-tab-content button[type="button"] {
+	background-color: #fff!important;
+	box-shadow:inset 0px 0px 0px 1px rgba(0,0,0,.2);
 	font-size: 12px;
 	border: 0px solid #dddddd;
-	color: rgba(255,255,255,1);
-	clear: both;
-	height: auto!important;
-	display:inline-block;
+	color: #666!important;
 	padding:0 auto!important;
 	text-decoration: none;
 	margin: auto!important;
 	border-radius:2px;
+	height:48px!important;
 	font-weight:700!important;
 	text-transform:capitalize!important;
 }
@@ -90,5 +88,3 @@ div.bhoechie-tab-content button[type="button"] {
 div.bhoechie-tab div.bhoechie-tab-content:not(.active){
   display: none;
 }
-
-div.bhoechie-tab-content .file-input-new>div.btn-file>span.hidden-xs{ display:none !important; }

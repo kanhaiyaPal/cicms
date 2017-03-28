@@ -145,12 +145,31 @@ class Home extends CI_Model {
 	
 	public function get_visasteps_meta()
 	{
-		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'visa-steps')); //myaccount page meta-details are reserved
+		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'visa-steps')); //visa-steps page meta-details are reserved
         return $query->row_array();
 	}
 	public function get_trackstatus_meta()
 	{
-		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'track-status')); //myaccount page meta-details are reserved
+		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'track-status')); //track-status page meta-details are reserved
         return $query->row_array();
+	}
+	public function get_testimonials_meta()
+	{
+		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'testimonials')); //track-status page meta-details are reserved
+        return $query->row_array();
+	}
+	
+	/*contact Us mail*/
+	public function register_enquiry_record()
+	{
+		$data = array(
+			'name' => $this->input->post('c_name'),
+			'mobile' => $this->input->post('c_mobile'),
+			'email' =>$this->input->post('c_mail'),
+			'message' => $this->input->post('c_message'),
+			'source' => 'contact_us_page'
+		);
+		
+		$this->db->insert('ci_inquiry', $data);
 	}
 }

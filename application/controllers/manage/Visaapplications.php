@@ -34,4 +34,27 @@ class Visaapplications extends CI_Controller {
 		}
 	}
 	
+	public function show_details_app($id = FALSE)
+	{
+		if(isset($this->session->adminsession)&& ($this->session->adminsession != ''))
+		{
+			$this->load->model('manage/visaapplications_model');
+			
+			if( ! file_exists(APPPATH.'views/manage/visas/show_details_app.php'))
+			{
+				show_404();
+			}
+			
+			$data['title'] = ucfirst('View Application Details'); 
+			$data['sidebar'] = $this->load->view('manage/templates/admin_sidebar', $data, true);
+			$data['page_data'] = $this->visaapplications_model->get_visa_applications($id);
+			$data['back_url'] = base_url('manage/visaapplications/show');
+
+			$this->load->view('manage/templates/admin_header', $data);
+			$this->load->view('manage/visas/show_details_app', $data);
+			$this->load->view('manage/templates/admin_footer', $data);
+		}else{
+			redirect("manage/pages/view");
+		}
+	}
 }

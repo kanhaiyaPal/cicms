@@ -78,8 +78,13 @@
 			  <?=$site_menu?>
                 <li><a href="<?=base_url('frontend/pages/visa_processing_steps')?>">Visa Processing Steps</a>
                 <li><a href="<?=base_url('frontend/pages/track_status')?>">Track Your Status</a></li>
-                <li class="res-show"><a href="<?=$login_url?>">Login</a></li>
+                <?php if(isset($this->session->usersession)&&($this->session->usersession != '')): ?>
+				<li class="res-show"><a href="<?=$myaccount_url?>">Account</a></li>
+				<li class="res-show"><a href="<?=$logout_url?>">Logout</a></li>
+				<?php else: ?>
+				<li class="res-show"><a href="<?=$login_url?>">Login</a></li>
                 <li class="res-show"><a href="<?=$login_url?>">Register</a></li>
+				<?php endif; ?>
                 <li><a href="<?=base_url('contact-us')?>">Contact us</a></li>
               </ul>
             </nav>
@@ -90,7 +95,12 @@
     
     
     <div class="h-r-r res-hide">
-    <a href="<?=$login_url?>"><i class="fa fa-key"></i> Login</a> <a href="<?=$login_url?>"><i class="fa fa-user-plus"></i> Register</a>
+	<?php if(isset($this->session->usersession)&&($this->session->usersession != '')): ?>
+	<a href="<?=$myaccount_url?>"><i class="fa fa-user-secret"></i>  Account</a> <a href="<?=$logout_url?>"><i class="fa fa-user-circle-o"></i>  Logout</a> 
+	<?php else: ?>
+	<a href="<?=$login_url?>"><i class="fa fa-key"></i> Login</a> <a href="<?=$login_url?>"><i class="fa fa-user-plus"></i> Register</a>
+	<?php endif; ?>
+    
     </div>
     
     

@@ -41,6 +41,6 @@
 	</li>
 	<li><a href="<?php echo base_url('manage/testimonials/showall'); ?>"><i class="glyphicon glyphicon-pencil"></i> Testimonials</a></li>
 	<li><a href="<?php echo base_url('manage/users/showall'); ?>"><i class="glyphicon glyphicon-user"></i> Users</a></li>
-	<li><a href="<?php echo base_url('manage/enquiry/contact'); ?>"><i class="glyphicon glyphicon-stats"></i> Enquiries </a></li>
+	<li><a href="<?php echo base_url('manage/pages/enquiry/contact'); ?>"><i class="glyphicon glyphicon-stats"></i> Enquiries </a></li>
 </ul>
 </div>

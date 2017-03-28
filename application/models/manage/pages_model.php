@@ -101,4 +101,24 @@ class Pages_model extends CI_Model {
 		$query = $this->db->get_where('ci_media', array('page_id' => $id));
         return $query->result_array();
 	}
+	
+	public function get_enquiries($id = FALSE)
+	{
+		 if ($id === FALSE)
+        {
+            $query = $this->db->get('ci_inquiry');
+            return $query->result_array();
+        }
+ 
+        $query = $this->db->get_where('ci_inquiry', array('id' => $id));
+        return $query->row_array();
+	}
+	
+	public function delete_inquiry($id = 0)
+	{
+		if($id){
+			$this->db->where('id', $id);
+			return $this->db->delete('ci_inquiry');
+		}
+	}
 }

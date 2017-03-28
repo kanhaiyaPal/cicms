@@ -15,7 +15,7 @@
 						</div>
 					</div>
 					<div class="panel-body">
-					<?php if(!empty(validation_errors())): ?>
+					<?php if(validation_errors()): ?>
 						<div class="alert alert-danger" role="alert">
 						  <?php echo validation_errors();  ?>
 						</div>

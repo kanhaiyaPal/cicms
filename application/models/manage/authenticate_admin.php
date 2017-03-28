@@ -20,4 +20,20 @@ class Authenticate_admin extends CI_Model {
 		public function verify_pass($password,$hash){
 			return password_verify($password,$hash);
 		}
+		
+		public function get_username_password($username = FALSE)
+		{
+			if($username){
+				$query = $this->db->get_where('ci_users',array('username' => $username));
+				return $query->row();
+			}
+		}
+		
+		public function check_username($username = False)
+		{
+			if($username){
+				$query = $this->db->get_where('ci_users',array('username' => $username));
+				return $query->num_rows();
+			}
+		}
 }

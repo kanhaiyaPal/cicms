@@ -14,17 +14,17 @@
 					</div>
 				</div>
 				<div class="panel-body">
-				<?php if(!empty($this->session->flashdata('page_created'))): ?>
+				<?php if($this->session->flashdata('page_created')): ?>
 				<div class="alert alert-success" role="alert">
 				  <?php echo $this->session->flashdata('page_created');  ?>
 				</div>
 				<?php endif; ?>
-				<?php if(!empty($this->session->flashdata('delete_success'))): ?>
+				<?php if($this->session->flashdata('delete_success')): ?>
 				<div class="alert alert-success" role="alert">
 				  <?php echo $this->session->flashdata('delete_success');  ?>
 				</div>
 				<?php endif; ?>
-				<?php if(!empty($this->session->flashdata('update_success'))): ?>
+				<?php if($this->session->flashdata('update_success')): ?>
 				<div class="alert alert-success" role="alert">
 				  <?php echo $this->session->flashdata('update_success');  ?>
 				</div>
