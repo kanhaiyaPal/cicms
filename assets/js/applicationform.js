@@ -1,7 +1,9 @@
 var step_1_validate = false;
 var step_2_validate = false;
 var step_3_validate = false;
-var applicant_more_name = ['applicant1','applicant2','applicant3','applicant4','applicant5','applicant6','applicant7','applicant8','applicant9','applicant10'];
+
+var base_uri = $('input[name="ste_url"]').val();
+var temp_id_val = $('input[name="temp_u_id"]').val();
 
 var form_submit_part_1;
 var form_submit_part_2;
@@ -14,7 +16,9 @@ var add_table_header;
 var check_size_cokkie;
 var single_entry_warning;
 var remove_applicant_data;
-var edit_applicant_data
+var edit_applicant_data;
+
+
 
 $(document).ready(function() {
 	form_submit_part_1 = function(){
@@ -155,24 +159,7 @@ $(document).ready(function() {
 		var vald = validate_form_p3();
 		if(vald){
 			/*redirect to thank you page*/
-			var ad_fl = check_size_cokkie();
-			if(ad_fl >= 1){
-			var index;
-				for (index = 0; index < applicant_more_name.length; ++index) {
-					var x = readCookie(applicant_more_name[index]);
-					if(x){
-						/*create hidden field for each applicant details*/
-						$('<input>').attr({
-							type: 'hidden',
-							name: applicant_more_name[index],
-							value: x
-						}).appendTo('form[name="application_form_vsa"]');
-					}
-				}
-			}else{
-				
-				console.log('error creating field'+ad_fl);
-			}
+			
 			$('form[name="application_form_vsa"]').submit();
 			//return false;
 			//window.location.replace("<?=base_url('thank-you')?>");
@@ -337,132 +324,37 @@ $(document).ready(function() {
 	
 	add_another_app = function(event){
 		event.preventDefault();
-		console.log(document.cookie);
+
 		var a_vald = validate_form_p3();
+		var next_lb = 0;
 		
 		if(!a_vald){
 			return false;
 		}
 		
-		var sz = check_size_cokkie();
-		if(sz >= 10){ alert('You cannot add more than 10 applicants'); return false; }
+		$('<input>').attr({
+			type: 'hidden',
+			name: 'flag-coapplicant',
+			value: '1'
+		}).appendTo('form[name="application_form_vsa"]');
 		
-		var $firstname = $('input[name="input-applicant-firstname"]');
-		var $lastname = $('input[name="input-applicant-lastname"]');
-		var $gender = $('select[name="input-applicant-gender"]');
-		var $dob = $('input[name="input-applicant-dob"]');
-		var $birthplace = $('input[name="input-applicant-birthplace"]');
-		var $birthcountry = $('select[name="select-applicant-birthcountry"]');
-		var $religion = $('select[name="input-applicant-religion"]');
-		var $email = $('input[name="input-applicant-email"]');
-		var $profession = $('input[name="input-applicant-profession"]');
-		var $father = $('input[name="input-applicant-fathername"]');
-		var $mother = $('input[name="input-applicant-mothername"]');
-		var $marital_st = $('input[name="input-applicant-maritalstatus"]');
-		var $passno = $('input[name="input-applicant-passportnumber"]');
-		var $passissp = $('input[name="input-applicant-placeofissue"]');
-		var $passissc = $('select[name="select-appplicant-pissuecountry"]');
-		var $passissd = $('input[name="input-applicant-issuedate"]');
-		var $passexp = $('input[name="input-applicant-expiry"]');
-		var $passupd = $('input[name="file-applicant-passport"]');
-		var $resprofupd = $('input[name="file-applicant-residence"]');
-		var $retickupd = $('input[name="file-applicant-returnticket"]');
-		var $horesupd = $('input[name="file-applicant-reservation"]');
-		var $empidupd = $('input[name="file-applicant-empid"]');
-		var $miscupd = $('input[name="file-applicant-miscellanious"]');
+		$('form[name="application_form_vsa"]').submit();
 		
-		var applicant = { 
-					firstname: $firstname.val() ,
-					lastname: $lastname.val(),
-					gender: $gender.val(),
-					dob: $dob.val(),
-					birth_place: $birthplace.val(),
-					birth_country: $birthcountry.val(),
-					religion: $religion.val(),
-					mail: $email.val(),
-					profession: $profession.val(),
-					father: $father.val(),
-					mother: $mother.val(),
-					marital_st: $marital_st.val(),
-					passport_no: $passno.val(),
-					passport_issue_place: $passissp.val(),
-					passport_issue_country: $passissc.val(),
-					passport_issue_date: $passissd.val(),
-					passport_expiry: $passexp.val(),
-					color_passport: $passupd.val(),
-					residence_proof: $resprofupd.val(),
-					return_ticket: $retickupd.val(),
-					emp_id: $empidupd.val(),
-					misc_docs: $miscupd.val(),
-					hotel_reservation: $horesupd.val()
-		}
-		var json_str = JSON.stringify(applicant);
-		
-		//check if there are existing applicant data
-		var available_cookie_name = get_available_cookiename();
- 		createCookie(available_cookie_name, json_str,1);
-		set_up_fields();
-		increase_label();
+		clear_third_step();
+		increase_label(next_lb);
 	}
 	
-	increase_label = function(){
-		var sze = check_size_cokkie();
+	increase_label = function(cont){
+		
 		$("#applicant_counter").html('');
-		$("#applicant_counter").html(sze+1);
+		$("#applicant_counter").html(cont+1);
 		 $("html, body").delay(2000).animate({scrollTop: $("#applicant_counter").offset().top}, 1000);
 	}
 	
-	check_size_cokkie = function(){
-		var size = 0;
-		for (index = 0; index < applicant_more_name.length; ++index) {
-			var x = readCookie(applicant_more_name[index]);
-			if (x != null) {
-				size++;
-			}
-		}
-		return size;
-	}
 	
-	get_available_cookiename = function(){
-		var ret_val;
-		var index;
-		for (index = 0; index < applicant_more_name.length; ++index) {
-			var x = readCookie(applicant_more_name[index]);
-			if (x == null) {
-				ret_val = applicant_more_name[index];
-				break;
-			}
-		}
-		return ret_val;
-	}
 	
 	set_up_fields = function(){
-		/*function to display table for each applicant stored in cookie*/
-		var $show_div = $('#applicant_details_more');
-		var ret_html = '';
-		var index;
-		var header_on = 0;
 		
-		for (index = 0; index < applicant_more_name.length; ++index) {
-			var x = readCookie(applicant_more_name[index]);
-			if(x){
-				var inter_data = JSON.parse(x);
-				ret_html += add_table_header(header_on);
-				header_on = 1;
-				ret_html += '<div class="col-md-3">'+inter_data.firstname+' '+inter_data.lastname+'</div>';
-				ret_html += '<div class="col-md-3">'+inter_data.dob+'</div>';
-				ret_html += '<div class="col-md-3">'+inter_data.passport_no+'</div>';
-				var inter_szs_ck = single_entry_warning();
-				if(inter_szs_ck){
-					ret_html += '<div class="col-md-3"><a href="#" onclick="edit_applicant_data(event,\''+applicant_more_name[index]+'\')">Edit</a></div>';
-				}else{
-					ret_html += '<div class="col-md-3"><a href="#" onclick="edit_applicant_data(event,\''+applicant_more_name[index]+'\')">Edit</a> | <a href="#" onclick="remove_applicant_data(event,\''+applicant_more_name[index]+'\')">Remove</a></div>';
-				}
-				
-			}
-		}
-		$show_div.html('');
-		$show_div.append(ret_html);
 		clear_third_step();
 	}
 	
@@ -486,17 +378,17 @@ $(document).ready(function() {
 	
 	remove_applicant_data = function(event,cookie_name){
 		event.preventDefault();
-		eraseCookie(cookie_name);
+
 	}
 	
 	clear_third_step = function(){
 		$('input[name="input-applicant-firstname"]').val('');
 		$('input[name="input-applicant-lastname"]').val('');
-		$('select[name="input-applicant-gender"]').val('0');
+		$('select[name="select-applicant-gender"]').val('0');
 		$('input[name="input-applicant-dob"]').val('');
 		$('input[name="input-applicant-birthplace"]').val('');
-		$('select[name="select-applicant-birthcountry"]').val('0');
-		$('select[name="input-applicant-religion"]').val('0');
+		$('select[name="select-applicant-birthcountry"]').prop('selectedIndex',0);
+		$('select[name="select-applicant-religion"]').val('0');
 		$('input[name="input-applicant-profession"]').val('');
 		$('input[name="input-applicant-fathername"]').val('');
 		$('input[name="input-applicant-mothername"]').val('');
@@ -516,41 +408,7 @@ $(document).ready(function() {
 	
 	edit_applicant_data = function(event,cookie_name){
 		event.preventDefault();
-		for (index = 0; index < applicant_more_name.length; ++index) {
-			if(applicant_more_name[index] == cookie_name){
-				var x = readCookie(applicant_more_name[index]);
-				if(x){
-					var inter_data = JSON.parse(x);
-					
-					$('input[name="input-applicant-firstname"]').val(inter_data.firstname);
-					$('input[name="input-applicant-lastname"]').val(inter_data.lastname);
-					$('select[name="input-applicant-gender"]').val(inter_data.gender);
-					$('input[name="input-applicant-dob"]').val(inter_data.dob);
-					$('input[name="input-applicant-birthplace"]').val(inter_data.birth_place);
-					$('select[name="select-applicant-birthcountry"]').val(inter_data.birth_country);
-					$('select[name="input-applicant-religion"]').val(inter_data.religion);
-					$('input[name="input-applicant-profession"]').val(inter_data.mail);
-					$('input[name="input-applicant-fathername"]').val(inter_data.father);
-					$('input[name="input-applicant-mothername"]').val(inter_data.mother);
-					$('input[name="input-applicant-maritalstatus"]').val(inter_data.marital_st);
-					$('input[name="input-applicant-passportnumber"]').val(inter_data.passport_no);
-					$('input[name="input-applicant-placeofissue"]').val(inter_data.passport_issue_place);
-					$('select[name="select-appplicant-pissuecountry"]').val(inter_data.passport_issue_country);
-					$('input[name="input-applicant-issuedate"]').val(inter_data.passport_issue_date);
-					$('input[name="input-applicant-expiry"]').val(inter_data.passport_expiry);
-					$('input[name="file-applicant-passport"]').val(inter_data.color_passport);
-					$('input[name="file-applicant-residence"]').val(inter_data.residence_proof);
-					$('input[name="file-applicant-returnticket"]').val(inter_data.return_ticket);
-					$('input[name="file-applicant-reservation"]').val(inter_data.hotel_reservation);
-					$('input[name="file-applicant-empid"]').val(inter_data.emp_id);
-					$('input[name="file-applicant-miscellanious"]').val(inter_data.misc_docs);
-				}else{
-					console.log('Cookie is null');
-				}
-			}else{
-				console.log('cookie name not found');
-			}
-		}
+
 	}
 	
 	show_error = function(ele){
@@ -625,11 +483,9 @@ $(document).ready(function() {
 		}
     });
 	
-	
-	
 	/*File Input Intialize*/
-	var base_uri = $('input[name="ste_url"]').val();
-	var temp_id_val = $('input[name="temp_u_id"]').val();
+	
+	/*
 	$(".vs_doc_up").fileinput({	
 								uploadUrl: base_uri + '/uploads/upload_userdocs',
 								uploadExtraData: {temp_id: temp_id_val},
@@ -641,7 +497,7 @@ $(document).ready(function() {
 							});
 	$(".vs_doc_up").on('fileclear', function(event) {
 		console.log($(this).closest('input').attr('name'));
-	});						
+	});   */ 						
 	/*File Input Intialize Ends*/
 });
 /*function to support cookie operations*/

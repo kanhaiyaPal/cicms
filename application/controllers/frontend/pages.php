@@ -238,9 +238,11 @@ class Pages extends CI_Controller {
 	{
 		$this->load->helper('form');
 		
+		
 		if((NULL == $this->input->post('citizen_of')) || (NULL == $this->input->post('living_in')) || (NULL == $this->input->post('travelling_to')) || (NULL == $this->input->post('visa_service_select')) || (NULL == $this->input->post('total_amount'))){
-			show_404();
+				show_404();
 		}
+				
 		
 		if( ! file_exists(APPPATH.'views/frontend/application_form.php'))
 		{
@@ -264,6 +266,117 @@ class Pages extends CI_Controller {
 		$this->load->view('frontend/template/header', $data);
 		$this->load->view('frontend/application_form', $data);
 		$this->load->view('frontend/template/footer', $data);
+	}
+	
+	public function start_coapplication()
+	{
+		$this->load->helper('form');
+		
+		$master_data_container = array();
+		
+		$parent_id =  $this->uri->segment(4);
+		$applicant_count =  $this->uri->segment(5);
+		
+		if((NULL !== $parent_id)&&(NULL !== $applicant_count)&& $this->session->flashdata('post_rev_up') )
+		{ 
+			$post_rev_up = $this->session->flashdata('post_rev_up');
+			foreach($post_rev_up as $key=>$val){
+				$master_data_container[$key] = $val;
+			}
+		}else{
+			show_404();
+
+		}
+				
+		if( ! file_exists(APPPATH.'views/frontend/application_form.php'))
+		{
+			show_404();
+		}
+		
+		$page_data = $this->home->get_visaapplication_meta();
+		$this->load->model('manage/visas_model');
+		
+		$data['title'] = ucfirst($page_data['meta_title']); // Capitalize the first letter
+		$data['description'] = $page_data['meta_description'];
+		$data['keywords'] = $page_data['meta_keywords'];
+		
+		$data['country_list'] = $this->visas_model->get_countries();
+		$data['top_total_value'] = $master_data_container['application_fee'];
+		
+		$data['selected_visa_ser'] = $this->home->get_visa_service_details($master_data_container['service_selected']);
+		$data['master_data'] = $master_data_container;
+		$data['parent_id'] = $parent_id;
+		$data['applicant_no'] = $applicant_count;
+		
+		$this->load->model('frontend/visas_front_model');
+		$data['existing_applicant_data'] = $this->visas_front_model->get_all_applicants($parent_id);
+
+		$data = array_merge($data,$this->common_data);
+		
+		$this->load->view('frontend/template/header', $data);
+		$this->load->view('frontend/coapplication_form', $data);
+		$this->load->view('frontend/template/footer', $data);
+	}
+	
+	public function edit_application($application_id = 0)
+	{
+		if($application_id !=0){
+			$this->load->helper('form');
+			$this->load->model('frontend/visas_front_model');
+		
+			$master_data_container = array();
+			
+			$parent_id =  $this->uri->segment(5);
+			$applicant_count =  $this->uri->segment(6);
+			
+			if((NULL !== $parent_id)&&(NULL !== $applicant_count)&& $this->visas_front_model->get_applicant_data($application_id) )
+			{ 
+				$post_rev_up = $this->visas_front_model->get_applicant_data($application_id);
+				foreach($post_rev_up as $key=>$val){
+					$master_data_container[$key] = $val;
+				}
+			}else{
+				show_404();
+
+			}
+					
+			if( ! file_exists(APPPATH.'views/frontend/application_form.php'))
+			{
+				show_404();
+			}
+			
+			$page_data = $this->home->get_visaapplication_meta();
+			$this->load->model('manage/visas_model');
+			
+			$data['title'] = ucfirst($page_data['meta_title']); // Capitalize the first letter
+			$data['description'] = $page_data['meta_description'];
+			$data['keywords'] = $page_data['meta_keywords'];
+			
+			$data['country_list'] = $this->visas_model->get_countries();
+			$data['top_total_value'] = $master_data_container['payable_fee'];
+			
+			$data['selected_visa_ser'] = $this->home->get_visa_service_details($master_data_container['selected_service']);
+			$data['master_data'] = $master_data_container;
+			$data['parent_id'] = $parent_id;
+			$data['applicant_no'] = $applicant_count;
+			
+			$this->load->model('frontend/visas_front_model');
+			$data['existing_applicant_data'] = $this->visas_front_model->get_all_applicants($parent_id);
+
+			$data = array_merge($data,$this->common_data);
+			
+			$this->load->view('frontend/template/header', $data);
+			$this->load->view('frontend/editapplication_form', $data);
+			$this->load->view('frontend/template/footer', $data);
+		}
+	}
+	
+	public function delete_application($application_id = 0)
+	{
+		if($application_id !=0){
+			$this->load->model('frontend/visas_front_model');
+			$this->visas_front_model->delete_applicant($application_id);
+		}
 	}
 	
 	public function select_service($service_id = 0)

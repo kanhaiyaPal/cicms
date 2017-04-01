@@ -32,7 +32,13 @@
 	  </div>
 	  <div class="col-sm-2 col-xs-6"> 
 		<select name="visa_service_type" class="selectpicker" data-live-search="true">
-		  <option value="0" >Visa Type:</option>
+		<option value="0" >Visa Type:</option>
+		<?php /*remove this code to autogenerate visa services+ajax post code*/ foreach($visa_services as $visa): 
+		$entry = '';
+		if($visa['visa_type'] == '4'){ $entry = 'Single Entry'; }else{ $entry = 'Multiple Entry'; }
+		?>
+		<option value="<?=$visa['id']?>" <?php echo set_select('visa_service_type', $visa['id']); ?>><?=$visa['service_title']?>  days Visa(<?=$entry?>)</option>
+		<?php endforeach; ?>  
 		</select>
 		<span id="visa_service_type_error" style="color:red; display:none">This field is required!</span>
 	  </div>

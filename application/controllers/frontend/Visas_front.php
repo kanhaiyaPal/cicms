@@ -27,7 +27,23 @@ class Visas_front extends CI_Controller {
 			show_404();
 		}
 		
-		$this->visas_front_model->add_application_data();
-		redirect('thank-you', 'refresh');
+		$applicant_id = $this->visas_front_model->add_application_data();
+		
+		if( NULL !== $this->input->post('flag-coapplicant')){
+			$parent_id = $this->visas_front_model->get_parent_appplicant($applicant_id);
+			$applicant_count = $this->visas_front_model->get_subapplicant_count($parent_id);
+			$this->session->set_flashdata('post_rev_up',$_POST);
+			redirect(base_url()."frontend/pages/start_coapplication/".$parent_id."/".$applicant_count);
+		}else{
+			redirect('thank-you', 'refresh');
+		}
+		
+		/*
+		if($this->input->is_ajax_request()){
+			$parent_id = $this->visas_front_model->get_parent_appplicant($applicant_id);
+			if($parent_id != '0'){ $applicant_count = $this->visas_front_model->get_subapplicant_count($parent_id); }
+			echo json_encode(array('parent_id'=> $parent_id,'existing' => $applicant_count ));
+			exit();
+		}*/
 	}
 }

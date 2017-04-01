@@ -22,7 +22,7 @@ $(document).ready(function() {
 		if($travelling_select.val()==0){
 			return false;
 		}
-		
+		/*****uncomment this to generate visas according to selected credentials******
 		$.ajax({
 		  url: $('#base_url').val()+'frontend/visas_front/get_visas_acc',
 		  type: 'POST',
@@ -58,6 +58,7 @@ $(document).ready(function() {
 				}
 			}
 		});
+		*****uncomment this to generate visas according to selected credentials******/
 	}
 	
 	$citizen_select.on('change', function() {

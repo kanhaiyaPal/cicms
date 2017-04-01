@@ -322,7 +322,10 @@
 				<input type="hidden" name="citizen_of" value="<?=$this->input->post('citizen_of')?>" />
 				<input type="hidden" name="living_in" value="<?=$this->input->post('living_in')?>" />
 				<input type="hidden" name="travelling_to" value="<?=$this->input->post('travelling_to')?>" />
+				<input type="hidden" name="service_selected" value="<?=$this->input->post('visa_service_select')?>" />
+				<input type="hidden" name="application_fee" value="<?=$this->input->post('total_amount')?>" />
 				<input type="hidden" name="temp_u_id" value="<?=md5(uniqid(rand(), true))?>" />
+				<input type="hidden" name="is_coapplicant" value="0" />
                 <input type="hidden" name="ste_url" value="<?=base_url()?>" />
                 <input type="button" class="btn btn-primary" onClick="form_submit_part_3()" value="Submit & Proceed" />
               </div>
@@ -337,11 +340,4 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0-RC1/js/bootstrap-datepicker.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0-RC1/css/bootstrap-datepicker.css" rel="stylesheet" />
-<!--File upload Js and Css-->
-<link href="<?php echo base_url(); ?>assets/vendors/multi_up/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
-<link href="<?php echo base_url(); ?>assets/vendors/multi_up/themes/explorer/theme.css" media="all" rel="stylesheet" type="text/css"/>
-<script src="<?php echo base_url(); ?>assets/vendors/multi_up/js/plugins/sortable.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets/vendors/multi_up/js/fileinput.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets/vendors/multi_up/themes/explorer/theme.js" type="text/javascript"></script>
-<!--File upload Js and Css-->
 <script src="<?php echo base_url(); ?>assets/js/applicationform.js"></script>
