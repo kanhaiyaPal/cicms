@@ -103,8 +103,9 @@ class Pages extends CI_Controller {
 				if(($this->authenticate_admin->verify_pass($this->input->post('passkey'),$pass_hash_key->password))){
 					$this->session->usersession = array(
 												'user'=> $pass_hash_key->username,
+												'user_id' => $pass_hash_key->id,
 												'email'=> $pass_hash_key->email,
-												'profie_id' => $pass_hash_key->profile_id,
+												'profile_id' => $pass_hash_key->profile_id,
 												'logged_in' => TRUE
 											);
 					$this->users->update_user_last_login();
@@ -360,8 +361,9 @@ class Pages extends CI_Controller {
 			$data['parent_id'] = $parent_id;
 			$data['applicant_no'] = $applicant_count;
 			
-			$this->load->model('frontend/visas_front_model');
+			$data['applicant_files'] =  $this->visas_front_model->get_applicant_files($application_id);
 			$data['existing_applicant_data'] = $this->visas_front_model->get_all_applicants($parent_id);
+			$data['apl_id'] = $application_id;
 
 			$data = array_merge($data,$this->common_data);
 			
@@ -371,9 +373,30 @@ class Pages extends CI_Controller {
 		}
 	}
 	
-	public function delete_application($application_id = 0)
+	public function delete_application_file()
 	{
+		if (!$this->input->is_ajax_request()) {
+		   exit('No direct script access allowed');
+		}
+		
+		$applicant_userfile = $this->input->post('file');
+		$applicant_id = $this->input->post('applicant');
+		$field_name = $this->input->post('field');
+		
+		if($applicant_userfile || $applicant_id || $field_name)
+		{
+			$this->load->model('frontend/visas_front_model');
+			$this->visas_front_model->delete_app_file();
+			echo $field_name;
+			return true;
+		}
+	}
+	
+	public function delete_application()
+	{
+		$application_id = $this->input->post('applicant_id');
 		if($application_id !=0){
+
 			$this->load->model('frontend/visas_front_model');
 			$this->visas_front_model->delete_applicant($application_id);
 		}
@@ -434,6 +457,8 @@ class Pages extends CI_Controller {
 			show_404();
 		}
 		
+		$this->load->model('frontend/users');
+		
 		if(isset($this->session->usersession)&& ($this->session->usersession != ''))
 		{
 			$page_data = $this->home->get_myaccount_meta();
@@ -442,12 +467,76 @@ class Pages extends CI_Controller {
 			$data['description'] = $page_data['meta_description'];
 			$data['keywords'] = $page_data['meta_keywords'];
 			
+			$data['user_info'] = $this->users->get_user_info($this->session->usersession['user_id']);
 
 			$data = array_merge($data,$this->common_data);
 			
 			$this->load->view('frontend/template/header', $data);
 			$this->load->view('frontend/my_account', $data);
 			$this->load->view('frontend/template/footer', $data);
+		}else{
+			redirect('login-register');
+		}
+	}
+	
+	public function view_applications()
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		
+		if( ! file_exists(APPPATH.'views/frontend/view_applications.php'))
+		{
+			show_404();
+		}
+		
+		$this->load->model('frontend/visas_front_model');
+		
+		if(isset($this->session->usersession)&& ($this->session->usersession != ''))
+		{
+			$page_data = $this->home->get_viewapplications_meta();
+			
+			$data['title'] = ucfirst($page_data['meta_title']); // Capitalize the first letter
+			$data['description'] = $page_data['meta_description'];
+			$data['keywords'] = $page_data['meta_keywords'];
+			
+			$all_parents = $this->visas_front_model->get_current_userapplication($this->session->usersession['user_id']);
+			foreach($all_parents as $key => $value){
+				$co_count = $this->visas_front_model->get_subapplicant_count($value['id']);
+				$all_parents[$key]['co-applicants'] =  $co_count;
+			}
+			
+			$data['applications'] = $all_parents;
+
+			$data = array_merge($data,$this->common_data);
+			
+			$this->load->view('frontend/template/header', $data);
+			$this->load->view('frontend/view_applications', $data);
+			$this->load->view('frontend/template/footer', $data);
+		}else{
+			redirect('login-register');
+		}
+	}
+	
+	public function edit_main_applicant($applicant_id = 0)
+	{
+		if($applicant_id){
+			if(isset($this->session->usersession)&& ($this->session->usersession != '')){
+				$page_data = $this->home->get_editmainapplicant_meta();
+			
+				$data['title'] = ucfirst($page_data['meta_title']); // Capitalize the first letter
+				$data['description'] = $page_data['meta_description'];
+				$data['keywords'] = $page_data['meta_keywords'];
+				
+				$this->load->model('frontend/visas_front_model');
+				$data['applicant_data'] = $this->visas_front_model->get_applicant_data($applicant_id);
+				$data['country_list'] = $this->home->get_countries(); 
+				
+				$data = array_merge($data,$this->common_data);
+			
+				$this->load->view('frontend/template/header', $data);
+				$this->load->view('frontend/edit_applicant', $data);
+				$this->load->view('frontend/template/footer', $data);
+			}
 		}else{
 			redirect('login-register');
 		}

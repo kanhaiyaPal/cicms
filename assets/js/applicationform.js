@@ -17,7 +17,9 @@ var check_size_cokkie;
 var single_entry_warning;
 var remove_applicant_data;
 var edit_applicant_data;
-
+var remove_user_file;
+var del_applicant_master;
+var save_and_add_another_app;
 
 
 $(document).ready(function() {
@@ -166,7 +168,19 @@ $(document).ready(function() {
 		}
 		
 	}
-	
+	form_submit_part_3_ed = function(event,ap_id){
+		event.preventDefault();
+		var vald = validate_form_p3();
+		if(vald){
+			$('<input>').attr({
+				type: 'hidden',
+				name: 'flag-no-multiple',
+				value: ap_id
+			}).appendTo('form[name="application_form_vsa"]');
+			
+			$('form[name="application_form_vsa"]').submit();
+		}
+	} 
 	validate_form_p3 = function(){
 		var is_error = false;
 		var email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -321,6 +335,27 @@ $(document).ready(function() {
 		
 		return true;
 	}
+	save_and_add_another_app  = function(event,ap_val){
+		event.preventDefault();
+
+		var a_vald = validate_form_p3();
+		var next_lb = 0;
+		
+		if(!a_vald){
+			return false;
+		}
+		
+		$('<input>').attr({
+			type: 'hidden',
+			name: 'flag-save-coapplicant',
+			value: ap_val
+		}).appendTo('form[name="application_form_vsa"]');
+		
+		$('form[name="application_form_vsa"]').submit();
+		
+		clear_third_step();
+		increase_label(next_lb);
+	}
 	
 	add_another_app = function(event){
 		event.preventDefault();
@@ -351,7 +386,34 @@ $(document).ready(function() {
 		 $("html, body").delay(2000).animate({scrollTop: $("#applicant_counter").offset().top}, 1000);
 	}
 	
+	remove_user_file = function(event,del_url,filename,applicant_id,field_name){
+		event.preventDefault();
+		
+		$.post( del_url, { file: filename, field: field_name, applicant: applicant_id } ).done(function( data ) { 
+		
+			alert('File Deleted Successfully, You can now upload new file');  
+			$(".preview_existing_image_"+field_name).remove(); 
+			$(".preview_existing_file_"+field_name).remove(); 
+			
+			$('#add_new_'+field_name).show(); 
+			$(event.target).remove();
+			
+		});
+	}
 	
+	del_applicant_master = function(event,posturl,app_id){
+		event.preventDefault();
+		
+		$.post( posturl, { applicant_id: app_id } ).done(function( data ) { 
+		
+			alert('Applicant Deleted Successfully');  
+			$(event.target).parent().prev('div.col-md-3').remove();
+			$(event.target).parent().prev('div.col-md-3').remove();
+			$(event.target).parent().prev('div.col-md-3').remove();
+			$(event.target).closest(".col-md-3").fadeOut(300);
+			
+		});
+	}
 	
 	set_up_fields = function(){
 		

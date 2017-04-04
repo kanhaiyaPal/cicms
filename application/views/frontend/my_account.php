@@ -12,21 +12,21 @@
   <div class="col-md-4">
   <div class="my-ac">
   <i class="fa fa-user" aria-hidden="true"></i><br />
-  <h3>Mr. ABC Smith</h3>
+  <h3><?=$user_info['firstname']?> <?=$user_info['lastname']?></h3>
   </div>
   </div>
   
   <div class="col-md-4">
   <div class="my-ac">
   <i class="fa fa-mobile" aria-hidden="true"></i><br />
-  <h3>+1-98765433</h3>
+  <h3><?=$user_info['mobile']?></h3>
   </div>
   </div>
   
   <div class="col-md-4">
   <div class="my-ac">
   <i class="fa fa-envelope-o" aria-hidden="true"></i><br />
-  <h3>abcsmith1032@yahoo.com</h3>
+  <h3><?=$user_info['email']?></h3>
   </div>
   </div>
   

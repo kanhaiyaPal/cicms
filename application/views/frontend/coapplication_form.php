@@ -324,7 +324,7 @@
 			<?php if($appl_data['id'] == $parent_id){ ?> 
 			<div class="col-md-3"><a href="<?=base_url('frontend/pages/edit_application/'.$appl_data['id'].'/'.$parent_id.'/'.$applicant_no);?>" >Edit</a></div>
 			<?php }else{ ?> 
-			<div class="col-md-3"><a href="<?=base_url('frontend/pages/edit_application/'.$appl_data['id'].'/'.$parent_id.'/'.$applicant_no);?>" >Edit</a> | <a href="<?=base_url('frontend/pages/delete_application/'.$appl_data['id']);?>" >Delete</a></div> <?php } ?>
+			<div class="col-md-3"><a href="<?=base_url('frontend/pages/edit_application/'.$appl_data['id'].'/'.$parent_id.'/'.$applicant_no);?>" >Edit</a> | <a href="#" onclick="del_applicant_master(event,'<?=base_url('frontend/pages/delete_application/');?>','<?=$appl_data['id']?>')" >Delete</a></div> <?php } ?>
 			
 			<?php endforeach; ?>
 			</div>

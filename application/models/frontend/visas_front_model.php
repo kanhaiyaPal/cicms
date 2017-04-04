@@ -8,7 +8,7 @@ class Visas_front_model extends CI_Model {
 		$this->load->database();
 
 		$this->file_upld_config['upload_path'] = './uploads/visas/user_docs';
-		$this->file_upld_config['allowed_types'] = 'gif|jpg|png';
+		$this->file_upld_config['allowed_types'] = 'gif|jpg|png|pdf|bmp';
         $this->file_upld_config['encrypt_name'] = TRUE;
 	}
 	
@@ -52,12 +52,34 @@ class Visas_front_model extends CI_Model {
 	
 	public function delete_applicant($apl_id)
 	{
+		$query = $this->db->get_where('ci_user_files',array('applicant_id' => $apl_id));
+		$ap_row = $query->row_array();
+		$this->delete_existing_files($ap_row['id']);
 		$this->db->where('id', $apl_id);
         return $this->db->delete('ci_user_applications');
 	}
 	
+	public function delete_co_applicants($apl_id)
+	{
+		$query = $this->db->get_where('ci_user_applications',array('is_coapplicant' => $apl_id));
+		$ap_row = $query->result_array();
+		foreach($ap_row as $aprw)
+		{
+			$query = $this->db->get_where('ci_user_files',array('applicant_id' => $apl_id));
+			$ap_row = $query->row_array();
+			$this->delete_existing_files($ap_row['id']);
+			$this->db->where('id', $aprw['id']);
+			$this->db->delete('ci_user_applications');
+		}
+	}
+	
 	public function add_application_data($id = FALSE)
 	{
+		if(NULL === $this->session->usersession['user_id']){
+			$reg_user_id = 0;
+		}else{
+			$reg_user_id = $this->session->usersession['user_id'];
+		}
  
         $data = array(
 			'applicant_citizen_of' => $this->input->post('citizen_of'),
@@ -92,7 +114,8 @@ class Visas_front_model extends CI_Model {
 			'applicant_passport_expiry' => $this->input->post('input-applicant-expiry'),
 			'is_coapplicant' => $this->input->post('is_coapplicant'),
 			'selected_service' => $this->input->post('service_selected'),
-			'payable_fee' => $this->input->post('application_fee')
+			'payable_fee' => $this->input->post('application_fee'),
+			'reg_id' => $reg_user_id
         );
 		
         
@@ -128,19 +151,23 @@ class Visas_front_model extends CI_Model {
 				$applicant_reservation = '';
 				$applicant_misc_docs = '';
 				
-				$this->load->library('upload', $this->file_upld_config); //load the library
+				$this->load->library('upload'); //load the library
+				
+				$this->upload->initialize($this->file_upld_config);
 				
 				if ((isset($_FILES['file-applicant-passport'])) && (!empty($_FILES['file-applicant-passport']['name']))) {
 					
 					if($this->upload->do_upload('file-applicant-passport')){
 						$fileData = $this->upload->data();
 						$applicant_coloured_passport = $fileData['file_name'];
-					}else{
+					}/*else{
 						 $ret = $this->upload->display_errors();
 						 print_r($ret);
 						 exit;
-					}
-					
+					}*/
+				}else{
+					if(NULL !== $this->input->post('pro-file-applicant-passport'))
+					$applicant_coloured_passport = $this->input->post('pro-file-applicant-passport');
 				}
 				if ((isset($_FILES['file-applicant-returnticket'])) && (!empty($_FILES['file-applicant-returnticket']['name']))) {
 					
@@ -149,6 +176,9 @@ class Visas_front_model extends CI_Model {
 						$applicant_return_ticket = $fileData['file_name'];
 					}
 					
+				}else{
+					if(NULL !== $this->input->post('pro-file-applicant-returnticket'))
+					$applicant_return_ticket = $this->input->post('pro-file-applicant-returnticket');
 				}
 				if ((isset($_FILES['file-applicant-empid'])) && (!empty($_FILES['file-applicant-empid']['name']))) {
 					
@@ -157,14 +187,24 @@ class Visas_front_model extends CI_Model {
 						$applicant_emp_id = $fileData['file_name'];
 					}
 					
+				}else{
+					if(NULL !== $this->input->post('pro-file-applicant-empid'))
+					$applicant_emp_id = $this->input->post('pro-file-applicant-empid');
 				}
 				if ((isset($_FILES['file-applicant-residence'])) && (!empty($_FILES['file-applicant-residence']['name']))) {
 					
 					if($this->upload->do_upload('file-applicant-residence')){
 						$fileData = $this->upload->data();
 						$applicant_residence_proof = $fileData['file_name'];
+					}else{
+						 $ret = $this->upload->display_errors();
+						 print_r($ret);
+						 exit;
 					}
 					
+				}else{
+					if(NULL !== $this->input->post('pro-file-applicant-residence'))
+					$applicant_residence_proof = $this->input->post('pro-file-applicant-residence');
 				}
 				if ((isset($_FILES['file-applicant-reservation'])) && (!empty($_FILES['file-applicant-reservation']['name']))) {
 					
@@ -173,6 +213,9 @@ class Visas_front_model extends CI_Model {
 						$applicant_reservation = $fileData['file_name'];
 					}
 					
+				}else{
+					if(NULL !== $this->input->post('pro-file-applicant-reservation'))
+					$applicant_reservation = $this->input->post('pro-file-applicant-reservation');
 				}
 				if ((isset($_FILES['file-applicant-miscellanious'])) && (!empty($_FILES['file-applicant-miscellanious']['name']))) {
 					
@@ -181,6 +224,9 @@ class Visas_front_model extends CI_Model {
 						$applicant_misc_docs = $fileData['file_name'];
 					}
 					
+				}else{
+					if(NULL !== $this->input->post('pro-file-applicant-miscellanious'))
+					$applicant_misc_docs = $this->input->post('pro-file-applicant-miscellanious');
 				}
 				
 				$fil_data = array(
@@ -212,18 +258,30 @@ class Visas_front_model extends CI_Model {
 			$query = $this->db->get_where('ci_user_files',array('id' => $id));
 			$file_row = $query->row_array();
 			
-			$c_pass = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR . 'user_docs'. DIRECTORY_SEPARATOR . $file_row['coloured_passport'];
-			unlink($c_pass);
-			$ret_tic = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR . 'user_docs'. DIRECTORY_SEPARATOR . $file_row['return_ticket'];
-			unlink($ret_tic);
-			$emp_id = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR . 'user_docs'. DIRECTORY_SEPARATOR . $file_row['employee_id'];
-			unlink($emp_id);
-			$res_pr = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR . 'user_docs'. DIRECTORY_SEPARATOR . $file_row['residence_proof'];
-			unlink($res_pr);
-			$ht_res = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR . 'user_docs'. DIRECTORY_SEPARATOR . $file_row['hotel_reservation'];
-			unlink($ht_res);
-			$misc_doc = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR . 'user_docs'. DIRECTORY_SEPARATOR . $file_row['misc_documents'];
-			unlink($misc_doc);
+			if(($file_row['coloured_passport'] != '')  && (NULL === $this->input->post('pro-file-applicant-passport'))){
+				$c_pass = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR . 'user_docs'. DIRECTORY_SEPARATOR . $file_row['coloured_passport'];
+				unlink($c_pass);
+			}
+			if(($file_row['return_ticket'] != '') && (NULL === $this->input->post('pro-file-applicant-returnticket'))){
+				$ret_tic = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR . 'user_docs'. DIRECTORY_SEPARATOR . $file_row['return_ticket'];
+				unlink($ret_tic);
+			}
+			if(($file_row['employee_id'] != '') && (NULL === $this->input->post('pro-file-applicant-empid'))){
+				$emp_id = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR . 'user_docs'. DIRECTORY_SEPARATOR . $file_row['employee_id'];
+				unlink($emp_id);
+			}
+			if(($file_row['residence_proof'] != '') && (NULL === $this->input->post('pro-file-applicant-residence'))){
+				$res_pr = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR . 'user_docs'. DIRECTORY_SEPARATOR . $file_row['residence_proof'];
+				unlink($res_pr);
+			}
+			if(($file_row['hotel_reservation'] != '')  && (NULL === $this->input->post('pro-file-applicant-reservation'))){
+				$ht_res = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR . 'user_docs'. DIRECTORY_SEPARATOR . $file_row['hotel_reservation'];
+				unlink($ht_res);
+			}
+			if(($file_row['misc_documents'] != '') && (NULL === $this->input->post('pro-file-applicant-miscellanious'))){
+				$misc_doc = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR . 'user_docs'. DIRECTORY_SEPARATOR . $file_row['misc_documents'];
+				unlink($misc_doc);
+			}
 			
 			$this->db->where('id', $id);
 			return $this->db->delete('ci_user_files');
@@ -239,12 +297,87 @@ class Visas_front_model extends CI_Model {
 		}
 	}
 	
+	public function get_applicant_files($applicant_id = 0)
+	{
+		if($applicant_id != 0){
+			$query = $this->db->get_where('ci_user_files',array('applicant_id' => $applicant_id));
+			return $query->row_array();
+		}
+	}
+	
+	public function delete_app_file()
+	{
+		$applicant_userfile = $this->input->post('file');
+		$applicant_id = $this->input->post('applicant');
+		$field_name = $this->input->post('field');
+		
+		$d_file = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'visas'. DIRECTORY_SEPARATOR . 'user_docs'. DIRECTORY_SEPARATOR . $applicant_userfile;
+		unlink($d_file);
+		
+		$wh_array = array($field_name => '');
+		
+		$this->db->where('applicant_id', $applicant_id);
+		return $this->db->update('ci_user_files', $wh_array);		
+	}
+	
 	public function get_subapplicant_count($parent_id = 0)
 	{
 		if($parent_id != 0){
 			$query = $this->db->get_where('ci_user_applications',array('is_coapplicant' => $parent_id));
 			$rowcount = $query->num_rows();
 			return (int)$rowcount;
+		}
+	}
+	
+	public function get_current_userapplication($user_id = 0)
+	{
+		if($user_id){
+			$this->db->order_by('id', 'ASC');
+			$query = $this->db->get_where('ci_user_applications',array('reg_id' => $user_id,'is_coapplicant' => '0'));
+			return $query->result_array();
+		}
+	}
+	
+	public function update_reg_id($application_id = 0,$user_id = 0)
+	{
+		if($application_id && $user_id){
+			//check if applicant is parent
+			$query_f = $this->db->get_where('ci_user_applications',array('id' => $application_id));
+			$tb_app = $query_f->row_array();
+			if($tb_app['is_coapplicant'] == '0')
+			{
+				$this->db->where('id', $application_id);
+				$this->db->update('ci_user_applications', array('reg_id' => $user_id));	
+				
+				$query_p = $this->db->get_where('ci_user_applications',array('is_coapplicant' => $application_id));
+				$child_num = $query_p->num_rows();
+				$child_ar = $query_p->result_array();
+				
+				if($child_num > 0){
+					foreach($child_ar as $child){
+						$this->db->where('id', $child['id']);
+						$this->db->update('ci_user_applications', array('reg_id' => $user_id));	
+					}
+				}
+			}else{
+				
+				$this->db->where('id', $application_id);
+				$this->db->update('ci_user_applications', array('reg_id' => $user_id));	
+				
+				$query_pa = $this->db->get_where('ci_user_applications',array('is_coapplicant' => $tb_app['is_coapplicant']));
+				$child_num = $query_pa->num_rows();
+				$child_ar = $query_pa->result_array();
+				
+				if($child_num > 0){
+					foreach($child_ar as $child){
+						$this->db->where('id', $child['id']);
+						$this->db->update('ci_user_applications', array('reg_id' => $user_id));	
+					}
+				}
+				
+				$this->db->where('id', $tb_app['is_coapplicant']);
+				$this->db->update('ci_user_applications', array('reg_id' => $user_id));	
+			}
 		}
 	}
 }

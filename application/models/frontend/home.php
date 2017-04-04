@@ -137,6 +137,18 @@ class Home extends CI_Model {
         return $query->row_array();
 	}
 	
+	public function get_viewapplications_meta()
+	{
+		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'viewapplications'));
+        return $query->row_array();
+	}
+	
+	public function get_editmainapplicant_meta()
+	{
+		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'editmainapplicant'));
+        return $query->row_array();
+	}
+	
 	public function get_myaccount_meta()
 	{
 		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'myaccount')); //myaccount page meta-details are reserved
