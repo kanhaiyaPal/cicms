@@ -88,4 +88,3 @@ div.bhoechie-tab-content legend{
 div.bhoechie-tab div.bhoechie-tab-content:not(.active){
   display: none;
 }
-.preview_existing_image,.preview_existing_file_misc_documents,.preview_existing_image_misc_documents,.preview_existing_file_hotel_reservation,.preview_existing_image_hotel_reservation,.preview_existing_file_residence_proof,.preview_existing_image_residence_proof,.preview_existing_file_employee_id,.preview_existing_image_employee_id,.preview_existing_file_return_ticket,.preview_existing_image_return_ticket,.preview_existing_file_coloured_passport,.preview_existing_image_coloured_passport{ width:200px; height:100px; }

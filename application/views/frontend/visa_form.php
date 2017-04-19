@@ -49,10 +49,10 @@
 	</div>
 </form>
 <script type="text/javascript" src="<?=base_url('assets/js/form_vald.js')?>" ></script>
-<?php if(isset($_POST['visa_service_type'])): ?>
+<?php if(isset($_REQUEST['visa_service_type'])): ?>
 <script>
 $(document).ready(function() { setTimeout(function() {
-$('select[name="visa_service_type"]').val(<?=$_POST['visa_service_type']?>);
+$('select[name="visa_service_type"]').val(<?=$_REQUEST['visa_service_type']?>);
 $('select[name="visa_service_type"]').selectpicker('refresh');
 }, 1000); });
 </script>

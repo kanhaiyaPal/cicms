@@ -13,6 +13,7 @@
 .bootstrap-select > .btn {
   width: 100%;
   padding-right: 25px;
+  border-radius:0!important;
 }
 .error .bootstrap-select .btn {
   border: 1px solid #b94a48;
@@ -27,9 +28,9 @@
   width: 100%;
 }
 .bootstrap-select .btn:focus {
-  outline: thin dotted #333333 !important;
-  outline: 5px auto -webkit-focus-ring-color !important;
-  outline-offset: -2px;
+  outline: ;
+  outline: ;
+  outline-offset: ;
 }
 .bootstrap-select.form-control {
   margin-bottom: 0;

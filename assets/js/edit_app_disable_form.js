@@ -1,22 +1,8 @@
-var remove_user_file;
+$(document).ready(function(){ 
 
-$(document).ready(function() {
-	
-	remove_user_file = function(event,del_url,filename,applicant_id,field_name){
-		event.preventDefault();
-		
-		$.post( del_url, { file: filename, field: field_name, applicant: applicant_id } ).done(function( data ) { 
-		
-			alert('File Deleted Successfully, You can now upload new file');  
-			$(".preview_existing_image_"+field_name).remove(); 
-			$(".preview_existing_file_"+field_name).remove(); 
-			
-			$('#add_new_'+field_name).show(); 
-			$(event.target).remove();
-			
-		});
-	}
-	
+	$('form[name="edit_appl_form"] input').attr('readonly', 'readonly'); 
+	$('form[name="edit_appl_form"] select').attr('readonly', 'readonly'); 
+	$('form[name="edit_appl_form"] textarea').attr('readonly', 'readonly'); 
 	
 	$('.datepicker').datepicker({
 		format: 'dd-mm-yyyy',
@@ -51,6 +37,6 @@ $(document).ready(function() {
 		event.preventDefault();
 		$('input[name="input-departure-date"]').datepicker('show');
 	});
+});	
 	
 	
-});

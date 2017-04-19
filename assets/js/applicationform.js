@@ -22,6 +22,7 @@ var del_applicant_master;
 var save_and_add_another_app;
 
 
+
 $(document).ready(function() {
 	form_submit_part_1 = function(){
 		
@@ -49,6 +50,20 @@ $(document).ready(function() {
 		}
 		
 	}
+	
+	form_submit_part_3_ed = function(event,ap_id){
+		event.preventDefault();
+		var vald = validate_form_p3();
+		if(vald){
+			$('<input>').attr({
+				type: 'hidden',
+				name: 'flag-no-multiple',
+				value: ap_id
+			}).appendTo('form[name="application_form_vsa"]');
+			
+			$('form[name="application_form_vsa"]').submit();
+		}
+	} 
 	
 	form_submit_part_2 = function(){
 		var has_error = false;
@@ -168,19 +183,7 @@ $(document).ready(function() {
 		}
 		
 	}
-	form_submit_part_3_ed = function(event,ap_id){
-		event.preventDefault();
-		var vald = validate_form_p3();
-		if(vald){
-			$('<input>').attr({
-				type: 'hidden',
-				name: 'flag-no-multiple',
-				value: ap_id
-			}).appendTo('form[name="application_form_vsa"]');
-			
-			$('form[name="application_form_vsa"]').submit();
-		}
-	} 
+	
 	validate_form_p3 = function(){
 		var is_error = false;
 		var email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -335,6 +338,7 @@ $(document).ready(function() {
 		
 		return true;
 	}
+	
 	save_and_add_another_app  = function(event,ap_val){
 		event.preventDefault();
 
@@ -379,13 +383,6 @@ $(document).ready(function() {
 		increase_label(next_lb);
 	}
 	
-	increase_label = function(cont){
-		
-		$("#applicant_counter").html('');
-		$("#applicant_counter").html(cont+1);
-		 $("html, body").delay(2000).animate({scrollTop: $("#applicant_counter").offset().top}, 1000);
-	}
-	
 	remove_user_file = function(event,del_url,filename,applicant_id,field_name){
 		event.preventDefault();
 		
@@ -400,7 +397,7 @@ $(document).ready(function() {
 			
 		});
 	}
-	
+ 	
 	del_applicant_master = function(event,posturl,app_id){
 		event.preventDefault();
 		
@@ -414,6 +411,15 @@ $(document).ready(function() {
 			
 		});
 	}
+	
+	increase_label = function(cont){
+		
+		$("#applicant_counter").html('');
+		$("#applicant_counter").html(cont+1);
+		 $("html, body").delay(2000).animate({scrollTop: $("#applicant_counter").offset().top}, 1000);
+	}
+	
+	
 	
 	set_up_fields = function(){
 		

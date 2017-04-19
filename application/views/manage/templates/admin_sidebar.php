@@ -15,7 +15,7 @@
 			<li><a href="<?php echo base_url('manage/visas/service'); ?>">Visa Service Setup</a></li>
 		</ul>
 	</li>
-	<li class="submenu" <?php $ur = uri_string(); if((strpos($ur,'visaapplications/show'))){ echo "open"; } ?>>
+	<li class="submenu <?php $ur = uri_string(); if((strpos($ur,'visaapplications/show'))||(strpos($ur,'visaapplications/application_tracking'))){ echo "open"; } ?>" >
 		 <a href="#">
 			<i class="glyphicon glyphicon-list"></i> Visa Applications
 			<span class="caret pull-right"></span>
@@ -24,7 +24,7 @@
 		 <ul>
 			<li><a href="<?php echo base_url('manage/visaapplications/show'); ?>">Application Submitted</a></li>
 			<li><a href="<?php echo base_url('manage/visaapplications/view'); ?>">Documents Upload Section</a></li>
-			<li><a href="<?php echo base_url('manage/visaapplications/view'); ?>">Application Tracking</a></li>
+			<li><a href="<?php echo base_url('manage/visaapplications/application_tracking'); ?>">Application Tracking</a></li>
 		</ul>
 	</li>
 	<li class="submenu <?php $ur = uri_string(); if((strpos($ur,'cms/page_settings'))||(strpos($ur,'cms/seo_management'))||(strpos($ur,'cms/parts_management'))){ echo "open"; } ?>">

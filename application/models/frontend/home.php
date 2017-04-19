@@ -123,6 +123,7 @@ class Home extends CI_Model {
 	{
 		if ($id === FALSE)
         {
+			$this->db->order_by('ci_visa_services.id', 'ASC');
             $query = $this->db->get_where('ci_visa_services',array('is_active'=> 1));
             return $query->result_array();
         }
@@ -168,6 +169,18 @@ class Home extends CI_Model {
 	public function get_testimonials_meta()
 	{
 		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'testimonials')); //track-status page meta-details are reserved
+        return $query->row_array();
+	}
+	
+	public function get_prestep_meta()
+	{
+		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'prestep')); 
+        return $query->row_array();
+	}
+	
+	public function get_paymentsuccess_meta()
+	{
+		$query = $this->db->get_where('ci_seo_data', array('page_title' => 'paymentsuccess')); 
         return $query->row_array();
 	}
 	

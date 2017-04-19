@@ -43,26 +43,30 @@
 </head>
 <body>
 
-
-
-
-<header data-spy="affix" data-offset-top="120">
-  <!--<div class="top-nav">
+<div class="top-nav">
     <div class="container">
       <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-8">
-          <div class="tnr"> <span class="tl-curve"></span> <span class="tr-curve"></span>
-            <div class="row">
-              <div class="col-md-4 col-xs-5"><a href="tel:<?=$phone?>"><i class="fa fa-volume-control-phone"></i> <?=$phone?></a></div>
-              <div class="col-md-4 res-hide"><a href="mailto:<?=$mailid?>"><i class="fa fa-envelope"></i> <?=$mailid?></a></div>
-              <div class="col-md-4 col-xs-7"><a href="<?=$login_url?>"><i class="fa fa-user"></i> Login | Register</a></div>
-            </div>
-          </div>
-        </div>
+        <div class="col-md-8"><a href="#"><i class="fa fa-sticky-note"></i> UAE travel visa requirements</a></div>
+        <!--
+        <div class="col-md-3"><a href="tel:<?=$phone?>"><i class="fa fa-volume-control-phone"></i> <?=$phone?></a></div>
+        <div class="col-md-3"><a href="mailto:<?=$mailid?>"><i class="fa fa-envelope"></i> <?=$mailid?></a></div>
+        -->
+        
+        
+        <div class="col-md-4 text-right res-hide">
+        <?php if(isset($this->session->usersession)&&($this->session->usersession != '')): ?>
+	<a href="<?=$myapplication_url?>"><i class="fa fa-file-text"></i>  View Applications</a> <a href="<?=$myaccount_url?>"><i class="fa fa-user-secret"></i>  Account</a> <a href="<?=$logout_url?>"><i class="fa fa-user-circle-o"></i>  Logout</a> 
+	<?php else: ?>
+	<a href="<?=$login_url?>"><i class="fa fa-key"></i> Login</a> <a href="<?=$login_url?>"><i class="fa fa-user-plus"></i> Register</a>
+	<?php endif; ?>
+    
+    </div>
       </div>
     </div>
-  </div>-->
+  </div>
+
+
+<header data-spy="affix" data-offset-top="120">  
   <div class="container">
     <div class="logo"><a href="<?=base_url()?>"><img src="<?=base_url('uploads/admin/').$logo?>" alt="E Visas Online" /></a></div>
     <div class="logo2"><a href="<?=base_url()?>"><img src="<?=base_url('assets/images/')?>logo2.png" alt="E Visas Online" /></a></div>
@@ -75,9 +79,11 @@
             <!--Menu HTML Code-->
             <nav class="wsmenu slideLeft clearfix">
               <ul class="mobile-sub wsmenu-list">
+              <li><a href="<?=base_url()?>">Home</a></li>
 			  <?=$site_menu?>
                 <li><a href="<?=base_url('frontend/pages/visa_processing_steps')?>">Visa Processing Steps</a>
-                <li><a href="<?=base_url('frontend/pages/track_status')?>">Track Your Status</a></li>
+                <li><a href="<?=base_url('frontend/pages/track_status')?>">Application Tracking</a></li>
+                
                 <?php if(isset($this->session->usersession)&&($this->session->usersession != '')): ?>
 				<li class="res-show"><a href="<?=$myaccount_url?>">Account</a></li>
 				<li class="res-show"><a href="<?=$logout_url?>">Logout</a></li>
@@ -94,14 +100,7 @@
     </div>
     
     
-    <div class="h-r-r res-hide">
-	<?php if(isset($this->session->usersession)&&($this->session->usersession != '')): ?>
-	<a href="<?=$myaccount_url?>"><i class="fa fa-user-secret"></i>  Account</a> <a href="<?=$logout_url?>"><i class="fa fa-user-circle-o"></i>  Logout</a> 
-	<?php else: ?>
-	<a href="<?=$login_url?>"><i class="fa fa-key"></i> Login</a> <a href="<?=$login_url?>"><i class="fa fa-user-plus"></i> Register</a>
-	<?php endif; ?>
-    
-    </div>
+   
     
     
     <div class="clear"></div>

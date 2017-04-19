@@ -75,11 +75,12 @@
 	-khtml-user-select: none;
 	cursor: pointer;
 	text-align:left;
-	border-bottom:solid 10px #f1f1f1;
+	border-bottom:solid 5px #f1f1f1;
 	color:#111;
 	text-transform:capitalize;
 	line-height:20px;
 	padding:15px 0;
+	font-family: 'Roboto Condensed', sans-serif!important;
 }
 .TabbedPanelsTab span {
 	font-size:42px;
@@ -102,7 +103,7 @@
 	-khtml-user-select: none;
 	cursor: pointer;
 	text-align:left;
-	border-bottom:solid 10px #f1f1f1;
+	border-bottom:solid 5px #f1f1f1;
 	color:#111;
 	text-transform:capitalize;
 	line-height:normal;
@@ -121,31 +122,31 @@
 }
 	
 .tab1{
-	border-bottom:solid 10px #0099cc;
+	border-bottom:solid 5px #0099cc;
 	color:#0099cc;
 }
 .tab2{
-	border-bottom:solid 10px #00cc66;
+	border-bottom:solid 5px #00cc66;
 	color:#00cc66;
 }
 .tab3{
-	border-bottom:solid 10px #eebb00;
+	border-bottom:solid 5px #eebb00;
 	color:#eebb00;
 }
 .tab4{
-	border-bottom:solid 10px #ff6600;
+	border-bottom:solid 5px #ff6600;
 	color:#ff6600;
 }
 .tab5{
-	border-bottom:solid 10px #e93416;
+	border-bottom:solid 5px #e93416;
 	color:#e93416;
 }
 .tab6{
-	border-bottom:solid 10px #d10bd8;
+	border-bottom:solid 5px #d10bd8;
 	color:#d10bd8;
 }
 .tab7{
-	border-bottom:solid 10px #9e20e6;
+	border-bottom:solid 5px #9e20e6;
 	color:#9e20e6;
 }
 
@@ -170,7 +171,7 @@
  */
 .TabbedPanelsTabSelected {
 	color:#111;
-	border-bottom:solid 10px #eee;
+	border-bottom:solid 5px #eee;
 }
 
 /* This selector is an example of how to make a link inside of a tab button

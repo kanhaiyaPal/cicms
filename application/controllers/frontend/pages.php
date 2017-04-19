@@ -23,6 +23,7 @@ class Pages extends CI_Controller {
 		$this->common_data['login_url'] = base_url('login-register');
 		$this->common_data['logout_url'] = base_url('frontend/pages/user_logout');
 		$this->common_data['myaccount_url'] = base_url('frontend/pages/my_account');
+		$this->common_data['myapplication_url'] = base_url('frontend/pages/view_applications');
 		$this->common_data['fb_url'] = $this->home->get_settings('site_footer_facebook')['setting_value'];
 		$this->common_data['tw_url'] = $this->home->get_settings('site_footer_twitter')['setting_value'];
 		$this->common_data['ln_url'] = $this->home->get_settings('site_footer_linkedin')['setting_value'];
@@ -502,7 +503,11 @@ class Pages extends CI_Controller {
 			$all_parents = $this->visas_front_model->get_current_userapplication($this->session->usersession['user_id']);
 			foreach($all_parents as $key => $value){
 				$co_count = $this->visas_front_model->get_subapplicant_count($value['id']);
+				$app_st = $this->visas_front_model->get_application_status($value['id']);
+				$pay_st = $this->visas_front_model->get_payment_status($value['id']);
 				$all_parents[$key]['co-applicants'] =  $co_count;
+				$all_parents[$key]['payment_st'] = $pay_st['status'];
+				$all_parents[$key]['application_st'] = $app_st['status'];
 			}
 			
 			$data['applications'] = $all_parents;
@@ -529,7 +534,22 @@ class Pages extends CI_Controller {
 				
 				$this->load->model('frontend/visas_front_model');
 				$data['applicant_data'] = $this->visas_front_model->get_applicant_data($applicant_id);
+				$data['applicant_files'] =  $this->visas_front_model->get_applicant_files($applicant_id);
+				$app_st = $this->visas_front_model->get_application_status($applicant_id);
+				$data['application_st'] = $app_st['status'];
 				$data['country_list'] = $this->home->get_countries(); 
+				
+				/*load co-applicants*/
+				if($data['applicant_data']['is_coapplicant'] == '0')
+				{
+					$co_applicant_count = $this->visas_front_model->get_subapplicant_count($applicant_id);
+					if($co_applicant_count > 0)
+					{
+						$data['co_applicants'] = $this->visas_front_model->get_subapplicant_parent($data['applicant_data']['id']);
+					}
+				}
+				
+				$data['back_url'] = base_url('frontend/pages/view_applications');
 				
 				$data = array_merge($data,$this->common_data);
 			
@@ -637,5 +657,59 @@ class Pages extends CI_Controller {
 		
 		// Send captcha image to view
 		return $captcha['image'];
+	}
+	
+	public function pre_step()
+	{	
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		
+		if( ! file_exists(APPPATH.'views/frontend/pre_step.php'))
+		{
+			show_404();
+		}
+		
+		$page_data = $this->home->get_prestep_meta();
+		
+		$data['title'] = ucfirst($page_data['meta_title']); // Capitalize the first letter
+		$data['description'] = $page_data['meta_description'];
+		$data['keywords'] = $page_data['meta_keywords'];
+		
+		$form_data['country_list'] = $this->home->get_countries(); 
+		$form_data['visa_services'] = $this->home->get_visa_services(); 
+		$data['visa_form'] = $this->load->view('frontend/visa_form', $form_data, true);
+		
+		$data = array_merge($data,$this->common_data);
+		
+		$this->load->view('frontend/template/header', $data);
+		$this->load->view('frontend/pre_step', $data);
+		$this->load->view('frontend/template/footer', $data);
+	}
+	
+	public function payment_success()
+	{
+		if( ! file_exists(APPPATH.'views/frontend/payment_success.php'))
+		{
+			show_404();
+		}
+		$this->load->model('frontend/visas_front_model');
+		
+		$page_data = $this->home->get_paymentsuccess_meta();
+		
+		$data['title'] = ucfirst($page_data['meta_title']); // Capitalize the first letter
+		$data['description'] = $page_data['meta_description'];
+		$data['keywords'] = $page_data['meta_keywords'];
+		
+		$tracking_id = 0;
+		if(isset($_REQUEST['applicantion_id'])){
+			//update tracking number and payment info 
+			$this->visas_front_model->generate_unique_tracking();
+		}
+		
+		$data = array_merge($data,$this->common_data);
+		
+		$this->load->view('frontend/template/header', $data);
+		$this->load->view('frontend/payment_success', $data);
+		$this->load->view('frontend/template/footer', $data);
 	}
 }

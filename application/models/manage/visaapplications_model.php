@@ -16,7 +16,7 @@ class Visaapplications_model extends CI_Model {
     {
         if ($id === FALSE)
         {
-            $query = $this->db->get('ci_user_applications');
+            $query = $this->db->get_where('ci_user_applications',array('is_coapplicant' => '0'));
             return $query->result_array();
         }
  
@@ -137,4 +137,105 @@ class Visaapplications_model extends CI_Model {
 			return $this->db->delete('ci_visa_services');
 		}
 	}
+	
+	public function get_coapplicant_count( $id = 0)
+	{
+		if($id != 0){
+			$query = $this->db->get_where('ci_user_applications',array('is_coapplicant' => $id));
+			$rowcount = $query->num_rows();
+			return (int)$rowcount;
+		}
+	}
+	
+	public function get_coapplicant_data( $id = 0)
+	{
+		if($id != 0){
+			$query = $this->db->get_where('ci_user_applications',array('is_coapplicant' => $id));
+			return $query->result_array();
+		}
+	}
+	
+	public function get_applicant_documents($id = 0)
+	{
+		if($id)
+		{
+			$query = $this->db->get_where('ci_user_files', array('applicant_id' => $id));
+			return $query->row_array();
+		}
+	}
+	
+	public function set_documents_status()
+	{
+		if($this->input->post('passport_approval') == '0')
+		{
+			$color_pass_val = $this->input->post('passport_approval_reason');
+		}else{
+			$color_pass_val = '1';
+		}
+		if($this->input->post('return_approval') == '0')
+		{
+			$return_val = $this->input->post('return_approval_reason');
+		}else{
+			$return_val = '1';
+		}
+		if($this->input->post('employee_approval') == '0')
+		{
+			$employee_val = $this->input->post('employee_approval_reason');
+		}else{
+			$employee_val = '1';
+		}
+		if($this->input->post('residence_approval') == '0')
+		{
+			$residence_val = $this->input->post('residence_approval_reason');
+		}else{
+			$residence_val = '1';
+		}
+		if($this->input->post('hotel_approval') == '0')
+		{
+			$hotel_val = $this->input->post('hotel_approval_reason');
+		}else{
+			$hotel_val = '1';
+		}
+		if($this->input->post('misc_approval') == '0')
+		{
+			$miscdocs_val = $this->input->post('misc_approval_reason');
+		}else{
+			$miscdocs_val = '1';
+		}
+		 
+		$data = array(
+			'coloured_passport_reject' => $color_pass_val,
+            'return_ticket_reject' => $return_val,
+			'employee_id_reject' => $employee_val,
+			'residence_proof_reject' => $residence_val,
+			'hotel_reservation_reject' => $hotel_val,
+			'misc_documents_reject' => $miscdocs_val
+        );
+		
+		$this->db->where('applicant_id', $this->input->post('applicant_id'));
+		$this->db->update('ci_user_files', $data);
+	}
+	
+	public function get_application_status($applicant_id = 0)
+	{
+		if($applicant_id){
+			$query = $this->db->get_where('ci_application_status', array('application_id' => $applicant_id));
+			return $query->row_array();
+		}else{
+			$query = $this->db->get('ci_application_status');
+			return $query->result_array();
+		}
+	}
+	
+	public function set_application_status()
+	{
+		$data = array(
+            'status' => $this->input->post('new_status'),
+			'comments' => $this->input->post('status_comment')
+        );
+		
+		$this->db->where('application_id', $this->input->post('applicantion_id'));
+		$this->db->update('ci_application_status', $data);
+	}
+	
 }

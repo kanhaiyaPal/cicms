@@ -25,9 +25,7 @@ class Visas_front extends CI_Controller {
 	{
 		$this->load->model('frontend/visas_front_model');
 		$this->load->model('frontend/users');
-		
-		
-		
+						
 		if(NULL === $this->input->post('citizen_of')){
 			show_404();
 		}
@@ -56,7 +54,7 @@ class Visas_front extends CI_Controller {
 				$u_id = $this->users->create_user();
 				$this->visas_front_model->update_reg_id($applicant_id,$u_id);
 			}
-			redirect('thank-you', 'refresh');
+			redirect('thank-you/'.$applicant_id, 'refresh');
 		}
 		
 		/*
@@ -84,6 +82,20 @@ class Visas_front extends CI_Controller {
 			}
 			
 		}
+	}
+	
+	public function edit_applicant()
+	{
+		$this->load->model('frontend/visas_front_model');
+						
+		if(NULL === $this->input->post('application_id')){
+			show_404();
+		}
+		
+		$ret_id = $this->visas_front_model->add_application_data($this->input->post('application_id'));
+		$this->session->set_flashdata('app_update_success','Application Updated successfully');
+		redirect('frontend/pages/view_applications', 'refresh');
+		
 	}
 
 }

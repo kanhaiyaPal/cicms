@@ -52,17 +52,18 @@
 .wsmenu-list > li > a{
 	display:block;
 	font-size:15px;
-	font-weight:600!important;
-	color:#fff;
+	font-weight:700!important;
+	color:#bf0a30;
+	font-weight:700;
 	padding:0px 10px;
-	line-height:55px;
+	line-height:44px;
 	border-right:1px solid rgba(0,0,0,.1);
 	text-decoration:none;
 	position:relative;
 	text-transform:uppercase;
 }
 .affix .wsmenu-list > li > a{
-	color:#006699;
+	color:#de0029;
 }
 @media screen and (max-width : 1200px) {
 }

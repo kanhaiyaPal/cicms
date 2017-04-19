@@ -1,8 +1,6 @@
 <div class="inner-banner">
 <div class="container">
-<h2>Select Visa Service</h2>
-
-<div class="search-panel" data-spy="affix" data-offset-top="200">
+<div class="search-panel" data-spy="affix" data-offset-top="150">
 <?=$visa_form?>
 </div>    
 </div>

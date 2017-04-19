@@ -109,7 +109,7 @@ class Visas_front_model extends CI_Model {
 			'applicant_marital' => $this->input->post('input-applicant-maritalstatus'),
 			'applicant_passport_number' => $this->input->post('input-applicant-passportnumber'),
 			'applicant_passport_placeofissue' => $this->input->post('input-applicant-placeofissue'),
-			'applicant_passport_issuningcountry	' => $this->input->post('select-appplicant-pissuecountry'),
+			'applicant_passport_issuingcountry' => $this->input->post('select-appplicant-pissuecountry'),
 			'applicant_passport_issuedate' => $this->input->post('input-applicant-issuedate'),
 			'applicant_passport_expiry' => $this->input->post('input-applicant-expiry'),
 			'is_coapplicant' => $this->input->post('is_coapplicant'),
@@ -128,6 +128,8 @@ class Visas_front_model extends CI_Model {
 			$this->db->insert('ci_user_applications', $data);
 			$insert_id = $this->db->insert_id();
 			$this->upload_applicant_images($insert_id);
+			$this->insert_track_status($insert_id);
+			$this->insert_payment_status($insert_id);
 			return $insert_id;
         }
 	}
@@ -252,6 +254,32 @@ class Visas_front_model extends CI_Model {
 		if($rowcount > 0){ return $row_inf['id']; }else{ return false; }
 	}
 	
+	public function insert_track_status($application_id = 0)
+	{
+		if($application_id){
+			$data = array(
+				'application_id' => $application_id,
+				'status' => 'submitted',
+				'comments' => 'Application Submitted by system'
+			);
+			
+			$this->db->insert('ci_application_status', $data);
+		}
+	}
+	
+	public function insert_payment_status($application_id = 0)
+	{
+		if($application_id){
+			$data = array(
+				'application_id' => $application_id,
+				'status' => 'pending',
+				'reference_number' => 'Testing'
+			);
+			
+			$this->db->insert('ci_application_status', $data);
+		}	
+	}
+	
 	function delete_existing_files($id = 0)
 	{
 		if($id != 0){
@@ -329,6 +357,30 @@ class Visas_front_model extends CI_Model {
 		}
 	}
 	
+	public function get_application_status($parent_id = 0)
+	{
+		if($parent_id != 0){
+			$query = $this->db->get_where('ci_application_status',array('application_id' => $parent_id));
+			return $query->row_array();
+		}
+	}
+	
+	public function get_payment_status($parent_id = 0)
+	{
+		if($parent_id != 0){
+			$query = $this->db->get_where('ci_payment_status',array('application_id' => $parent_id));
+			return $query->row_array();
+		}
+	}
+	
+	public function get_subapplicant_parent($parent_id = 0)
+	{
+		if($parent_id != 0){
+			$query = $this->db->get_where('ci_user_applications',array('is_coapplicant' => $parent_id));
+			return $query->result_array();
+		}
+	}
+	
 	public function get_current_userapplication($user_id = 0)
 	{
 		if($user_id){
@@ -378,6 +430,71 @@ class Visas_front_model extends CI_Model {
 				$this->db->where('id', $tb_app['is_coapplicant']);
 				$this->db->update('ci_user_applications', array('reg_id' => $user_id));	
 			}
+		}
+	}
+	
+	public function generate_unique_tracking()
+	{
+		$application_id = $_REQUEST['applicantion_id'];
+		$parent_id = 0;
+		
+		$query_f = $this->db->get_where('ci_user_applications',array('id' => $application_id));
+		$tb_app = $query_f->row_array();
+		
+		if($tb_app['tracking_no'] == ''){
+			if($tb_app['is_coapplicant'] == '0')
+			{
+				$parent_id = $application_id;
+			}else{
+				$query_p = $this->db->get_where('ci_user_applications',array('id' => $tb_app['is_coapplicant']));
+				$tb_ap = $query_p->row_array();
+				$parent_id = $tb_ap['id'];
+			}
+			
+			$query = $this->db->get_where('ci_user_applications',array('id' => $parent_id));
+			$parent_dt = $query->row_array();
+			
+			$first_two = '';
+			$last_four = '';
+			$first_two .= ucfirst(substr($parent_dt['applicant_firstname'], 0, 1));
+			$first_two .= ucfirst(substr($parent_dt['applicant_lastname'], 0, 1));
+			
+			$last_four = strtoupper(substr($parent_dt['applicant_passport_number'], -4));
+			
+			$tracking_id = $this->test_uniqueness_tracking($first_two,$last_four);
+			
+			//update payment status
+			$this->db->where('application_id', $parent_id);
+			$this->db->update('ci_payment_status', array('staus' => 'paid','reference_number' => 'Testing'));
+			
+			//update parent
+			$this->db->where('id', $parent_id);
+			$this->db->update('ci_user_applications', array('tracking_no' => $tracking_id,'application_date' => date('d-m-Y')));
+			
+			//update sub-applicants
+			$this->db->where('is_coapplicant', $parent_id);
+			$this->db->update('ci_user_applications', array('tracking_no' => $tracking_id,'application_date' => date('d-m-Y')));
+		}
+	}
+	
+	public function test_uniqueness_tracking($first_two = '',$last_four = '')
+	{
+		$charactersM = 4;
+		$possibleM = '123456789';
+		$codeM = '';
+		$i = 0;
+		while ($i < $charactersM) { 
+			$codeM .= substr($possibleM, mt_rand(0, strlen($possibleM)-1), 1);
+			$i++;
+		}
+		$ranStrM = $first_two.$codeM.$last_four;
+		
+		$query = $this->db->get_where('ci_user_applications',array('tracking_no' => $ranStrM));
+		$parent_c = $query->num_rows();
+		if($parent_c > 0) {
+			$this->test_uniqueness_tracking($first_two,$last_four);
+		} else {	
+			return $ranStrM;
 		}
 	}
 }
