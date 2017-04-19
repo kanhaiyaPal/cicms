@@ -170,36 +170,54 @@ class Visaapplications_model extends CI_Model {
 		{
 			$color_pass_val = $this->input->post('passport_approval_reason');
 		}else{
+			if($this->input->post('passport_approval') === NULL)
+			$color_pass_val = '0';
+			else
 			$color_pass_val = '1';
 		}
 		if($this->input->post('return_approval') == '0')
 		{
 			$return_val = $this->input->post('return_approval_reason');
 		}else{
+			if($this->input->post('return_approval') === NULL)
+			$return_val = '0';
+			else
 			$return_val = '1';
 		}
 		if($this->input->post('employee_approval') == '0')
 		{
 			$employee_val = $this->input->post('employee_approval_reason');
 		}else{
+			if($this->input->post('employee_approval') === NULL)
+			$employee_val = '0';
+			else
 			$employee_val = '1';
 		}
 		if($this->input->post('residence_approval') == '0')
 		{
 			$residence_val = $this->input->post('residence_approval_reason');
 		}else{
+			if($this->input->post('residence_approval') === NULL)
+			$residence_val = '0';
+			else
 			$residence_val = '1';
 		}
 		if($this->input->post('hotel_approval') == '0')
 		{
 			$hotel_val = $this->input->post('hotel_approval_reason');
 		}else{
+			if($this->input->post('hotel_approval') === NULL)
+			$hotel_val = '0';
+			else
 			$hotel_val = '1';
 		}
 		if($this->input->post('misc_approval') == '0')
 		{
 			$miscdocs_val = $this->input->post('misc_approval_reason');
 		}else{
+			if($this->input->post('misc_approval') === NULL)
+			$miscdocs_val = '0';
+			else
 			$miscdocs_val = '1';
 		}
 		 

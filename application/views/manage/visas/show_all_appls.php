@@ -50,7 +50,7 @@
 									$ed_url = base_url('/manage/visaapplications/show_details_app/'.$page['id']);
 									$dl_url = base_url('/manage/visaapplications/delete_application/'.$page['id']);
 									
-									if((int)$page['tracking_no']){
+									if($page['tracking_no']!=''){
 										$paymen = $page['tracking_no'];
 									}else{ 
 										$paymen = "Payment Pending";

@@ -1,7 +1,8 @@
 $(document).ready(function(){ 
 
-	$('form[name="edit_appl_form"] input').attr('readonly', 'readonly'); 
-	$('form[name="edit_appl_form"] select').attr('readonly', 'readonly'); 
+	$('form[name="edit_appl_form"] input[type="text"]').attr('disabled', 'disabled');
+	$('form[name="edit_appl_form"] input[type="radio"]').attr('disabled', 'disabled'); 	
+	$('form[name="edit_appl_form"] select').attr('disabled', 'disabled'); 
 	$('form[name="edit_appl_form"] textarea').attr('readonly', 'readonly'); 
 	
 	$('.datepicker').datepicker({

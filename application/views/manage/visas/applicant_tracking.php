@@ -38,7 +38,7 @@
 									
 									$ed_url = base_url('/manage/visaapplications/applicant_tracking_modify/'.$page['id']);
 																		
-									if((int)$page['tracking_no']){
+									if($page['tracking_no']!=''){
 										$paymen = $page['tracking_no'];
 									}else{ 
 										$paymen = "Payment Pending";

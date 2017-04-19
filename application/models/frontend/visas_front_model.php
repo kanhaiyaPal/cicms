@@ -360,6 +360,7 @@ class Visas_front_model extends CI_Model {
 	public function get_application_status($parent_id = 0)
 	{
 		if($parent_id != 0){
+			$parent_id = $this->get_parent_appplicant($parent_id);
 			$query = $this->db->get_where('ci_application_status',array('application_id' => $parent_id));
 			return $query->row_array();
 		}

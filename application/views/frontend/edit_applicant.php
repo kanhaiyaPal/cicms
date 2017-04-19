@@ -174,10 +174,21 @@
 											{
 												echo "<div class='preview_existing_file_coloured_passport'><a href=".base_url('uploads/visas/user_docs/'.$applicant_files['coloured_passport'])."><img class='img-responsive' src=".base_url('assets/images/icon-form.png')."  /><input type='hidden' value='".$applicant_files['coloured_passport']."' name='pro-file-applicant-passport' /></a></div><br/>";
 											}
-											echo "<a href='#' onclick='remove_user_file(event,\"".base_url('frontend/pages/delete_application_file')."\",\"".$applicant_files['coloured_passport']."\",\"".$applicant_data['id']."\",\"coloured_passport\")'>Delete existing file and Add new file</a>";
+											
+											if(($applicant_files['coloured_passport_reject'] != '0')&&($applicant_files['coloured_passport_reject'] != '1')){
+												echo "<a href='#' onclick='remove_user_file(event,\"".base_url('frontend/pages/delete_application_file')."\",\"".$applicant_files['coloured_passport']."\",\"".$applicant_data['id']."\",\"coloured_passport\")'>Delete existing file and Add new file</a>";
+											}
 										} 
 									?>
 									<span id="add_new_coloured_passport" <?php if($applicant_files['coloured_passport'] != ''){ echo "style='display:none'"; } ?> ><input type="file" class="vs_doc_up" name="file-applicant-passport"  value="" /></span>
+									
+									<?php if($applicant_files['coloured_passport_reject'] == '0'){ ?> 
+									<div class="alert alert-warning"> <i class="glyphicon glyphicon-exclamation-sign" ></i> Document under review </div>
+									<?php }elseif($applicant_files['coloured_passport_reject'] == '1'){ ?> 
+									<div class="alert alert-success"> <i class="glyphicon glyphicon-ok-sign" ></i>Document Approved</div>
+									<?php }else{ ?>
+									<div class="alert alert-danger"> <i class="glyphicon glyphicon-remove-sign"></i> Your uploaded document has been Rejected. Reason: <br/> <strong><?=$applicant_files['coloured_passport_reject']?></strong></div>	
+									<?php } ?>
 								  </div>
 								  <div class="form-group">
 									<label class="control-label">Return Ticket Scanned Copy</label>
@@ -192,10 +203,21 @@
 											{
 												echo "<div class='preview_existing_file_return_ticket'><a href=".base_url('uploads/visas/user_docs/'.$applicant_files['return_ticket'])."><img class='img-responsive' src=".base_url('assets/images/icon-form.png')."  /><input type='hidden' value='".$applicant_files['return_ticket']."' name='pro-file-applicant-returnticket' /></a></div><br/>";
 											}
-											echo "<a href='#' onclick='remove_user_file(event,\"".base_url('frontend/pages/delete_application_file')."\",\"".$applicant_files['return_ticket']."\",\"".$applicant_data['id']."\",\"return_ticket\")'>Delete existing file and Add new file</a>";
+											
+											if(($applicant_files['return_ticket_reject'] != '0')&&($applicant_files['return_ticket_reject'] != '1')){
+												echo "<a href='#' onclick='remove_user_file(event,\"".base_url('frontend/pages/delete_application_file')."\",\"".$applicant_files['return_ticket']."\",\"".$applicant_data['id']."\",\"return_ticket\")'>Delete existing file and Add new file</a>";
+											}
 										} 
 									?>
 									<span id="add_new_return_ticket" <?php if($applicant_files['return_ticket'] != ''){ echo "style='display:none'"; } ?> ><input type="file" class="vs_doc_up " name="file-applicant-returnticket" value="" /></span>
+									
+									<?php if($applicant_files['return_ticket_reject'] == '0'){ ?> 
+									<div class="alert alert-warning"> <i class="glyphicon glyphicon-exclamation-sign" ></i> Document under review </div>
+									<?php }elseif($applicant_files['return_ticket_reject'] == '1'){ ?> 
+									<div class="alert alert-success"> <i class="glyphicon glyphicon-ok-sign" ></i>Document Approved</div>
+									<?php }else{ ?>
+									<div class="alert alert-danger"> <i class="glyphicon glyphicon-remove-sign"></i> Your uploaded document has been Rejected. Reason: <br/> <strong><?=$applicant_files['return_ticket_reject']?></strong></div>	
+									<?php } ?>
 								  </div>
 								  <div class="form-group">
 									<label class="control-label">Employee ID</label>
@@ -210,10 +232,21 @@
 											{
 												echo "<div class='preview_existing_file_employee_id'><a href=".base_url('uploads/visas/user_docs/'.$applicant_files['employee_id'])."><img class='img-responsive' src=".base_url('assets/images/icon-form.png')."  /><input type='hidden' value='".$applicant_files['return_ticket']."' name='pro-file-applicant-empid' /></a></div><br/>";
 											}
-											echo "<a href='#' onclick='remove_user_file(event,\"".base_url('frontend/pages/delete_application_file')."\",\"".$applicant_files['employee_id']."\",\"".$applicant_data['id']."\",\"employee_id\")'>Delete existing file and Add new file</a>";
+											
+											if(($applicant_files['employee_id_reject'] != '0')&&($applicant_files['employee_id_reject'] != '1')){
+												echo "<a href='#' onclick='remove_user_file(event,\"".base_url('frontend/pages/delete_application_file')."\",\"".$applicant_files['employee_id']."\",\"".$applicant_data['id']."\",\"employee_id\")'>Delete existing file and Add new file</a>";
+											}
 										} 
 									?>
 									<span id="add_new_employee_id" <?php if($applicant_files['employee_id'] != ''){ echo "style='display:none'"; } ?> ><input type="file" class="vs_doc_up" name="file-applicant-empid" value="" /></span>
+									
+									<?php if($applicant_files['employee_id_reject'] == '0'){ ?> 
+									<div class="alert alert-warning"> <i class="glyphicon glyphicon-exclamation-sign" ></i> Document under review </div>
+									<?php }elseif($applicant_files['employee_id_reject'] == '1'){ ?> 
+									<div class="alert alert-success"> <i class="glyphicon glyphicon-ok-sign" ></i> Document Approved</div>
+									<?php }else{ ?>
+									<div class="alert alert-danger"> <i class="glyphicon glyphicon-remove-sign"></i> Your uploaded document has been Rejected. Reason: <br/> <strong><?=$applicant_files['employee_id_reject']?></strong></div>	
+									<?php } ?>
 								  </div>
 								</div>
 								<div class="col-md-6">
@@ -230,10 +263,20 @@
 											{
 												echo "<div class='preview_existing_file_residence_proof'><a href=".base_url('uploads/visas/user_docs/'.$applicant_files['residence_proof'])."><img class='img-responsive' src=".base_url('assets/images/icon-form.png')."  /></a><input type='hidden' value='".$applicant_files['residence_proof']."' name='pro-file-applicant-residence' /></div><br/>";
 											}
-											echo "<a href='#' onclick='remove_user_file(event,\"".base_url('frontend/pages/delete_application_file')."\",\"".$applicant_files['residence_proof']."\",\"".$applicant_data['id']."\",\"residence_proof\")'>Delete existing file and Add new file</a>";
+											if(($applicant_files['residence_proof_reject'] != '0')&&($applicant_files['residence_proof_reject'] != '1')){
+												echo "<a href='#' onclick='remove_user_file(event,\"".base_url('frontend/pages/delete_application_file')."\",\"".$applicant_files['residence_proof']."\",\"".$applicant_data['id']."\",\"residence_proof\")'>Delete existing file and Add new file</a>";
+											}
 										} 
 									?>
 									<span id="add_new_residence_proof" <?php if($applicant_files['residence_proof'] != ''){ echo "style='display:none'"; } ?> ><input type="file" class="vs_doc_up" name="file-applicant-residence" value="" /></span>
+									
+									<?php if($applicant_files['residence_proof_reject'] == '0'){ ?> 
+									<div class="alert alert-warning"> <i class="glyphicon glyphicon-exclamation-sign" ></i> Document under review </div>
+									<?php }elseif($applicant_files['residence_proof_reject'] == '1'){ ?> 
+									<div class="alert alert-success"> <i class="glyphicon glyphicon-ok-sign" ></i>Document Approved</div>
+									<?php }else{ ?>
+									<div class="alert alert-danger"> <i class="glyphicon glyphicon-remove-sign"></i> Your uploaded document has been Rejected. Reason: <br/> <strong><?=$applicant_files['residence_proof_reject']?></strong></div>	
+									<?php } ?>
 								  </div>
 								  <div class="form-group">
 									<label class="control-label">Hotel Reservation Copy</label>
@@ -248,10 +291,20 @@
 											{
 												echo "<div class='preview_existing_file_hotel_reservation'><a href=".base_url('uploads/visas/user_docs/'.$applicant_files['hotel_reservation'])."><img class='img-responsive' src=".base_url('assets/images/icon-form.png')."  /></a><input type='hidden' value='".$applicant_files['hotel_reservation']."' name='pro-file-applicant-reservation' /></div><br/>";
 											}
-											echo "<a href='#' onclick='remove_user_file(event,\"".base_url('frontend/pages/delete_application_file')."\",\"".$applicant_files['hotel_reservation']."\",\"".$applicant_data['id']."\",\"hotel_reservation\")'>Delete existing file and Add new file</a>";
+											if(($applicant_files['hotel_reservation_reject'] != '0')&&($applicant_files['hotel_reservation_reject'] != '1')){
+												echo "<a href='#' onclick='remove_user_file(event,\"".base_url('frontend/pages/delete_application_file')."\",\"".$applicant_files['hotel_reservation']."\",\"".$applicant_data['id']."\",\"hotel_reservation\")'>Delete existing file and Add new file</a>";
+											}
 										} 
 									?>
 									<span id="add_new_hotel_reservation" <?php if($applicant_files['hotel_reservation'] != ''){ echo "style='display:none'"; } ?> ><input type="file" class="vs_doc_up" name="file-applicant-reservation" value="" /></span>
+									
+									<?php if($applicant_files['hotel_reservation_reject'] == '0'){ ?> 
+									<div class="alert alert-warning"> <i class="glyphicon glyphicon-exclamation-sign" ></i> Document under review </div>
+									<?php }elseif($applicant_files['hotel_reservation_reject'] == '1'){ ?> 
+									<div class="alert alert-success"> <i class="glyphicon glyphicon-ok-sign" ></i>Document Approved</div>
+									<?php }else{ ?>
+									<div class="alert alert-danger"> <i class="glyphicon glyphicon-remove-sign"></i> Your uploaded document has been Rejected. Reason: <br/> <strong><?=$applicant_files['hotel_reservation_reject']?></strong></div>	
+									<?php } ?>
 								  </div>
 								  <div class="form-group">
 									<label class="control-label">Misc Documents</label>
@@ -266,10 +319,21 @@
 											{
 												echo "<div class='preview_existing_file_misc_documents'><a href=".base_url('uploads/visas/user_docs/'.$applicant_files['misc_documents'])."><img class='img-responsive' src=".base_url('assets/images/icon-form.png')." /></a><input type='hidden' value='".$applicant_files['misc_documents']."' name='pro-file-applicant-miscellanious' /></div><br/>";
 											}
-											echo "<a href='#' onclick='remove_user_file(event,\"".base_url('frontend/pages/delete_application_file')."\",\"".$applicant_files['misc_documents']."\",\"".$applicant_data['id']."\",\"misc_documents\")'>Delete existing file and Add new file</a>";
+											
+											if(($applicant_files['misc_documents_reject'] != '0')&&($applicant_files['misc_documents_reject'] != '1')){
+												echo "<a href='#' onclick='remove_user_file(event,\"".base_url('frontend/pages/delete_application_file')."\",\"".$applicant_files['misc_documents']."\",\"".$applicant_data['id']."\",\"misc_documents\")'>Delete existing file and Add new file</a>";
+											}
 										} 
 									?>
 									<span id="add_new_misc_documents" <?php if($applicant_files['misc_documents'] != ''){ echo "style='display:none'"; } ?> ><input type="file" class="vs_doc_up" name="file-applicant-miscellanious" value="" /></span>
+									
+									<?php if($applicant_files['misc_documents_reject'] == '0'){ ?> 
+									<div class="alert alert-warning"> <i class="glyphicon glyphicon-exclamation-sign" ></i> Document under review </div>
+									<?php }elseif($applicant_files['misc_documents_reject'] == '1'){ ?> 
+									<div class="alert alert-success"> <i class="glyphicon glyphicon-ok-sign" ></i>Document Approved</div>
+									<?php }else{ ?>
+									<div class="alert alert-danger"> <i class="glyphicon glyphicon-remove-sign"></i> Your uploaded document has been Rejected. Reason: <br/> <strong><?=$applicant_files['misc_documents_reject']?></strong></div>	
+									<?php } ?>
 								  </div>
 								</div>
 							  </div>

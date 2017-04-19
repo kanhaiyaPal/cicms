@@ -83,7 +83,7 @@
 												<td><strong>Place of Issue</strong></td>
 												<td><?=$page_data['applicant_passport_placeofissue']?></td>
 												<td><strong>Issuing Country</strong></td>
-												<td><?php foreach($country_list as $country){ if($page_data['applicant_passport_issuningcountry'] == $country['id']){echo $country['country_name'];}  }?></td>
+												<td><?php foreach($country_list as $country){ if($page_data['applicant_passport_issuingcountry'] == $country['id']){echo $country['country_name'];}  }?></td>
 												<td><strong>Issue Date</strong></td>
 												<td><?=$page_data['applicant_passport_issuedate']?></td>
 												<td><strong>Expiry Date</strong></td>
@@ -164,7 +164,7 @@
 												<td><strong>Place of Issue</strong></td>
 												<td><?=$coapplicants_data[$i-1]['applicant_passport_placeofissue']?></td>
 												<td><strong>Issuing Country</strong></td>
-												<td><?php foreach($country_list as $country){ if($coapplicants_data[$i-1]['applicant_passport_issuningcountry'] == $country['id']){echo $country['country_name'];}  }?></td>
+												<td><?php foreach($country_list as $country){ if($coapplicants_data[$i-1]['applicant_passport_issuingcountry'] == $country['id']){echo $country['country_name'];}  }?></td>
 												<td><strong>Issue Date</strong></td>
 												<td><?=$coapplicants_data[$i-1]['applicant_passport_issuedate']?></td>
 												<td><strong>Expiry Date</strong></td>

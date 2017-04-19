@@ -25,7 +25,7 @@
 					<br/>
 					<input type="hidden" name="applicantion_id" value="<?=$status_data['application_id']?>" />
 					<input type="submit" name="changetracking" class="btn btn-primary" value="Change" />
-					<a href="#" class="btn btn-default">Back</a>
+					<a href="#" onclick="location.href='<?=base_url('manage/visaapplications/application_tracking')?>'" class="btn btn-default">Back</a>
 				</form>
 		  	</div>
 		   </div>
