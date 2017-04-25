@@ -72,7 +72,7 @@ class Pages extends CI_Controller {
 			$data['title'] = ucfirst('Add static page'); // Capitalize the first letter
 			$data['sidebar'] = $this->load->view('manage/templates/admin_sidebar', $data, true);
 			$data['editor_on'] = 'show';
-			$data['multiple_image_select'] = 'show';
+			//$data['multiple_image_select'] = 'show';
 			$data['return_url'] = base_url('/manage/pages/show');
 			$data['file_upload_url'] = base_url('/uploads/admin_upload');
 			$data['p_pages'] = $this->pages_model->get_pages();
@@ -168,7 +168,7 @@ class Pages extends CI_Controller {
 				$data['title'] = ucfirst('update page data'); 
 				$data['sidebar'] = $this->load->view('manage/templates/admin_sidebar', $data, true);
 				$data['editor_on'] = 'show';
-				$data['multiple_image_select_up'] = 'show';
+				//$data['multiple_image_select_up'] = 'show';
 				$data['return_url'] = base_url('/manage/pages/show');
 				$data['page_data'] = $this->pages_model->get_pages($id);
 				$data['p_pages'] = $this->pages_model->get_pages();

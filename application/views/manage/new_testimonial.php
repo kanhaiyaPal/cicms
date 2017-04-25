@@ -28,8 +28,20 @@
 									<input class="form-control" name="testimonial_title" placeholder="Testimonial Title" value="<?=set_value('testimonial_title')?>" type="text">
 								</div>
 								<div class="form-group">
+									<label>Company</label>
+									<input class="form-control" name="t_company" placeholder="Company Name" value="<?=set_value('t_company')?>" type="text">
+								</div>
+								<div class="form-group">
+									<label>Designation</label>
+									<input class="form-control" name="t_designation" placeholder="Designation" value="<?=set_value('t_designation')?>" type="text">
+								</div>
+								<div class="form-group">
 									<label>Content</label>
 									<textarea class="form-control" name="testimonial_content" placeholder="Testimonial Content" id="ckeditor_standard" rows="3"><?=set_value('testimonial_content')?></textarea>
+								</div>
+								<div class="form-group">
+									<label>Image</label>
+									<input type="file" name="t_file" value="" />
 								</div>
 								<div class="form-group">
 									<label>Order</label>

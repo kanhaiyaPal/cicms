@@ -15,7 +15,7 @@
 						</div>
 					</div>
 					<div class="panel-body">
-					<?php if(!empty(validation_errors())): ?>
+					<?php if(validation_errors()): ?>
 						<div class="alert alert-danger" role="alert">
 						  <?php echo validation_errors();  ?>
 						</div>
@@ -68,22 +68,64 @@
 									<label>Visa Maximum Stay ( in Days )</label>
 									<input class="form-control" name="visa_max_stay" placeholder="Maximum Stay in Foreign Country" value="<?=$service_data['visa_max_stay']?>" type="text">
 								</div>
-								
+								<?php $processing_parts = explode('|-|',$service_data['processing_time']); 
+								 $service_fee_parts = explode('|-|',$service_data['service_fee']); 
+								 $embassy_fee_parts = explode('|-|',$service_data['embassy_fee']); ?>
+								<div class="form-group col-md-3">
+									<label><h4>Regular Visa Service</h4></label>
+								</div>
+								<div class="form-group col-md-9"><hr/><br/></div>
 								<div class="form-group col-md-4">
 									<label>Processing Time</label>
-									<input class="form-control" name="processing_time" placeholder="Processing Time" value="<?=$service_data['processing_time']?>" type="text">
+									<input class="form-control" name="processing_time_rg" placeholder="Processing Time" value="<?=$processing_parts[0]?>" type="text">
 								</div>
 								
 								<div class="form-group col-md-4">
 									<label>Service Fee Amount</label>
-									<input class="form-control" name="service_fee" placeholder="Service fee" value="<?=$service_data['service_fee']?>" type="text">
+									<input class="form-control" name="service_fee_rg" placeholder="Service fee" value="<?=$service_fee_parts[0]?>" type="text">
 								</div>
 								
 								<div class="form-group col-md-4">
 									<label>Embassy/Visa Fee Amount</label>
-									<input class="form-control" name="embassy_fee" placeholder="Embassy/Visa Fee" value="<?=$service_data['embassy_fee']?>" type="text">
+									<input class="form-control" name="embassy_fee_rg" placeholder="Embassy/Visa Fee" value="<?=$embassy_fee_parts[0]?>" type="text">
+								</div>
+								<div class="form-group col-md-3">
+									<label><h4>Premium Visa Service</h4></label>
+								</div>
+								<div class="form-group col-md-9"><hr/><br/></div>
+								<div class="form-group col-md-4">
+									<label>Processing Time</label>
+									<input class="form-control" name="processing_time_prem" placeholder="Processing Time" value="<?=$processing_parts[1]?>" type="text">
 								</div>
 								
+								<div class="form-group col-md-4">
+									<label>Service Fee Amount</label>
+									<input class="form-control" name="service_fee_prem" placeholder="Service fee" value="<?=$service_fee_parts[1]?>" type="text">
+								</div>
+								
+								<div class="form-group col-md-4">
+									<label>Embassy/Visa Fee Amount</label>
+									<input class="form-control" name="embassy_fee_prem" placeholder="Embassy/Visa Fee" value="<?=$embassy_fee_parts[1]?>" type="text">
+								</div>
+								<div class="form-group col-md-3">
+									<label><h4>Express Visa Service</h4></label>
+								</div>
+								<div class="form-group col-md-9"><hr/><br/></div>
+								<div class="form-group col-md-4">
+									<label>Processing Time</label>
+									<input class="form-control" name="processing_time_ex" placeholder="Processing Time" value="<?=$processing_parts[2]?>" type="text">
+								</div>
+								
+								<div class="form-group col-md-4">
+									<label>Service Fee Amount</label>
+									<input class="form-control" name="service_fee_ex" placeholder="Service fee" value="<?=$service_fee_parts[2]?>" type="text">
+								</div>
+								
+								<div class="form-group col-md-4">
+									<label>Embassy/Visa Fee Amount</label>
+									<input class="form-control" name="embassy_fee_ex" placeholder="Embassy/Visa Fee" value="<?=$embassy_fee_parts[2]?>" type="text">
+								</div>
+								<?php /*?>
 								<div class="form-group col-md-4">
 									<label>Meet & Greet Combo Available</label>
 									<select class="form-control" name="meet_greet_combo" onchange="if(this.value =='1'){ $('#ex_ser_fe').show(); }else{ $('#ex_ser_fe').hide(); }">
@@ -91,6 +133,7 @@
 										<option value="1" <?php if($service_data['extended_service_fee']!= ''){ echo "selected"; } ?> >Yes</option>
 									</select>
 								</div>
+								<?php */?>
 								
 								<div class="form-group col-md-4" id="ex_ser_fe" <?php if($service_data['extended_service_fee']== ''){ echo 'style="display:none"'; } ?>>
 									<label>Extended Service Fee Amount</label>
@@ -100,10 +143,18 @@
 								<div class="form-group col-md-4">
 									&nbsp;
 								</div>
-								
+								<?php $text_parts = explode('|-|',$service_data['intro_content']); ?>
+								<div class="form-group col-md-12">
+									<label>Overview Text</label>
+									<textarea class="form-control" name="overview_text" placeholder="Overview Page Content"  rows="3"><?=$text_parts[2]?></textarea>
+								</div>
 								<div class="form-group col-md-12">
 									<label>Introduction Text</label>
-									<textarea class="form-control" name="intro_text" placeholder="Introduction Page Content" id="ckeditor_full" rows="3"><?=$service_data['intro_content']?></textarea>
+									<textarea class="form-control" name="intro_text" placeholder="Introduction Page Content" id="ckeditor_full" rows="3"><?=$text_parts[0]?></textarea>
+								</div>
+								<div class="form-group col-md-12">
+									<label>Detail Text</label>
+									<textarea class="form-control" name="detail_text" placeholder="Detail Content" id="ckeditor_full_twice" rows="3"><?=$text_parts[1]?></textarea>
 								</div>
 								<div class="form-group col-md-12">
 									<label>Public Visibility</label>

@@ -54,6 +54,8 @@ class Testimonials extends CI_Controller {
 			
 			$this->form_validation->set_rules('testimonial_title', 'Testimonial Title', 'trim|required');
 			$this->form_validation->set_rules('testimonial_content', 'Testimonial Content', 'trim|required');
+			$this->form_validation->set_rules('t_company', 'Testimonial Company', 'trim|required');
+			$this->form_validation->set_rules('t_designation', 'Testimonial Designation', 'trim|required');
 			
 			if(!($this->form_validation->run() === FALSE)){
 				$this->testimonials_model->set_testimonials();
@@ -85,6 +87,20 @@ class Testimonials extends CI_Controller {
 		}else{
 			redirect("manage/pages/view");
 		}
+	}
+	
+	public function delete_testimonial_image()
+	{
+		$this->load->model('manage/testimonials_model'); 
+		
+		$t_file = $this->input->post('file');
+		$t_id = $this->input->post('id');
+		
+		$d_file = APPPATH.'..'. DIRECTORY_SEPARATOR .'uploads'. DIRECTORY_SEPARATOR .'testimonials'. DIRECTORY_SEPARATOR . $t_file;
+		unlink($d_file);
+		
+		$this->testimonials_model->remove_image($t_id);
+		
 	}
 	
 	public function update($id = 0)

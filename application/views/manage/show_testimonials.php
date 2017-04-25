@@ -33,6 +33,8 @@
 						<thead>
 							<tr>
 								<th>Title</th>
+								<th>Comapny</th>
+								<th>Designation</th>
 								<th>Order</th>
 								<th>Options</th>
 							</tr>
@@ -48,6 +50,8 @@
 									
 									echo "<tr class='".$od_ev." gradeX'>";
 									echo "<td>".$testimonial['title']."</td>";
+									echo "<td>".$testimonial['company']."</td>";
+									echo "<td>".$testimonial['designation']."</td>";
 									echo "<td>".$testimonial['order_s']."</td>";
 									echo "<td><a href='$ed_url' class='option_ico glyphicon glyphicon-edit'/>&nbsp;<a href='$dl_url' class='glyphicon glyphicon-trash'/></td>";
 									echo "</tr>";

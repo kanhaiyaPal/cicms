@@ -77,11 +77,11 @@ class Visas_model extends CI_Model {
 			'travelling_to' => $this->input->post('travelling_to'),
 			'living_in' => $this->input->post('living_in'),
 			'visa_type' => $this->input->post('visa_type'),
-			'intro_content' => $this->input->post('intro_text'),
-			'embassy_fee' => $this->input->post('embassy_fee'),
-			'service_fee' => $this->input->post('service_fee'),
+			'intro_content' => $this->input->post('intro_text').'|-|'.$this->input->post('detail_text').'|-|'.$this->input->post('overview_text'),
+			'embassy_fee' => $this->input->post('embassy_fee_rg').'|-|'.$this->input->post('embassy_fee_prem').'|-|'.$this->input->post('embassy_fee_ex'),
+			'service_fee' => $this->input->post('service_fee_rg').'|-|'.$this->input->post('service_fee_prem').'|-|'.$this->input->post('service_fee_ex'),
 			'extended_service_fee' => $this->input->post('extended_service_fee'),
-			'processing_time' => $this->input->post('processing_time'),
+			'processing_time' => $this->input->post('processing_time_rg').'|-|'.$this->input->post('processing_time_prem').'|-|'.$this->input->post('processing_time_ex'),
 			'visa_validity' => $this->input->post('visa_validity'),
 			'visa_max_stay' => $this->input->post('visa_max_stay'),
 			'is_active' => $this->input->post('is_active'),
@@ -151,4 +151,5 @@ class Visas_model extends CI_Model {
 			return $this->db->delete('ci_visa_services');
 		}
 	}
+	
 }

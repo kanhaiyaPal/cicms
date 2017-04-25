@@ -53,7 +53,7 @@
 	display:block;
 	font-size:15px;
 	font-weight:700!important;
-	color:#bf0a30;
+	color:#00529b;
 	font-weight:700;
 	padding:0px 10px;
 	line-height:44px;
@@ -62,8 +62,7 @@
 	position:relative;
 	text-transform:uppercase;
 }
-.affix .wsmenu-list > li > a{
-	color:#de0029;
+.affix .wsmenu-list > li > a{	
 }
 @media screen and (max-width : 1200px) {
 }

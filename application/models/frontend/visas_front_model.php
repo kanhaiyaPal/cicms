@@ -498,4 +498,22 @@ class Visas_front_model extends CI_Model {
 			return $ranStrM;
 		}
 	}
+	
+	public function track_status_pass()
+	{
+		$tracking_no = $this->input->post('tracking_sr');
+		$passport_no = $this->input->post('passport_sr');
+		
+		$query_track = $this->db->get_where('ci_user_applications',array('tracking_no' => $tracking_no,'applicant_passport_number' => $passport_no));
+		$tr_dt_count = $query_track->num_rows();
+		$tr_dt = $query_track->row_array();
+		
+		if($tr_dt_count > 0){
+			$query_st = $this->db->get_where('ci_application_status',array('application_id' => $tr_dt['id']));
+			return $query_st->row_array();
+		}else{
+			return 0;
+		}
+		
+	}
 }

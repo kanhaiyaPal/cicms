@@ -24,13 +24,20 @@
 	var $2222 = jQuery.noConflict();
 	$2222(document).ready(function(){
 	$2222('#slider2').bxSlider({
-		moveSlides: 1,
-		auto: true,
-		controls: false,
-		slideMargin: 10	
+		slideWidth: 345,
+    minSlides: 1,
+    maxSlides: 3,
+    moveSlides: 1,
+	auto: true,
+	controls: false,
+    slideMargin: 50	
 	});
 	});
 	</script>
+    
+
+
+
 	<?php endif; ?>
     
 <link href="<?php echo base_url(); ?>/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -46,7 +53,7 @@
 <div class="top-nav">
     <div class="container">
       <div class="row">
-        <div class="col-md-8"><a href="#"><i class="fa fa-sticky-note"></i> UAE travel visa requirements</a></div>
+        <div class="col-md-8"><a href="<?=base_url('uae-travel-visa-requirements')?>"><i class="fa fa-sticky-note"></i> UAE travel visa requirements</a></div>
         <!--
         <div class="col-md-3"><a href="tel:<?=$phone?>"><i class="fa fa-volume-control-phone"></i> <?=$phone?></a></div>
         <div class="col-md-3"><a href="mailto:<?=$mailid?>"><i class="fa fa-envelope"></i> <?=$mailid?></a></div>
@@ -81,8 +88,8 @@
               <ul class="mobile-sub wsmenu-list">
               <li><a href="<?=base_url()?>">Home</a></li>
 			  <?=$site_menu?>
-                <li><a href="<?=base_url('frontend/pages/visa_processing_steps')?>">Visa Processing Steps</a>
-                <li><a href="<?=base_url('frontend/pages/track_status')?>">Application Tracking</a></li>
+                <li><a href="<?=base_url('visa-processing-steps')?>">Visa Processing Steps</a>
+                <li><a href="<?=base_url('application-tracking')?>">Application Tracking</a></li>
                 
                 <?php if(isset($this->session->usersession)&&($this->session->usersession != '')): ?>
 				<li class="res-show"><a href="<?=$myaccount_url?>">Account</a></li>

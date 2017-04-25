@@ -20,12 +20,11 @@
 
 
 .bx-wrapper #slider2 li{
-	min-height:150px;
 }
 .slide-cont{
 	width:100%;
 	margin:0 auto;
-	padding:0 0 50px 0;
+	padding:0 15px 50px 15px;
 }
 .slide-cont .quote{
 	
@@ -42,21 +41,6 @@
 	width:100px;
 	height:auto;
 }
-.slide-cont h4{
-	border:0;
-	margin:50px 0 0 0;
-	color:#ccc!important;
-	font-size:22px!important;
-	text-transform:uppercase;
-}
-.slide-cont h4 a{
-	color:#111!important;
-	text-decoration:none;
-}
-.slide-cont h4 a:hover{
-	text-decoration:underline;
-}
-
 
 
 @media screen and (max-width : 768px) {

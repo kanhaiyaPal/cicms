@@ -7,65 +7,99 @@
 </div>
 
 
-<div class="h-thumbs">
+<div class="h-thumbs text-center">
 <div class="container">
-  <div class="row">
-    <div class="col-sm-3 col-xs-6">
-      <div class="h-thumb">
-        <div class="hti"><img src="<?=base_url('assets/images/icon-form.png')?>" alt="Application Form" /></div>
-        <h3>Fill Application Form</h3>
-      </div>
-    </div>
-    <div class="col-sm-3 col-xs-6">
-      <div class="h-thumb">
-        <div class="hti"><img src="<?=base_url('assets/images/icon-docs.png')?>" alt="Upload Documents" /></div>
-        <h3>Upload Documents</h3>
-      </div>
-    </div>
-    <div class="col-sm-3 col-xs-6">
-      <div class="h-thumb">
-        <div class="hti"><img src="<?=base_url('assets/images/icon-pay.png')?>" alt="Pay Online" /></div>
-        <h3>Pay Online</h3>
-      </div>
-    </div>
-    <div class="col-sm-3 col-xs-6">
-      <div class="h-thumb">
-        <div class="hti"><img src="<?=base_url('assets/images/icon-visa.png')?>" alt="Visa Processign!!" /></div>
-        <h3>Visa Processing!!</h3>
-      </div>
-    </div>
-  </div>
+<h1>How to apply for UAE Visa Online?<span></span></h1>
+<h5>Easy & faster processing without errors : 5 easy steps for UAE visa application</h5>
+
+  <ul>
+    <li>
+        <div class="hti">
+        <span>1</span>
+        <img src="<?=base_url('uploads/admin/').$step_1_image?>" alt="Visa Type" /></div>
+        <h3><?=$step_1_title?></h3>
+    </li>
+	<li>
+        <div class="hti">
+        <span>2</span>
+        <img src="<?=base_url('uploads/admin/').$step_2_image?>" alt="Visa Type" /></div>
+        <h3><?=$step_2_title?></h3>
+    </li>
+	<li>
+        <div class="hti">
+        <span>3</span>
+        <img src="<?=base_url('uploads/admin/').$step_3_image?>" alt="Visa Type" /></div>
+        <h3><?=$step_3_title?></h3>
+    </li>
+	<li>
+        <div class="hti">
+        <span>4</span>
+        <img src="<?=base_url('uploads/admin/').$step_4_image?>" alt="Visa Type" /></div>
+        <h3><?=$step_4_title?></h3>
+    </li>
+	<li>
+        <div class="hti">
+        <span>5</span>
+        <img src="<?=base_url('uploads/admin/').$step_5_image?>" alt="Visa Type" /></div>
+        <h3><?=$step_5_title?></h3>
+    </li>
+      
+      
+      
+
+  </ul>
+<div class="clear"></div>
 </div>
 </div>
 
 
 
-<div class="container">
-  <h1><?=$title?><span></span></h1>
-  <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget pharetra lorem. Quisque nec erat felis. Nulla nunc nisl, pretium quis imperdiet quis, scelerisque et felis. Sed fermentum, tellus quis pulvinar tincidunt, mauris turpis porttitor tortor, ac cursus nibh ipsum quis metus. Aliquam erat volutpat. Aliquam eu sagittis nisi, sed finibus odio. Proin placerat, odio nec scelerisque tincidunt, mauris risus efficitur augue, nec efficitur metus nunc non sapien. Mauris accumsan lobortis nisl. Vestibulum fermentum facilisis urna, sed sollicitudin est rhoncus ac.</h6>
 
-  <p>&nbsp;</p>  
-  <h2>Fill Application Form<span></span></h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget pharetra lorem. Quisque nec erat felis. Nulla nunc nisl, pretium quis imperdiet quis, scelerisque et felis. Sed fermentum, tellus quis pulvinar tincidunt, mauris turpis porttitor tortor, ac cursus nibh ipsum quis metus. Aliquam erat volutpat. Aliquam eu sagittis nisi, sed finibus odio. Proin placerat, odio nec scelerisque tincidunt, mauris risus efficitur augue, nec efficitur metus nunc non sapien. Mauris accumsan lobortis nisl. Vestibulum fermentum facilisis urna, sed sollicitudin est rhoncus ac.</p>
+
+
+<div class="container">
+  <h2><?=$step_1_title?><span></span></h2>
+  <h6><?=$step_1_content?></h6>
+  
+  <p>&nbsp;</p> 
+  <h2><?=$step_2_title?><span></span></h2>
+  <h6><?=$step_2_content?></h6>
+  
+  <p>&nbsp;</p> 
+  <h2><?=$step_3_title?><span></span></h2>
+  <h6><?=$step_3_content?></h6>
+  
+  <p>&nbsp;</p> 
+  <h2><?=$step_4_title?><span></span></h2>
+  <h6><?=$step_4_content?></h6>
+
+  <p>&nbsp;</p> 
+  <h2><?=$step_5_title?><span></span></h2>
+  <h6><?=$step_5_content?></h6>
+
+   
+  <!--<h2>Fill in Application Form<span></span></h2>
+        <h6>Now that you know your visa type. You need to fill in the application form to provide your travel informnation, contact details and personal information</h6>
   
   <p>&nbsp;</p>  
   <h2>Upload Documents<span></span></h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget pharetra lorem. Quisque nec erat felis. Nulla nunc nisl, pretium quis imperdiet quis, scelerisque et felis. Sed fermentum, tellus quis pulvinar tincidunt, mauris turpis porttitor tortor, ac cursus nibh ipsum quis metus. Aliquam erat volutpat. Aliquam eu sagittis nisi, sed finibus odio. Proin placerat, odio nec scelerisque tincidunt, mauris risus efficitur augue, nec efficitur metus nunc non sapien. Mauris accumsan lobortis nisl. Vestibulum fermentum facilisis urna, sed sollicitudin est rhoncus ac.</p>
+        <h6>Once you have filled  up the application form, you need to upload your coloured scanned documents. Passport / Photograph & itenary details</h6>
   
   <p>&nbsp;</p>  
   <h2>Pay Online<span></span></h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget pharetra lorem. Quisque nec erat felis. Nulla nunc nisl, pretium quis imperdiet quis, scelerisque et felis. Sed fermentum, tellus quis pulvinar tincidunt, mauris turpis porttitor tortor, ac cursus nibh ipsum quis metus. Aliquam erat volutpat. Aliquam eu sagittis nisi, sed finibus odio. Proin placerat, odio nec scelerisque tincidunt, mauris risus efficitur augue, nec efficitur metus nunc non sapien. Mauris accumsan lobortis nisl. Vestibulum fermentum facilisis urna, sed sollicitudin est rhoncus ac.</p>
+        <h6>Once you upload the documents make online payment using our secured payment gateway</h6>
   
   <p>&nbsp;</p>  
-  <h2>Visa Processing!!<span></span></h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget pharetra lorem. Quisque nec erat felis. Nulla nunc nisl, pretium quis imperdiet quis, scelerisque et felis. Sed fermentum, tellus quis pulvinar tincidunt, mauris turpis porttitor tortor, ac cursus nibh ipsum quis metus. Aliquam erat volutpat. Aliquam eu sagittis nisi, sed finibus odio. Proin placerat, odio nec scelerisque tincidunt, mauris risus efficitur augue, nec efficitur metus nunc non sapien. Mauris accumsan lobortis nisl. Vestibulum fermentum facilisis urna, sed sollicitudin est rhoncus ac.</p>
+  <h2>Application Submit!!<span></span></h2>
+        <h6>Now that you have applied for your visa to UAE, your application will be processed immediately. You can track the status of your application online by simply </h5>-->
 </div>
 
 
 <div class="home-1">
   <div class="container">
   <div class="row">
-  <div class="col-md-10">
+  <div class="col-md-6">&nbsp;</div>
+  <div class="col-md-6">
   <h2>Documents required for Visa Application Process:<span></span></h2>
     <?=$fet_dec?>
     </div>

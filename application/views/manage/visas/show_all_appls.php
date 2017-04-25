@@ -29,6 +29,22 @@
 				  <?php echo $this->session->flashdata('update_success');  ?>
 				</div>
 				<?php endif; ?>
+				<div class="row">
+					<form class="form-inline" action="" method="post">
+						<div class="col-sm-2"></div>
+						
+						<div class="form-group col-sm-3">
+						<input type="text" class="form-control bfh-datepicker_start" data-format="d-m-y" data-date="today" name="from_sr" value="<?php echo set_value('from_sr'); ?>" placeholder="From Date">
+						</div>
+						<div class="form-group col-sm-3">
+						<input type="text" class="form-control bfh-datepicker_end" name="to_sr" value="<?php echo set_value('to_sr'); ?>" placeholder="To Date">
+						</div>
+						<div class="form-group col-sm-3">
+						<input type="submit" name="sbmt_sr_dt" class="btn btn-primary" value="Search" />
+						</div>
+					</form>
+					<div class="col-md-12"><br/></div>
+				</div>
   					<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="pages_table">
 						<thead>
 							<tr>
@@ -75,3 +91,18 @@
 		</div>
 	</div>
 </div>
+ <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<!-- jQuery UI -->
+    <link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet" media="screen">
+<script>
+
+$('.bfh-datepicker_start').datepicker({
+	 dateFormat: "dd-mm-yy"
+});
+$('.bfh-datepicker_end').datepicker({
+	 dateFormat: "dd-mm-yy"
+});
+</script>

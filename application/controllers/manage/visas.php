@@ -9,20 +9,43 @@ class Visas extends CI_Controller {
 		$this->load->library('session');
 	}
 	
-	public function dashboard()
+	public function steps()
 	{
 		if(isset($this->session->adminsession)&& ($this->session->adminsession != ''))
 		{
-			if( ! file_exists(APPPATH.'views/manage/visas/dashboard.php'))
+			$this->load->helper('form');
+			$this->load->library('form_validation');
+			$this->load->model('manage/pagesettings_model');
+			
+			if( ! file_exists(APPPATH.'views/manage/visas/steps.php'))
 			{
 				// Whoops, we don't have a page for that!
 				show_404();
 			}
-			$data['title'] = ucfirst('visas dashboard'); 
+			$data['title'] = ucfirst('visas processing steps'); 
 			$data['sidebar'] = $this->load->view('manage/templates/admin_sidebar', $data, true);
+			
+			$settings = $this->pagesettings_model->get_settings('3');
+			
+			foreach($settings as $setting)
+			{
+				$data[$setting['setting_name']] = $setting['setting_val'];
+			}
+			
+			$this->form_validation->set_rules('step_1_title', 'Visa Title', 'trim|required');
+			$this->form_validation->set_rules('step_2_title', 'Visa Title', 'trim|required');
+			$this->form_validation->set_rules('step_3_title', 'Visa Title', 'trim|required');
+			$this->form_validation->set_rules('step_4_title', 'Visa Title', 'trim|required');
+			$this->form_validation->set_rules('step_5_title', 'Visa Title', 'trim|required');
+			if(!($this->form_validation->run() === FALSE))
+			{
+				$this->pagesettings_model->set_settings('3');
+				$this->session->set_flashdata('setting_updated', 'Visa Steps Updated Successfully');
+				redirect("manage/visas/steps");
+			}
 
 			$this->load->view('manage/templates/admin_header', $data);
-			$this->load->view('manage/visas/dashboard', $data);
+			$this->load->view('manage/visas/steps', $data);
 			$this->load->view('manage/templates/admin_footer', $data);
 		}else{
 			redirect("manage/pages/view");
@@ -180,10 +203,18 @@ class Visas extends CI_Controller {
 			$this->form_validation->set_rules('service_title', 'Visa Title', 'trim|required');
 			$this->form_validation->set_rules('visa_validity', 'Visa Validity', 'trim|required');
 			$this->form_validation->set_rules('visa_max_stay', 'Visa Maximum Stay', 'trim|required');
-			$this->form_validation->set_rules('processing_time', 'Visa Processing Time', 'trim|required');
-			$this->form_validation->set_rules('service_fee', 'Visa Service fee', 'trim|required');
-			$this->form_validation->set_rules('embassy_fee', 'Visa Embassy Fee', 'trim|required');
+			$this->form_validation->set_rules('processing_time_rg', 'Visa Processing Time - Regular', 'trim|required');
+			$this->form_validation->set_rules('service_fee_rg', 'Visa Service fee - Regular', 'trim|required');
+			$this->form_validation->set_rules('embassy_fee_rg', 'Visa Embassy Fee - Regular', 'trim|required');
+			$this->form_validation->set_rules('processing_time_prem', 'Visa Processing Time - Premium', 'trim|required');
+			$this->form_validation->set_rules('service_fee_prem', 'Visa Service fee - Premium', 'trim|required');
+			$this->form_validation->set_rules('embassy_fee_prem', 'Visa Embassy Fee - Premium', 'trim|required');
+			$this->form_validation->set_rules('processing_time_ex', 'Visa Processing Time - Express', 'trim|required');
+			$this->form_validation->set_rules('service_fee_ex', 'Visa Service fee - Express', 'trim|required');
+			$this->form_validation->set_rules('embassy_fee_ex', 'Visa Embassy Fee - Express', 'trim|required');
 			$this->form_validation->set_rules('intro_text', 'Introduction Text', 'trim|required');
+			$this->form_validation->set_rules('detail_text', 'Details Text', 'trim|required');
+
 			if(( NULL != $this->input->post('meet_greet_combo'))&&($this->input->post('meet_greet_combo')=='1')){
 				$this->form_validation->set_rules('extended_service_fee', 'Extended Service Fee', 'trim|required');
 			}
@@ -196,7 +227,7 @@ class Visas extends CI_Controller {
 			
 			$data['title'] = ucfirst('add new visa type'); 
 			$data['sidebar'] = $this->load->view('manage/templates/admin_sidebar', $data, true);
-			$data['return_url'] = base_url('manage/visas/types');
+			$data['return_url'] = base_url('manage/visas/service');
 			$data['country_list'] = $this->visas_model->get_countries();
 			$data['visa_types'] = $this->visas_model->get_visas();
 			$data['editor_on'] = 'show';
@@ -244,10 +275,18 @@ class Visas extends CI_Controller {
 				$this->form_validation->set_rules('service_title', 'Visa Title', 'trim|required');
 				$this->form_validation->set_rules('visa_validity', 'Visa Validity', 'trim|required');
 				$this->form_validation->set_rules('visa_max_stay', 'Visa Maximum Stay', 'trim|required');
-				$this->form_validation->set_rules('processing_time', 'Visa Processing Time', 'trim|required');
-				$this->form_validation->set_rules('service_fee', 'Visa Service fee', 'trim|required');
-				$this->form_validation->set_rules('embassy_fee', 'Visa Embassy Fee', 'trim|required');
+				$this->form_validation->set_rules('processing_time_rg', 'Visa Processing Time - Regular', 'trim|required');
+				$this->form_validation->set_rules('service_fee_rg', 'Visa Service fee - Regular', 'trim|required');
+				$this->form_validation->set_rules('embassy_fee_rg', 'Visa Embassy Fee - Regular', 'trim|required');
+				$this->form_validation->set_rules('processing_time_prem', 'Visa Processing Time - Premium', 'trim|required');
+				$this->form_validation->set_rules('service_fee_prem', 'Visa Service fee - Premium', 'trim|required');
+				$this->form_validation->set_rules('embassy_fee_prem', 'Visa Embassy Fee - Premium', 'trim|required');
+				$this->form_validation->set_rules('processing_time_ex', 'Visa Processing Time - Express', 'trim|required');
+				$this->form_validation->set_rules('service_fee_ex', 'Visa Service fee - Express', 'trim|required');
+				$this->form_validation->set_rules('embassy_fee_ex', 'Visa Embassy Fee - Express', 'trim|required');
 				$this->form_validation->set_rules('intro_text', 'Introduction Text', 'trim|required');
+				$this->form_validation->set_rules('detail_text', 'Details Text', 'trim|required');
+				
 				if(( NULL != $this->input->post('meet_greet_combo'))&&($this->input->post('meet_greet_combo')=='1')){
 					$this->form_validation->set_rules('extended_service_fee', 'Extended Service Fee', 'trim|required');
 				}
@@ -262,7 +301,7 @@ class Visas extends CI_Controller {
 				
 				$data['title'] = ucfirst('edit service'); 
 				$data['sidebar'] = $this->load->view('manage/templates/admin_sidebar', $data, true);
-				$data['return_url'] = base_url('manage/visas/types');
+				$data['return_url'] = base_url('manage/visas/service');
 				$data['country_list'] = $this->visas_model->get_countries();
 				$data['visa_types'] = $this->visas_model->get_visas();
 				$data['editor_on'] = 'show';

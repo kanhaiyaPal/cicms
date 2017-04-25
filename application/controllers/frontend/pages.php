@@ -47,6 +47,13 @@ class Pages extends CI_Controller {
 		$data['description'] = $meta_info['meta_description'];
 		$data['keywords'] = $meta_info['meta_keywords'];
 		
+		$this->load->model('manage/pagesettings_model');
+		$steps_settings = $this->pagesettings_model->get_settings('3');
+		foreach($steps_settings as $setting)
+		{
+			$data[$setting['setting_name']] = $setting['setting_val'];
+		}
+		
 		$home_parts_info = $this->home->get_home_data();
 		foreach($home_parts_info as $homepart){
 			if($homepart['setting_name'] == 'home_top_summary')
@@ -572,6 +579,13 @@ class Pages extends CI_Controller {
 		
 		$page_data = $this->home->get_visasteps_meta();
 		
+		$this->load->model('manage/pagesettings_model');
+		$steps_settings = $this->pagesettings_model->get_settings('3');
+		foreach($steps_settings as $setting)
+		{
+			$data[$setting['setting_name']] = $setting['setting_val'];
+		}
+		
 		$data['title'] = ucfirst($page_data['meta_title']); // Capitalize the first letter
 		$data['description'] = $page_data['meta_description'];
 		$data['keywords'] = $page_data['meta_keywords'];
@@ -605,6 +619,23 @@ class Pages extends CI_Controller {
 		$data['description'] = $page_data['meta_description'];
 		$data['keywords'] = $page_data['meta_keywords'];
 		
+		$this->load->model('frontend/visas_front_model');
+		
+		if((NULL !== $this->input->post('track_st_sr')) && ($this->input->post('track_st_sr') == 'Track'))
+		{
+			$this->form_validation->set_rules('tracking_sr', 'Tracking Number/Reference Number', 'trim|required');
+			$this->form_validation->set_rules('passport_sr', 'Passport Number', 'trim|required');
+			
+			if(!($this->form_validation->run() === FALSE)){
+				$ret_status = $this->visas_front_model->track_status_pass();
+				if($ret_status == '0'){
+					$data['sr_err'] = true;
+				}else{
+					$data['status'] = $ret_status['status'];
+					$data['comments'] = $ret_status['comments'];
+				}
+			}
+		}
 
 		$data = array_merge($data,$this->common_data);
 		

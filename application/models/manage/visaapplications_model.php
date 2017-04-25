@@ -16,6 +16,15 @@ class Visaapplications_model extends CI_Model {
     {
         if ($id === FALSE)
         {
+			if((NULL !== $this->input->post('from_sr')) && (NULL !== $this->input->post('to_sr')))
+			{
+				$this->db->where('application_date >=',$this->input->post('from_sr'));
+				$this->db->where('application_date <=',$this->input->post('to_sr'));
+				$this->db->where('is_coapplicant','0');
+				
+				$query = $this->db->get('ci_user_applications');
+				return $query->result_array();
+			}
             $query = $this->db->get_where('ci_user_applications',array('is_coapplicant' => '0'));
             return $query->result_array();
         }
@@ -254,6 +263,18 @@ class Visaapplications_model extends CI_Model {
 		
 		$this->db->where('application_id', $this->input->post('applicantion_id'));
 		$this->db->update('ci_application_status', $data);
+	}
+	
+	public function get_payment_status_list($id = false)
+	{
+		if ($id === FALSE)
+        {
+            $query = $this->db->get('ci_payment_status');
+            return $query->result_array();
+        }
+ 
+        $query = $this->db->get_where('ci_payment_status', array('id' => $id));
+        return $query->row_array();
 	}
 	
 }

@@ -3,19 +3,19 @@
 	<!-- Main menu -->
 	<li class="current"><a href="<?php echo base_url('manage/pages/view/home'); ?>"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
 	<li><a href="<?php echo base_url('manage/pages/show'); ?>"><i class="glyphicon glyphicon-list"></i> Static Pages</a></li>
-	<li class="submenu <?php $ur = uri_string(); if((strpos($ur,'visas/dashboard'))||(strpos($ur,'visas/types'))||(strpos($ur,'visas/service'))){ echo "open"; } ?>">
+	<li class="submenu <?php $ur = uri_string(); if((strpos($ur,'visas/steps'))||(strpos($ur,'visas/types'))||(strpos($ur,'visas/service'))){ echo "open"; } ?>">
 		 <a href="#">
 			<i class="glyphicon glyphicon-list"></i> Visa Setup
 			<span class="caret pull-right"></span>
 		 </a>
 		 <!-- Sub menu -->
 		 <ul>
-			<li><a href="<?php echo base_url('manage/visas/dashboard'); ?>">Dashboard</a></li>
+			<li><a href="<?php echo base_url('manage/visas/steps'); ?>">Visa Steps Display</a></li>
 			<li><a href="<?php echo base_url('manage/visas/types'); ?>">Types of Visas</a></li>
 			<li><a href="<?php echo base_url('manage/visas/service'); ?>">Visa Service Setup</a></li>
 		</ul>
 	</li>
-	<li class="submenu <?php $ur = uri_string(); if((strpos($ur,'visaapplications/show'))||(strpos($ur,'visaapplications/application_tracking'))){ echo "open"; } ?>" >
+	<li class="submenu <?php $ur = uri_string(); if((strpos($ur,'visaapplications/show'))||(strpos($ur,'visaapplications/application_tracking'))||(strpos($ur,'visaapplications/payment_status'))){ echo "open"; } ?>" >
 		 <a href="#">
 			<i class="glyphicon glyphicon-list"></i> Visa Applications
 			<span class="caret pull-right"></span>
@@ -23,7 +23,7 @@
 		 <!-- Sub menu -->
 		 <ul>
 			<li><a href="<?php echo base_url('manage/visaapplications/show'); ?>">Application Submitted</a></li>
-			<li><a href="<?php echo base_url('manage/visaapplications/view'); ?>">Documents Upload Section</a></li>
+			<li><a href="<?php echo base_url('manage/visaapplications/payment_status'); ?>">Payment Status</a></li>
 			<li><a href="<?php echo base_url('manage/visaapplications/application_tracking'); ?>">Application Tracking</a></li>
 		</ul>
 	</li>

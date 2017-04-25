@@ -6,7 +6,7 @@
         <ul>
           <li><a href="<?=base_url()?>"><i class="fa fa-home"></i> Home</a></li>
           <li><a href="<?=base_url('about-us')?>"><i class="fa fa-info-circle"></i> About us</a></li>
-          <li><a href="<?=base_url('frontend/pages/visa_processing_steps')?>"><i class="fa fa-list-ul"></i> Visa Processing Steps</a></li>
+          <li><a href="<?=base_url('visa-processing-steps')?>"><i class="fa fa-list-ul"></i> Visa Processing Steps</a></li>
           <li><a href="<?=base_url('contact-us')?>"><i class="fa fa-envelope-o"></i> Contact us</a></li>
         </ul>
       </div>

@@ -68,21 +68,61 @@
 									<input class="form-control" name="visa_max_stay" placeholder="Maximum Stay in Foreign Country" value="<?=set_value('visa_max_stay')?>" type="text">
 								</div>
 								
+								<div class="form-group col-md-3">
+									<label><h4>Regular Visa Service</h4></label>
+								</div>
+								<div class="form-group col-md-9"><hr/><br/></div>
 								<div class="form-group col-md-4">
 									<label>Processing Time</label>
-									<input class="form-control" name="processing_time" placeholder="Processing Time" value="<?=set_value('visa_max_stay')?>" type="text">
+									<input class="form-control" name="processing_time_rg" placeholder="Processing Time" value="<?=set_value('processing_time_rg')?>" type="text">
 								</div>
 								
 								<div class="form-group col-md-4">
 									<label>Service Fee Amount</label>
-									<input class="form-control" name="service_fee" placeholder="Service fee" value="<?=set_value('service_fee')?>" type="text">
+									<input class="form-control" name="service_fee_rg" placeholder="Service fee" value="<?=set_value('service_fee_rg')?>" type="text">
 								</div>
 								
 								<div class="form-group col-md-4">
 									<label>Embassy/Visa Fee Amount</label>
-									<input class="form-control" name="embassy_fee" placeholder="Embassy/Visa Fee" value="<?=set_value('embassy_fee')?>" type="text">
+									<input class="form-control" name="embassy_fee_rg" placeholder="Embassy/Visa Fee" value="<?=set_value('embassy_fee_rg')?>" type="text">
+								</div>
+								<div class="form-group col-md-3">
+									<label><h4>Premium Visa Service</h4></label>
+								</div>
+								<div class="form-group col-md-9"><hr/><br/></div>
+								<div class="form-group col-md-4">
+									<label>Processing Time</label>
+									<input class="form-control" name="processing_time_prem" placeholder="Processing Time" value="<?=set_value('processing_time_prem')?>" type="text">
 								</div>
 								
+								<div class="form-group col-md-4">
+									<label>Service Fee Amount</label>
+									<input class="form-control" name="service_fee_prem" placeholder="Service fee" value="<?=set_value('service_fee_prem')?>" type="text">
+								</div>
+								
+								<div class="form-group col-md-4">
+									<label>Embassy/Visa Fee Amount</label>
+									<input class="form-control" name="embassy_fee_prem" placeholder="Embassy/Visa Fee" value="<?=set_value('embassy_fee_prem')?>" type="text">
+								</div>
+								<div class="form-group col-md-3">
+									<label><h4>Express Visa Service</h4></label>
+								</div>
+								<div class="form-group col-md-9"><hr/><br/></div>
+								<div class="form-group col-md-4">
+									<label>Processing Time</label>
+									<input class="form-control" name="processing_time_ex" placeholder="Processing Time" value="<?=set_value('processing_time_ex')?>" type="text">
+								</div>
+								
+								<div class="form-group col-md-4">
+									<label>Service Fee Amount</label>
+									<input class="form-control" name="service_fee_ex" placeholder="Service fee" value="<?=set_value('service_fee_ex')?>" type="text">
+								</div>
+								
+								<div class="form-group col-md-4">
+									<label>Embassy/Visa Fee Amount</label>
+									<input class="form-control" name="embassy_fee_ex" placeholder="Embassy/Visa Fee" value="<?=set_value('embassy_fee_ex')?>" type="text">
+								</div>
+								<?php /*?>
 								<div class="form-group col-md-4">
 									<label>Meet & Greet Combo Available</label>
 									<select class="form-control" name="meet_greet_combo" onchange="if(this.value =='1'){ $('#ex_ser_fe').show(); }else{ $('#ex_ser_fe').hide(); }">
@@ -90,6 +130,7 @@
 										<option value="1" <?=set_select('meet_greet_combo','1')?> >Yes</option>
 									</select>
 								</div>
+								<?php */?>
 								
 								<div class="form-group col-md-4" id="ex_ser_fe" style="display:none">
 									<label>Extended Service Fee Amount</label>
@@ -101,8 +142,16 @@
 								</div>
 								
 								<div class="form-group col-md-12">
+									<label>Overview Text</label>
+									<textarea class="form-control" name="overview_text" placeholder="Overview Page Content"  rows="3"><?=set_value('overview_text')?></textarea>
+								</div>
+								<div class="form-group col-md-12">
 									<label>Introduction Text</label>
 									<textarea class="form-control" name="intro_text" placeholder="Introduction Page Content" id="ckeditor_full" rows="3"><?=set_value('intro_text')?></textarea>
+								</div>
+								<div class="form-group col-md-12">
+									<label>Detail Content</label>
+									<textarea class="form-control" name="detail_text" placeholder="Detail Content" id="ckeditor_full_twice" rows="3"><?=set_value('detail_text')?></textarea>
 								</div>
 								<div class="form-group col-md-12">
 									<label>Public Visibility</label>

@@ -15,6 +15,9 @@ class Visaapplications extends CI_Controller {
 		{
 			$this->load->model('manage/visaapplications_model');
 			
+			$this->load->helper('form');
+			$this->load->library('form_validation');
+			
 			if( ! file_exists(APPPATH.'views/manage/visas/show_all_appls.php'))
 			{
 				show_404();
@@ -220,6 +223,35 @@ class Visaapplications extends CI_Controller {
 			
 			$this->load->view('manage/templates/admin_header', $data);
 			$this->load->view('manage/visas/change_tracking', $data);
+			$this->load->view('manage/templates/admin_footer', $data);
+		}else{
+			redirect("manage/pages/view");
+		}
+	}
+	
+	public function payment_status()
+	{
+		if(isset($this->session->adminsession)&& ($this->session->adminsession != ''))
+		{
+			$this->load->model('manage/visaapplications_model');
+				
+			if( ! file_exists(APPPATH.'views/manage/track_payment_status.php'))
+			{
+				show_404();
+			}
+			$data['title'] = ucfirst('View Application Payments'); 
+			$data['sidebar'] = $this->load->view('manage/templates/admin_sidebar', $data, true);
+			$data['page_data'] =  $this->visaapplications_model->get_payment_status_list();
+			$data['app_dt'] = '';
+			foreach($data['page_data'] as $el){
+				
+				$applicant_dt = $this->visaapplications_model->get_visa_applications($el['application_id']);
+				$data['app_dt'][$el['application_id']] = array('tracking'=> $applicant_dt['tracking_no'],'date'=> $applicant_dt['application_date']);
+			}
+			$data['pages_script'] = 'show';
+			
+			$this->load->view('manage/templates/admin_header', $data);
+			$this->load->view('manage/track_payment_status', $data);
 			$this->load->view('manage/templates/admin_footer', $data);
 		}else{
 			redirect("manage/pages/view");
